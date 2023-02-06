@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpawnController : MonoBehaviour
@@ -7,37 +8,58 @@ public class SpawnController : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private GameObject[] spawnObjects;
     [SerializeField] private int snowAmount;
+    [SerializeField] private bool stopSpawning = false;
+    [SerializeField] private float spawnTime;
+    [SerializeField] private float spawnDelay;
     int spawnAmount = 0;
-    int lastSnow;
-    int lastPoint;
+    int lastSnow=-1;
+    int lastPoint=-1;
 
-
-
-    void Update()
+    private void Start()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            spawn();
-        }
-        
+        InvokeRepeating("Spawn", spawnTime, spawnDelay);
     }
 
-    
-    public void spawn()
+    private void Spawn()
     {
-        int randomEnemy = Random.Range(0, spawnObjects.Length);
+        
+        int randomSnow = Random.Range(0, spawnObjects.Length);
         int randSpawnPoint = Random.Range(0, spawnPoints.Length);
         
-        if ( spawnAmount+randomEnemy + 1 > snowAmount || randomEnemy == lastSnow || lastPoint == randSpawnPoint)
+        if ( spawnAmount+randomSnow + 1 > snowAmount)
         {
             return;
         }
 
-        Instantiate(spawnObjects[randomEnemy], spawnPoints[randSpawnPoint]);
-        spawnAmount += randomEnemy + 1;
-        lastSnow = randomEnemy;
+        randomSnow = MakeUnique(randomSnow, lastSnow, spawnObjects.Length);
+        randSpawnPoint = MakeUnique(randSpawnPoint,lastPoint, spawnPoints.Length);
+
+        Instantiate(spawnObjects[randomSnow], spawnPoints[randSpawnPoint]);
+        spawnAmount += randomSnow + 1;
+        lastSnow = randomSnow;
         lastPoint = randSpawnPoint;
 
+        //if (stopSpawning)
+        //    CancelInvoke("Spawn");
 
     }
+
+    private int MakeUnique(int random,int last, int lenght)
+    {
+        int unique = random;
+
+        if(random == last)
+        {
+            unique++;
+        }
+
+        if (unique == lenght)
+        {
+            unique = 0;
+        }
+
+        return unique;
+    }
+
+
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,14 +8,32 @@ public class SnowBallMovement : MonoBehaviour
 {
     [SerializeField] private float gravity;
     [SerializeField] private float horSpeed;
-    
+    [SerializeField] private TextMeshProUGUI snowSize;
 
+    private void Start()
+    {
+        DirectionSelector();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Sky") 
+        switch (collision.tag)
         {
-            Debug.Log("Edge");
-            ChangeDirection();
+            case "MainCamera":
+                ChangeDirection();
+                break;
+            case "Flame":
+                snowSize.SetText((int.Parse(snowSize.text) - 1).ToString());
+                if (int.Parse(snowSize.text) - 1 == 0)
+                {
+                    Destroy(gameObject);
+                }                
+                break;
+            case "Grass":
+                Destroy(gameObject);
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -38,5 +57,14 @@ public class SnowBallMovement : MonoBehaviour
     {
         horSpeed *= -1;
         
+    }
+
+    private void DirectionSelector()
+    {
+        bool left = Random.Range(0, 2) == 1;
+        if (left)
+        {
+            ChangeDirection();
+        }
     }
 }

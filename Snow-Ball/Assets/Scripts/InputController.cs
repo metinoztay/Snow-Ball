@@ -12,7 +12,7 @@ public class InputController : MonoBehaviour, IDragHandler
     {
         var position = main.position;
         var current = position.x;
-        current += eventData.delta.x * speed;
+        current += eventData.delta.x * speed*Time.deltaTime;
         position = new Vector3(current,position.y , 0);
         main.position = position;
     }
