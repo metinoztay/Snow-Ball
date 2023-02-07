@@ -4,7 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SnowBallMovement : MonoBehaviour
+public class SnowBallScript : MonoBehaviour
 {
     [SerializeField] private float gravity;
     [SerializeField] private float horSpeed;
@@ -21,12 +21,13 @@ public class SnowBallMovement : MonoBehaviour
             case "MainCamera":
                 ChangeDirection();
                 break;
-            case "Flame":
+            case "Cannon":
                 snowSize.SetText((int.Parse(snowSize.text) - 1).ToString());
-                if (int.Parse(snowSize.text) - 1 == 0)
+                if (int.Parse(snowSize.text) == 0)
                 {
                     Destroy(gameObject);
-                }                
+                }
+                Destroy(collision.gameObject);
                 break;
             case "Grass":
                 Destroy(gameObject);

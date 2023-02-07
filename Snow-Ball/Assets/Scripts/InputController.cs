@@ -5,15 +5,15 @@ using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour, IDragHandler
 {
-    [SerializeField] Transform main;
+    [SerializeField] Transform cannon;
     [SerializeField] float speed;
 
     public void OnDrag(PointerEventData eventData)
     {
-        var position = main.position;
+        var position = cannon.position;
         var current = position.x;
         current += eventData.delta.x * speed*Time.deltaTime;
         position = new Vector3(current,position.y , 0);
-        main.position = position;
+        cannon.position = position;
     }
 }

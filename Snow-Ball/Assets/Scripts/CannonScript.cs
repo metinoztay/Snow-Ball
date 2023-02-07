@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class FlameScript : MonoBehaviour
+public class CannonScript : MonoBehaviour
 {
     
     [SerializeField] private float verSpeed;
+    [SerializeField] private GameObject coin;
     void Update()
     {
         Move();
@@ -13,13 +15,12 @@ public class FlameScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "SnowBall" || collision.tag == "MainCamera")
+        if (collision.tag == "SnowBall")
         {
-            Destroy(gameObject);
+            coin.GetComponent<CoinScript>().AddGold();
         }
-
     }
-    
+
 
     private void Move()
     {

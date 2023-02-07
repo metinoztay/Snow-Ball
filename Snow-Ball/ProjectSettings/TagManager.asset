@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Sky
-  - Flame
   - SnowBall
   - Grass
+  - Cannon
   layers:
   - Default
   - TransparentFX
@@ -15,9 +15,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Back
+  - Mid
+  - Front
   - 
   - 
   - 
