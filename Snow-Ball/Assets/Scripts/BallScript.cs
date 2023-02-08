@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CannonScript : MonoBehaviour
+public class BallScript : MonoBehaviour
 {
     
     [SerializeField] private float verSpeed;
     [SerializeField] private GameObject coin;
+
     void Update()
     {
         Move();

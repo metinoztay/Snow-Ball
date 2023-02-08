@@ -4,7 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpawnController : MonoBehaviour
+public class SnowSpawnController : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private GameObject[] spawnObjects;
