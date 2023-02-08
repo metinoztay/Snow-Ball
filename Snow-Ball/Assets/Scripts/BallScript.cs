@@ -7,8 +7,12 @@ public class BallScript : MonoBehaviour
 {
     
     [SerializeField] private float verSpeed;
-    [SerializeField] private GameObject coin;
+    private GameObject coins;
 
+    private void Start()
+    {
+        coins = GameObject.Find("Coins");
+    }
     void Update()
     {
         Move();
@@ -18,7 +22,7 @@ public class BallScript : MonoBehaviour
     {
         if (collision.tag == "SnowBall")
         {
-            coin.GetComponent<CoinScript>().AddGold();
+            coins.GetComponent<CoinScript>().AddGold();
         }
     }
 
