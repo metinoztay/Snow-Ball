@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
-    
     [SerializeField] private float verSpeed;
     private GameObject coins;
+    //private Rigidbody2D rb;
 
     private void Start()
     {
         coins = GameObject.Find("Coins");
+        //rb = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
@@ -29,6 +30,8 @@ public class BallScript : MonoBehaviour
 
     private void Move()
     {
+        //rb.velocity = transform.up * verSpeed; 
+
         Vector2 position = transform.position;
 
         position.y += verSpeed * Time.deltaTime;

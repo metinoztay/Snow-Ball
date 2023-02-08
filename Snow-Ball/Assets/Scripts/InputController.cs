@@ -7,13 +7,19 @@ public class InputController : MonoBehaviour, IDragHandler
 {
     [SerializeField] Transform cannon;
     [SerializeField] float speed;
-
+    private void Update()
+    {
+        
+    }
     public void OnDrag(PointerEventData eventData)
     {
-        var position = cannon.position;
-        var current = position.x;
-        current += eventData.delta.x * speed*Time.deltaTime;
-        position = new Vector3(current,position.y , 0);
-        cannon.position = position;
+        Vector2 position = cannon.position;
+        float current = position.x;
+        current += eventData.delta.x * speed * Time.deltaTime;
+        position = new Vector2(current, position.y);
+        
+        cannon.position = new Vector3(position.x, position.y, 0);
+        Debug.Log(cannon.position);
     }
+
 }
