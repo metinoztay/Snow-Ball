@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class SnowBallScript : MonoBehaviour
 {
-    [SerializeField] private GameObject[] karlanma;
     [SerializeField] private float gravity;
     [SerializeField] private float horSpeed;
     [SerializeField] private TextMeshProUGUI snowSize;
