@@ -24,7 +24,7 @@ public class SnowBallScript : MonoBehaviour
             case "MainCamera":
                 ChangeDirection();
                 break;
-            case "Cannon":
+            case "Ball":
                 snowSize.SetText((int.Parse(snowSize.text) - 1).ToString());
                 Destroy(collision.gameObject);
                 if (int.Parse(snowSize.text) == 0)

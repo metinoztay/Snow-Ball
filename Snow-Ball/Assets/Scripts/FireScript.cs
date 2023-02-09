@@ -5,16 +5,17 @@ using UnityEngine;
 public class FireScript : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject cannonObject;
+    [SerializeField] private GameObject ballObject;
     [SerializeField] private float spawnTime;
     [SerializeField] private float spawnDelay;
     private void Start()
     {
-        InvokeRepeating("Spawn",spawnTime,spawnDelay);
+        InvokeRepeating("Fire",spawnTime,spawnDelay);
     }
-    private void Spawn()
+    private void Fire()
     {
-        Instantiate(cannonObject, firePoint.position, firePoint.rotation);
+        Instantiate(ballObject, firePoint.position,firePoint.rotation);
     }
+
 
 }

@@ -5,21 +5,22 @@ using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour, IDragHandler
 {
-    [SerializeField] Transform cannon;
+   [SerializeField] Transform cannonBall;
     [SerializeField] float speed;
-    private void Update()
-    {
-        
-    }
+    [SerializeField] float maxTurnAngle;
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 position = cannon.position;
-        float current = position.x;
-        current += eventData.delta.x * speed * Time.deltaTime;
-        position = new Vector2(current, position.y);
-        
-        cannon.position = new Vector3(position.x, position.y, 0);
-        Debug.Log(cannon.position);
-    }
+        var rotation = cannonBall.rotation;
+        float current = rotation.eulerAngles.z;
+        current -= eventData.delta.x * speed;  
+        if(current>300){
+            current = current-360;
+        }
+        rotation.eulerAngles = new Vector3(0, 0, current);
+        if(current>maxTurnAngle||current<-maxTurnAngle){
+            return;
+        }
+        cannonBall.rotation= rotation;
+    }   
 
 }
