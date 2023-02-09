@@ -53,7 +53,7 @@ public class SnowBallScript : MonoBehaviour
     private void Move()
     {
 
-        Vector2 position = transform.position;
+        Vector3 position = transform.position;
         
         position.x += horSpeed*Time.deltaTime;
         position.y -= gravity*Time.deltaTime;

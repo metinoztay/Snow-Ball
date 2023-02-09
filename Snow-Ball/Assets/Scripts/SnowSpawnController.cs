@@ -38,7 +38,7 @@ public class SnowSpawnController : MonoBehaviour
         randSpawnPoint = MakeUnique(randSpawnPoint,lastPoint, spawnPoints.Length);
         randomAmount = MakeUnique(randomAmount, lastSnow, maxSnowAmount);
 
-        Instantiate(spawnObjects[randomSnow], spawnPoints[randSpawnPoint]);
+        Instantiate(spawnObjects[randomSnow],spawnPoints[randSpawnPoint].transform.transform);
         spawnObjects[randomSnow].GetComponentInChildren<TextMeshProUGUI>().SetText((randomAmount + 1).ToString());
 
         spawnAmount += randomSnow + 1;
