@@ -17,23 +17,23 @@ public class SnowBallScript : MonoBehaviour
         isMove = true;
         DirectionSelector();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        switch (collision.tag)
+        switch (other.tag)
         {
             case "MainCamera":
                 ChangeDirection();
                 break;
             case "Ball":
                 snowSize.SetText((int.Parse(snowSize.text) - 1).ToString());
-                Destroy(collision.gameObject);
-                if (int.Parse(snowSize.text) == 0)
+                Destroy(other.gameObject);
+                if (int.Parse(snowSize.text) <= 0)
                 {
                     Destroy(gameObject);
                 }                
                 break;
             case "Grass":
-                TouchGround(gameObject);
+                Destroy(gameObject);
                 break;
 
             default:
@@ -76,13 +76,4 @@ public class SnowBallScript : MonoBehaviour
             ChangeDirection();
         }
     }
-
-    private void TouchGround(GameObject snow)
-    {
-        int random = Random.Range(0, karlanma.Length);
-        Instantiate(karlanma[random], snow.transform.position, snow.transform.rotation);
-        Destroy(snow);
-    }
-
-
 }

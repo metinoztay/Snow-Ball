@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -131021824892640292}
   - component: {fileID: 9042825361112099226}
   m_Layer: 0
-  m_Name: topmermisi
+  m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
