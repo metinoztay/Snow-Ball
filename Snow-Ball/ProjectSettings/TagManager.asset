@@ -9,6 +9,9 @@ TagManager:
   - Ball
   - Sky
   - GroundSnowPoint
+  - Plant
+  - PlantPoint
+  - Water
   layers:
   - Default
   - TransparentFX
