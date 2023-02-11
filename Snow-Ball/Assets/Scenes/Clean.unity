@@ -5949,8 +5949,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1990064317}
   - component: {fileID: 1990064318}
-  - component: {fileID: 1990064319}
   - component: {fileID: 1990064320}
+  - component: {fileID: 1990064321}
   m_Layer: 0
   m_Name: CannonBallTop
   m_TagString: Untagged
@@ -6026,7 +6026,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &1990064319
+--- !u!114 &1990064320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990064316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f18e9e76d2d8dd47b321bb9592ce9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 1830399620}
+  ballObject: {fileID: 2430688861007828566, guid: c72178713cb38184eb1699e391c35d67, type: 3}
+  spawnTime: 0.6
+  spawnDelay: 0.25
+--- !u!95 &1990064321
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -6046,22 +6062,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1990064320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990064316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f18e9e76d2d8dd47b321bb9592ce9d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 1830399620}
-  ballObject: {fileID: 2430688861007828566, guid: c72178713cb38184eb1699e391c35d67, type: 3}
-  spawnTime: 0.6
-  spawnDelay: 0.5
 --- !u!1 &2076907150
 GameObject:
   m_ObjectHideFlags: 0

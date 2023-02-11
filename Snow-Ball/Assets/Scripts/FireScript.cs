@@ -8,12 +8,16 @@ public class FireScript : MonoBehaviour
     [SerializeField] private GameObject ballObject;
     [SerializeField] private float spawnTime;
     [SerializeField] private float spawnDelay;
+
+    private Animator fireAnimator;
     private void Start()
     {
+        fireAnimator = GetComponent<Animator>();
         InvokeRepeating("Fire",spawnTime,spawnDelay);
     }
     private void Fire()
     {
+        fireAnimator.SetTrigger("Fire");
         Instantiate(ballObject, firePoint.position,firePoint.rotation);
     }
 
