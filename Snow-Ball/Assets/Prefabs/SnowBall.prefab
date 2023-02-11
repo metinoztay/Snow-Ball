@@ -276,3 +276,4 @@ MonoBehaviour:
   horSpeed: 1
   snowSize: {fileID: 513926521951923258}
   isMove: 0
+  waterPrefab: {fileID: 4383320946062098430, guid: 514617c345bae614a8f10c7bf7246a2e, type: 3}

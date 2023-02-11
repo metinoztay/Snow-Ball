@@ -10,6 +10,7 @@ public class SnowBallScript : MonoBehaviour
     [SerializeField] private float horSpeed;
     [SerializeField] private TextMeshProUGUI snowSize;
     [SerializeField] private bool isMove;
+    [SerializeField] private GameObject waterPrefab;
 
     private void Start()
     {
@@ -27,7 +28,8 @@ public class SnowBallScript : MonoBehaviour
                 snowSize.SetText((int.Parse(snowSize.text) - 1).ToString());
                 Destroy(other.gameObject);
                 if (int.Parse(snowSize.text) <= 0)
-                {
+                {   
+                    Instantiate(waterPrefab,transform.position,transform.rotation,GameObject.Find("SnowCanvas").transform);
                     Destroy(gameObject);
                 }                
                 break;
