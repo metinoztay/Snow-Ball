@@ -6,14 +6,14 @@ using UnityEngine;
 public class GroundSnowScrip : MonoBehaviour
 {
     [SerializeField] private GameObject[] groundSnowPrefabs;
-    [SerializeField] private List<GameObject> touchingGroundPoints;
+    [SerializeField] private List<GameObject> groundSnowPoints;
     
      private void Awake() {
         int random = Random.Range(0,groundSnowPrefabs.Length);
         Instantiate(groundSnowPrefabs[random],transform.position,transform.rotation,transform);
-        foreach (var touchingGroundPoint in GameObject.FindGameObjectsWithTag("GroundSnowPoint"))
+        foreach (var groundSnowPoint in GameObject.FindGameObjectsWithTag("GroundSnowPoint"))
         {
-            touchingGroundPoints.Add(touchingGroundPoint);
+            groundSnowPoints.Add(groundSnowPoint);
         }
         
     }
@@ -27,23 +27,33 @@ public class GroundSnowScrip : MonoBehaviour
                 ChangeSnowTouchingPoint();
              }
              else{
-                GetComponentInChildren<Image>().enabled=true;
-                
+                GetComponentInChildren<Image>().enabled=true; 
              }
+             
              
         }
     }
 
     private void ChangeSnowTouchingPoint(){
-        int index = touchingGroundPoints.IndexOf(gameObject);
+        int index = groundSnowPoints.IndexOf(gameObject);
         bool left = Random.Range(0,2) == 0;
-        if (left && index > 0 && !touchingGroundPoints[index-1].GetComponentInChildren<Image>().enabled)
+        
+       if (left && (index == 0 || groundSnowPoints[index-1].GetComponentInChildren<Image>().enabled))
         {
-            touchingGroundPoints[index-1].GetComponentInChildren<Image>().enabled = true;
+            left = !left;
         }
-        else if(index < touchingGroundPoints.Count-1 && !touchingGroundPoints[index+1].GetComponentInChildren<Image>().enabled)
+        else if(!left && (index == groundSnowPoints.Count-1 || groundSnowPoints[index+1].GetComponentInChildren<Image>().enabled))
         {
-            touchingGroundPoints[index+1].GetComponentInChildren<Image>().enabled = true;
+            left = !left;
+        }
+
+        if (left)
+        {   Debug.Log("Sol");
+            groundSnowPoints[index-1].GetComponentInChildren<Image>().enabled = true;
+        }
+        else
+        {   Debug.Log("Sağ");
+            groundSnowPoints[index+1].GetComponentInChildren<Image>().enabled = true;
         }
         
 

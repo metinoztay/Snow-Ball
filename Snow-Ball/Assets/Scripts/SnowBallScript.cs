@@ -34,7 +34,6 @@ public class SnowBallScript : MonoBehaviour
                 }                
                 break;
             case "Grass":
-                Destroy(gameObject);
                 break;
 
             default:

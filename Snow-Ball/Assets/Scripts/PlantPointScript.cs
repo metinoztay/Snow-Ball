@@ -6,6 +6,8 @@ public class PlantPointScript : MonoBehaviour
 {
     [SerializeField] private Transform grossPoint;
     [SerializeField] private float grossAmount;
+
+    [SerializeField] public GameObject[] isSnowed = new GameObject[2];
     
     private int maxPlantCount;
 
@@ -32,14 +34,14 @@ public class PlantPointScript : MonoBehaviour
     }
 
     private void GetPlantCount(){
-        plantCount = GetComponentInParent<PlantCounter>().plantCount;
-        maxPlantCount = GetComponentInParent<PlantCounter>().maxPlantCount;
+        plantCount = GetComponentInParent<PlantController>().plantCount;
+        maxPlantCount = GetComponentInParent<PlantController>().maxPlantCount;
     }
 
     private void AddNewPlant(){
         if (!isGross)
         {
-            GetComponentInParent<PlantCounter>().plantCount++;
+            GetComponentInParent<PlantController>().plantCount++;
             isGross = true;
         }        
     }
