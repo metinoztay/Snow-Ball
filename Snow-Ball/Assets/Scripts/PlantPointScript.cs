@@ -77,6 +77,7 @@ public class PlantPointScript : MonoBehaviour
 
     [ContextMenu(nameof(Cut))]
     public void Cut(){
+        var topPoint = gameObject.transform.GetChild(0).transform;
        for (int i = 0; i < 2; i++)
        {
         var current = gameObject.transform.GetChild(i).transform.position;
@@ -84,7 +85,7 @@ public class PlantPointScript : MonoBehaviour
         gameObject.transform.GetChild(i).transform.position = current;
        }
         
-        Instantiate(cutPrefab,transform.position,transform.rotation,transform);
+        Instantiate(cutPrefab,topPoint.position,topPoint.rotation,transform);
 
     }
 

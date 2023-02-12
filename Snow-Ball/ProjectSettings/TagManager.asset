@@ -14,6 +14,7 @@ TagManager:
   - Water
   - GroundSnow
   - CuttingLine
+  - Hand
   layers:
   - Default
   - TransparentFX
