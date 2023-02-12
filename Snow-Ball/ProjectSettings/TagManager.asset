@@ -13,6 +13,7 @@ TagManager:
   - PlantPoint
   - Water
   - GroundSnow
+  - CuttingLine
   layers:
   - Default
   - TransparentFX

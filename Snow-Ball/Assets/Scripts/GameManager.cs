@@ -4,15 +4,52 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    public static GameManager Instance; 
+    public GameState State; 
+
+    private void Awake() {
+        Instance = this;
+    }
+    
+    public void UpdateGameState(GameState newState){
+        State = newState;
+
+        switch (State)
+        {
+             case GameState.Menu:
+                break;
+             case GameState.Start:
+                break;
+             case GameState.Pause:
+                break;
+             case GameState.Win:
+                HandleWin();
+                break;
+             case GameState.Lose:
+                HandleLose();
+                break;
         
+            
+             default:
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void HandleWin(){
+
+    }
+
+    private void HandleLose(){
+
+    }
+       
+    
+    public enum GameState{
+        Menu,
+        Start,
+        Pause,
+        Win,
+        Lose  
         
     }
 }

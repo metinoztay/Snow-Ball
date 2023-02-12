@@ -7,6 +7,9 @@ public class PlantPointScript : MonoBehaviour
 {
     [SerializeField] private Transform grossPoint;
     [SerializeField] private float grossAmount;
+    [SerializeField] private GameObject cutPrefab;
+    
+    [SerializeField] private Transform cuttingLine;
 
     [SerializeField] public List<GameObject> isSnowedFields;
     
@@ -18,18 +21,26 @@ public class PlantPointScript : MonoBehaviour
         
     private void OnTriggerEnter2D(Collider2D other) {
         GetPlantCount();
-        if (other.tag=="Water" && !isSnowed())
+        if (other.tag=="Water")
         {  
             Destroy(other.gameObject); 
-            if (isGross)
+            if (!isSnowed())
             {
-                Gross();
+                if (isGross)
+                {
+                    Gross();
+                }
+                else if (plantCount < maxPlantCount)
+                {
+                    AddNewPlant();
+                    Gross();
+                }           
             }
-            else if (plantCount < maxPlantCount)
-            {
-                AddNewPlant();
-                Gross();
-            }           
+           
+        }
+        else if(other.tag=="Hand")
+        {
+            Cut();
         }
               
     }
@@ -62,6 +73,19 @@ public class PlantPointScript : MonoBehaviour
         }
 
         return true;
+    }
+
+    [ContextMenu(nameof(Cut))]
+    public void Cut(){
+       for (int i = 0; i < 2; i++)
+       {
+        var current = gameObject.transform.GetChild(i).transform.position;
+        current = new Vector3(current.x,cuttingLine.position.y,current.z);
+        gameObject.transform.GetChild(i).transform.position = current;
+       }
+        
+        Instantiate(cutPrefab,transform.position,transform.rotation,transform);
+
     }
 
 }
