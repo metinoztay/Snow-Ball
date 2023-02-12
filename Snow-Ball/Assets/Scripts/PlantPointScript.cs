@@ -1,25 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlantPointScript : MonoBehaviour
 {
     [SerializeField] private Transform grossPoint;
     [SerializeField] private float grossAmount;
 
-    [SerializeField] public GameObject[] isSnowed = new GameObject[2];
+    [SerializeField] public List<GameObject> isSnowedFields;
     
     private int maxPlantCount;
 
-     private int plantCount;
-     private bool isGross;
+    private int plantCount;
+    private bool isGross;
 
         
     private void OnTriggerEnter2D(Collider2D other) {
         GetPlantCount();
-        if (other.tag=="Water")
+        if (other.tag=="Water" && !isSnowed())
         {  
-             Destroy(other.gameObject); 
+            Destroy(other.gameObject); 
             if (isGross)
             {
                 Gross();
@@ -49,6 +50,18 @@ public class PlantPointScript : MonoBehaviour
     private void Gross(){
         Vector3 current = grossPoint.position;
         grossPoint.position = new Vector3(current.x,current.y+grossAmount,current.z);
+    }
+
+    private bool isSnowed(){
+        foreach (GameObject field in isSnowedFields)
+        {
+            if (!field.GetComponent<GroundSnowScript>().isSnowed)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

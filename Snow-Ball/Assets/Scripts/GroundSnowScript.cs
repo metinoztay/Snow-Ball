@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
- using UnityEngine.UI;
+using UnityEngine.UI;
 using UnityEngine;
 
-public class GroundSnowScrip : MonoBehaviour
+public class GroundSnowScript : MonoBehaviour
 {
     [SerializeField] private GameObject[] groundSnowPrefabs;
     [SerializeField] private List<GameObject> groundSnowPoints;
+
+    [SerializeField] public bool isSnowed;
     
      private void Awake() {
         int random = Random.Range(0,groundSnowPrefabs.Length);
@@ -24,17 +26,19 @@ public class GroundSnowScrip : MonoBehaviour
         if(other.tag == "SnowBall"){
              Destroy(other.gameObject);
              if(GetComponentInChildren<Image>().enabled){                
-                ChangeSnowTouchingPoint();
+                ChangeSnowTouchingPoint(other);
              }
              else{
                 GetComponentInChildren<Image>().enabled=true; 
+                isSnowed = true;
+
              }
              
              
         }
     }
 
-    private void ChangeSnowTouchingPoint(){
+    private void ChangeSnowTouchingPoint(Collider2D other){
         int index = groundSnowPoints.IndexOf(gameObject);
         bool left = Random.Range(0,2) == 0;
         
@@ -48,12 +52,14 @@ public class GroundSnowScrip : MonoBehaviour
         }
 
         if (left)
-        {   Debug.Log("Sol");
-            groundSnowPoints[index-1].GetComponentInChildren<Image>().enabled = true;
+        {  
+            //groundSnowPoints[index-1].GetComponentInChildren<Image>().enabled = true;
+            groundSnowPoints[index-1].GetComponent<GroundSnowScript>().OnTriggerEnter2D(other);
         }
         else
-        {   Debug.Log("Sağ");
-            groundSnowPoints[index+1].GetComponentInChildren<Image>().enabled = true;
+        { 
+           // groundSnowPoints[index+1].GetComponentInChildren<Image>().enabled = true;
+           groundSnowPoints[index+1].GetComponent<GroundSnowScript>().OnTriggerEnter2D(other);
         }
         
 
