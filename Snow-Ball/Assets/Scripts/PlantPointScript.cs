@@ -14,9 +14,12 @@ public class PlantPointScript : MonoBehaviour
     [SerializeField] public List<GameObject> isSnowedFields;
     
     private int maxPlantCount;
-
     private int plantCount;
     private bool isGross;
+
+    Vector3 cutStartPosition;
+    Vector3 cutEndPosition;
+
 
         
     private void OnTriggerEnter2D(Collider2D other) {
@@ -40,9 +43,18 @@ public class PlantPointScript : MonoBehaviour
         }
         else if(other.tag=="Hand")
         {
-            Cut();
+            cutStartPosition = other.transform.position;
         }
               
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if(other.tag=="Hand")
+        {
+            cutEndPosition = other.transform.position;
+        }
+
+        Cut();
     }
 
     private void GetPlantCount(){
@@ -75,17 +87,8 @@ public class PlantPointScript : MonoBehaviour
         return true;
     }
 
-    [ContextMenu(nameof(Cut))]
     public void Cut(){
-        var topPoint = gameObject.transform.GetChild(0).transform;
-       for (int i = 0; i < 2; i++)
-       {
-        var current = gameObject.transform.GetChild(i).transform.position;
-        current = new Vector3(current.x,cuttingLine.position.y,current.z);
-        gameObject.transform.GetChild(i).transform.position = current;
-       }
         
-        Instantiate(cutPrefab,topPoint.position,topPoint.rotation,transform);
 
     }
 
