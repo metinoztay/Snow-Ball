@@ -8,6 +8,8 @@ public class HandCutScript : MonoBehaviour
    [SerializeField] private bool move;   
    [SerializeField] private float speed;
 
+   [SerializeField] private GameObject progressBar;
+
    private void Update() {
       if (move)
       {
@@ -39,6 +41,8 @@ public class HandCutScript : MonoBehaviour
 
    private void Collect(Collider2D other){
       other.GetComponent<PlantScript>().Collect();
+      progressBar.GetComponent<ProgressBar>().IncrementProgress();
+
    }
    
 }
