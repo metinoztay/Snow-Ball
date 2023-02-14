@@ -7,16 +7,7 @@ public class HandCutScript : MonoBehaviour
    [SerializeField] private float direction;
    [SerializeField] private bool move;   
    [SerializeField] private float speed;
-   private Transform startingPosition;
 
-   private Vector3 cutStart;
-   private Vector3 cutEnd;
-
-   bool mousePressed;
-
-   private void Start() {
-      startingPosition = transform;
-   }
    private void Update() {
       if (move)
       {
@@ -32,23 +23,22 @@ public class HandCutScript : MonoBehaviour
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
-      if (other.tag=="MainCamera"&& direction==1)
-      {
-         
+      if (other.tag=="MainCamera" && direction==1)
+      {         
          direction *= -1;
-      
-         
       }
       else if(other.tag=="MainCamera")
       {
          move=false;
       }
-      else if(other.tag=="Plant")
+      else if(other.tag=="Collectable")
       {
-         
-         
+         Collect(other);         
       }
    }
 
-
+   private void Collect(Collider2D other){
+      other.GetComponent<PlantScript>().Collect();
+   }
+   
 }

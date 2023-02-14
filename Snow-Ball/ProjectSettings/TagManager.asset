@@ -15,6 +15,7 @@ TagManager:
   - GroundSnow
   - CuttingLine
   - Hand
+  - Collectable
   layers:
   - Default
   - TransparentFX

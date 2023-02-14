@@ -7,21 +7,15 @@ public class PlantPointScript : MonoBehaviour
 {
     [SerializeField] private Transform grossPoint;
     [SerializeField] private float grossAmount;
-    [SerializeField] private GameObject cutPrefab;
-    
-    [SerializeField] private Transform cuttingLine;
-
     [SerializeField] public List<GameObject> isSnowedFields;
     
     private int maxPlantCount;
-    private int plantCount;
-    private bool isGross;
-
-    Vector3 cutStartPosition;
-    Vector3 cutEndPosition;
+    [SerializeField] public int plantCount;
+    [SerializeField] public bool isGross;
 
 
-        
+
+    
     private void OnTriggerEnter2D(Collider2D other) {
         GetPlantCount();
         if (other.tag=="Water")
@@ -41,22 +35,7 @@ public class PlantPointScript : MonoBehaviour
             }
            
         }
-        else if(other.tag=="Hand")
-        {
-            cutStartPosition = other.transform.position;
-        }
-              
     }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        if(other.tag=="Hand")
-        {
-            cutEndPosition = other.transform.position;
-        }
-
-        Cut();
-    }
-
     private void GetPlantCount(){
         plantCount = GetComponentInParent<PlantController>().plantCount;
         maxPlantCount = GetComponentInParent<PlantController>().maxPlantCount;
@@ -85,11 +64,6 @@ public class PlantPointScript : MonoBehaviour
         }
 
         return true;
-    }
-
-    public void Cut(){
-        
-
     }
 
 }
