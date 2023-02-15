@@ -20,7 +20,7 @@ public class InputController : MonoBehaviour, IDragHandler
         if(current>maxTurnAngle||current<-maxTurnAngle){
             return;
         }
-        cannonBall.rotation= rotation;
+        cannonBall.rotation = rotation;
     }   
 
 }

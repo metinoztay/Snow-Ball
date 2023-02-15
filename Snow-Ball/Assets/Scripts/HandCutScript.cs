@@ -8,8 +8,13 @@ public class HandCutScript : MonoBehaviour
    [SerializeField] private bool move;   
    [SerializeField] private float speed;
 
-   [SerializeField] private GameObject progressBar;
+   [SerializeField] private GameObject coinsObject;
 
+   [SerializeField] private Animator animator;
+
+   private void Start() {
+      animator = GetComponentInParent<Animator>();
+   }
    private void Update() {
       if (move)
       {
@@ -21,7 +26,7 @@ public class HandCutScript : MonoBehaviour
 
    public void Move(){
       move = true;
-      direction=1;
+      direction = 1;
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
@@ -32,6 +37,9 @@ public class HandCutScript : MonoBehaviour
       else if(other.tag=="MainCamera")
       {
          move=false;
+         direction = 1;
+         animator.SetBool("Collect",false);
+         
       }
       else if(other.tag=="Collectable")
       {
@@ -40,9 +48,10 @@ public class HandCutScript : MonoBehaviour
    }
 
    private void Collect(Collider2D other){
-      other.GetComponent<PlantScript>().Collect();
-      progressBar.GetComponent<ProgressBar>().IncrementProgress();
-
+      if(other.tag == "Collectable"){
+            other.GetComponent<PlantScript>().Collect();
+            coinsObject.GetComponent<CoinScript>().AddGold();
+        }
    }
    
 }

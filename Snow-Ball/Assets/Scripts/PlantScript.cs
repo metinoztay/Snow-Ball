@@ -8,12 +8,11 @@ public class PlantScript : MonoBehaviour
     [SerializeField] private Transform plantPoint;
     [SerializeField] private float grossSpeed;
     [SerializeField] private GameObject plantController;
-
     [SerializeField] private GameObject cuttingLine;
     [SerializeField] bool collectable;
 
     private void Start() {
-        collectable = false;    
+        collectable = false;
     }
     void Update()
     {
@@ -43,10 +42,10 @@ public class PlantScript : MonoBehaviour
             gameObject.tag="Collectable";
         }
     }
-
     public void Collect(){
-        grossPoint.position = plantPoint.position;
-        transform.position = plantPoint.position;
+       
+        grossPoint.transform.position = transform.position;
+        plantPoint.GetComponent<PlantPointScript>().CollectFall();
          
         collectable = false;
         gameObject.tag="Plant";
