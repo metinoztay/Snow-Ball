@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballSpeed: 5
   destroyTimer: 2.5
+  destroyParticle: {fileID: 7992929658942475705, guid: f7da075d44ee5496f9b097413640e28d, type: 3}
 --- !u!58 &3023702891553073306
 CircleCollider2D:
   m_ObjectHideFlags: 0

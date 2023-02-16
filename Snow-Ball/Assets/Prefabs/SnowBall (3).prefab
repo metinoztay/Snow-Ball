@@ -277,3 +277,4 @@ MonoBehaviour:
   snowSize: {fileID: 3234080586829915707}
   isMove: 0
   waterPrefab: {fileID: 4383320946062098430, guid: 514617c345bae614a8f10c7bf7246a2e, type: 3}
+  waterExpolisonParticle: {fileID: 7889455369710313607, guid: a0add106573dbc840a7acb4fe874b11d, type: 3}

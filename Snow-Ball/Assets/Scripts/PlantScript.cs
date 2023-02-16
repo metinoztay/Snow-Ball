@@ -29,17 +29,21 @@ public class PlantScript : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-         if (other.tag=="PlantPoint")
+         if (other.transform == plantPoint)
         {
-           collectable = false;
-           gameObject.tag="Plant";
+        
+            Debug.Log("Enter");
+            collectable = false;
+            gameObject.tag="Plant";
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
-        if (other.tag=="PlantPoint")
-        {
+        if (other.transform == plantPoint)
+        {   
+            Debug.Log("Exit");
             collectable = true;
             gameObject.tag="Collectable";
+            cuttingLine.GetComponent<Animator>().SetBool("Collect",true);
         }
     }
     public void Collect(){

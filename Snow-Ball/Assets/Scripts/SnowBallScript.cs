@@ -12,6 +12,8 @@ public class SnowBallScript : MonoBehaviour
     [SerializeField] private bool isMove;
     [SerializeField] private GameObject waterPrefab;
 
+    [SerializeField] private GameObject waterExpolisonParticle;
+
     private void Start()
     {
         isMove = true;
@@ -30,6 +32,8 @@ public class SnowBallScript : MonoBehaviour
                 if (int.Parse(snowSize.text) <= 0)
                 {   
                     Instantiate(waterPrefab,transform.position,transform.rotation,GameObject.Find("SnowCanvas").transform);
+                    GameObject waterExplosion = Instantiate(waterExpolisonParticle,transform.position,transform.rotation);
+                    Destroy(waterExplosion,0.75f);
                     Destroy(gameObject);
                 }                
                 break;

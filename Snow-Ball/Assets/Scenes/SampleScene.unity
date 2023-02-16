@@ -392,7 +392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &88024366
 Transform:
   m_ObjectHideFlags: 0
@@ -6039,7 +6039,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!1 &1872622665
 GameObject:
@@ -6224,7 +6224,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &1980179842
 GameObject:
@@ -6499,7 +6499,7 @@ MonoBehaviour:
   firePoint: {fileID: 1830399620}
   ballObject: {fileID: 2430688861007828566, guid: c72178713cb38184eb1699e391c35d67, type: 3}
   spawnTime: 0.6
-  spawnDelay: 0.25
+  spawnDelay: 0.5
 --- !u!95 &1990064321
 Animator:
   serializedVersion: 5
