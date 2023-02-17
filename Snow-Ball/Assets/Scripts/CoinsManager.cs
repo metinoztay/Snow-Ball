@@ -22,8 +22,8 @@ public class CoinsManager : MonoBehaviour
     [Header ("Animation Settings")]
     [SerializeField] [Range(0.5f,0.9f)] float minAnimationDuration;
     [SerializeField] [Range(0.9f,2f)] float maxAnimationDuration;
-
     [SerializeField] Ease easeType;
+    [SerializeField] private float spread;
 
    
     private int c;
@@ -61,7 +61,7 @@ public class CoinsManager : MonoBehaviour
             {
                 GameObject coin = coinsQueue.Dequeue(); 
                 coin.SetActive(true);
-                coin.transform.position = collectedCoinPosition;
+                coin.transform.position = collectedCoinPosition + new Vector3(Random.Range(-spread,+spread),0f,0f);
 
                 float duration = Random.Range(minAnimationDuration,maxAnimationDuration);
                 coin.transform.DOMove(targetPosition,duration)
