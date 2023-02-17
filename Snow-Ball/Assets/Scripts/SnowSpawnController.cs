@@ -29,8 +29,9 @@ public class SnowSpawnController : MonoBehaviour
         int randomSnow = Random.Range(0, spawnObjects.Length);
         int randSpawnPoint = Random.Range(0, spawnPoints.Length);
         int randomAmount = Random.Range(minSnowAmount, maxSnowAmount);
+        Debug.Log(randomAmount + "-1");
         
-        if ( spawnAmount+randomSnow + 1 > totalSnowAmount)
+        if ( spawnAmount + randomSnow + 1 > totalSnowAmount )
         {
             return;
         }
@@ -38,6 +39,7 @@ public class SnowSpawnController : MonoBehaviour
         randomSnow = MakeUnique(randomSnow, lastSnow, spawnObjects.Length);
         randSpawnPoint = MakeUnique(randSpawnPoint,lastPoint, spawnPoints.Length);
         randomAmount = MakeUnique(randomAmount, lastSnow, maxSnowAmount);
+        Debug.Log(randomAmount + "-2");
 
         Instantiate(spawnObjects[randomSnow],spawnPoints[randSpawnPoint].transform);
         spawnObjects[randomSnow].GetComponentInChildren<TextMeshProUGUI>().SetText((randomAmount + 1).ToString());

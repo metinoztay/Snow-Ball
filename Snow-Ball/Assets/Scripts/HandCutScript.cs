@@ -52,7 +52,7 @@ public class HandCutScript : MonoBehaviour
    }
 
    private void Collect(Collider2D other){
-      if(other.tag == "Collectable"){
+      if(other.tag == "Collectable" && move){
             coinsManager.AddCoins(other.transform.position);
             other.GetComponent<PlantScript>().Collect();            
         }
