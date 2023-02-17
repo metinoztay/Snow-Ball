@@ -9,6 +9,8 @@ public class FireScript : MonoBehaviour
     [SerializeField] private float spawnTime;
     [SerializeField] private float spawnDelay;
 
+    [SerializeField] private int level;
+
     private Animator fireAnimator;
     private void Start()
     {
@@ -19,6 +21,7 @@ public class FireScript : MonoBehaviour
     {
         fireAnimator.SetTrigger("Fire");
         Instantiate(ballObject, firePoint.position,firePoint.rotation);
+        ballObject.GetComponent<BallScript>().level = this.level;
     }
 
 

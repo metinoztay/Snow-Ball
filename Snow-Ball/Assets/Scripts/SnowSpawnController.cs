@@ -10,6 +10,7 @@ public class SnowSpawnController : MonoBehaviour
     [SerializeField] private GameObject[] spawnObjects;
     [SerializeField] private int totalSnowAmount;
     [SerializeField] private int maxSnowAmount;
+    [SerializeField] private int minSnowAmount;
     [SerializeField] private bool stopSpawning = false;
     [SerializeField] private float spawnTime;
     [SerializeField] private float spawnDelay;
@@ -27,7 +28,7 @@ public class SnowSpawnController : MonoBehaviour
         
         int randomSnow = Random.Range(0, spawnObjects.Length);
         int randSpawnPoint = Random.Range(0, spawnPoints.Length);
-        int randomAmount = Random.Range(0, maxSnowAmount);
+        int randomAmount = Random.Range(minSnowAmount, maxSnowAmount);
         
         if ( spawnAmount+randomSnow + 1 > totalSnowAmount)
         {

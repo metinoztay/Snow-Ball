@@ -9,7 +9,9 @@ public class BallScript : MonoBehaviour
     [SerializeField] private float ballSpeed;
     [SerializeField] private float destroyTimer;
 
-    [SerializeField] private GameObject destroyParticle;
+    [SerializeField] public int level;
+
+    
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.up*ballSpeed;
@@ -19,9 +21,8 @@ public class BallScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "SnowBall")
         {
-            Debug.Log("Destroy");
-            GameObject explosion = Instantiate(destroyParticle,transform.position,transform.rotation);
-            Destroy(explosion,0.75f);
+            //GameObject explosion = Instantiate(ballExplosionParticle,transform.position,transform.rotation,other.transform);  
+            //Destroy(explosion,0.75f);
         }
     }
 }
