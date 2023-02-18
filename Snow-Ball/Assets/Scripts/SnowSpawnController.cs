@@ -7,16 +7,33 @@ using UnityEngine;
 public class SnowSpawnController : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private GameObject[] spawnObjects;
+    [SerializeField] private GameObject[] snowPrefabs;
     [SerializeField] private int totalSnowAmount;
     [SerializeField] private int maxSnowAmount;
     [SerializeField] private int minSnowAmount;
-    [SerializeField] private bool stopSpawning = false;
     [SerializeField] private float spawnTime;
     [SerializeField] private float spawnDelay;
+    [SerializeField] public bool startSnow;
+
+
+    
+    private int _ds=0;
+    public int destroyedSnowCount
+    {
+        get { return _ds; }
+        set { _ds = value; 
+                if (totalSnowAmount == destroyedSnowCount)
+                {
+                    GameManager.Instance.UpdateGameState(GameManager.GameState.Win);
+                }
+            }
+    }
+    
+    
     int spawnAmount = 0;
-    int lastSnow=-1;
-    int lastPoint=-1;
+    int lastSnowPrefab=-1;
+    int lastSpawnPoint=-1;
+    int lastSnowAmount=-1;
 
     private void Start()
     {
@@ -25,50 +42,60 @@ public class SnowSpawnController : MonoBehaviour
 
     private void Spawn()
     {
-        
-        int randomSnow = Random.Range(0, spawnObjects.Length);
-        int randSpawnPoint = Random.Range(0, spawnPoints.Length);
-        int randomAmount = Random.Range(minSnowAmount, maxSnowAmount);
-        Debug.Log(randomAmount + "-1");
-        
-        if ( spawnAmount + randomSnow + 1 > totalSnowAmount )
+        if (startSnow)
         {
-            return;
-        }
+            int randomSnow = RandomUniqueNumber(0, snowPrefabs.Length, lastSnowPrefab,false);
+            int randomSpawnPoint = RandomUniqueNumber(0,spawnPoints.Length, lastSpawnPoint,false);
+            int randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount,lastSnowAmount,true);
+            if (spawnAmount == totalSnowAmount)
+            {
+                startSnow =false;
+                return;
+            }
+            
 
-        randomSnow = MakeUnique(randomSnow, lastSnow, spawnObjects.Length);
-        randSpawnPoint = MakeUnique(randSpawnPoint,lastPoint, spawnPoints.Length);
-        randomAmount = MakeUnique(randomAmount, lastSnow, maxSnowAmount);
-        Debug.Log(randomAmount + "-2");
+            GameObject newSnow = Instantiate(snowPrefabs[randomSnow],spawnPoints[randomSpawnPoint].transform);
+            newSnow.GetComponent<SnowBallScript>().snowSize = randomAmount;
 
-        Instantiate(spawnObjects[randomSnow],spawnPoints[randSpawnPoint].transform);
-        spawnObjects[randomSnow].GetComponentInChildren<TextMeshProUGUI>().SetText((randomAmount + 1).ToString());
-
-        spawnAmount += randomSnow + 1;
-        lastSnow = randomSnow;
-        lastPoint = randSpawnPoint;
-
-        //if (stopSpawning)
-        //    CancelInvoke("Spawn");
+            spawnAmount += randomAmount;
+            lastSnowPrefab = randomSnow;
+            lastSpawnPoint = randomSpawnPoint;
+            lastSnowAmount = randomAmount;
+        }       
 
     }
 
-    private int MakeUnique(int random,int last, int lenght)
+    private int RandomUniqueNumber(int min , int max, int last, bool control)
     {
-        int unique = random;
+        if (max == min)
+        {
+            return min;
+        }
+        else if(max < min)
+        {
+            return -1;
+        }
 
+        int random = Random.Range(min,max);        
         if(random == last)
         {
-            unique++;
+            random++;
+            if (random > max)
+            {
+                random=min;
+            }
         }
 
-        if (unique == lenght)
-        {
-            unique = 0;
+        if (control)
+        {   
+            int diff = totalSnowAmount - spawnAmount;
+
+            if (diff <= random)
+            {   
+                return diff;
+            }
         }
 
-        return unique;
+        return random;
     }
-
-
 }

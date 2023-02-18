@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,20 +6,34 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; 
-    public GameState State; 
 
+    [SerializeField] GameObject shopCanvas;
+    [SerializeField] GameObject winCanvas;
+
+    [SerializeField] GameObject loseCanvas;
+    [SerializeField] GameObject snowSpawner;
+    [SerializeField] GameObject fireScript;
+
+    
+    public GameState State; 
+    
     private void Awake() {
         Instance = this;
     }
     
+    private void Start() {
+      UpdateGameState(GameState.ShopMenu);
+    }
     public void UpdateGameState(GameState newState){
         State = newState;
 
         switch (State)
         {
-             case GameState.Menu:
+             case GameState.ShopMenu:
+                HandleShopMenu();
                 break;
              case GameState.Start:
+                HandleStart();
                 break;
              case GameState.Pause:
                 break;
@@ -35,17 +50,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void HandleWin(){
+    private void HandleShopMenu()
+    {
+      shopCanvas.SetActive(true);
+      fireScript.GetComponent<FireScript>().startFire = false;
+      snowSpawner.GetComponent<SnowSpawnController>().startSnow = false;
+    }
 
+    private void HandleStart(){
+      shopCanvas.SetActive(false);
+      snowSpawner.GetComponent<SnowSpawnController>().startSnow = true;
+      fireScript.GetComponent<FireScript>().startFire = true;
+      
+    }
+    private void HandleWin(){
+      fireScript.GetComponent<FireScript>().startFire = false;
+      winCanvas.SetActive(true);
     }
 
     private void HandleLose(){
-
+      fireScript.GetComponent<FireScript>().startFire = false;
+      snowSpawner.GetComponent<SnowSpawnController>().startSnow = false;
+      snowSpawner.SetActive(false);
+      loseCanvas.SetActive(true);
     }
        
     
     public enum GameState{
-        Menu,
+        ShopMenu,
         Start,
         Pause,
         Win,

@@ -27,14 +27,13 @@ public class GroundSnowScript : MonoBehaviour
              Destroy(other.gameObject);
              if(GetComponentInChildren<Image>().enabled){                
                 ChangeSnowTouchingPoint(other);
+                GetComponentInParent<GroundSnowController>().snowedFields++;
              }
              else{
                 GetComponentInChildren<Image>().enabled=true; 
                 isSnowed = true;
-
+                GetComponentInParent<GroundSnowController>().snowedFields++;   
              }
-             
-             
         }
     }
 
@@ -53,17 +52,15 @@ public class GroundSnowScript : MonoBehaviour
 
         if (left)
         {  
-            //groundSnowPoints[index-1].GetComponentInChildren<Image>().enabled = true;
-            groundSnowPoints[index-1].GetComponent<GroundSnowScript>().OnTriggerEnter2D(other);
+            groundSnowPoints[index-1].GetComponentInChildren<Image>().enabled = true;
+            groundSnowPoints[index-1].GetComponent<GroundSnowScript>().isSnowed =true;
+            //groundSnowPoints[index-1].GetComponent<GroundSnowScript>().OnTriggerEnter2D(other);
         }
         else
         { 
-           // groundSnowPoints[index+1].GetComponentInChildren<Image>().enabled = true;
-           groundSnowPoints[index+1].GetComponent<GroundSnowScript>().OnTriggerEnter2D(other);
+           groundSnowPoints[index+1].GetComponentInChildren<Image>().enabled = true;
+           groundSnowPoints[index+1].GetComponent<GroundSnowScript>().isSnowed =true;
+           //groundSnowPoints[index+1].GetComponent<GroundSnowScript>().OnTriggerEnter2D(other);
         }
-        
-
     }
-   
-    
 }

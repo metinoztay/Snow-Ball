@@ -8,12 +8,22 @@ public class SnowBallScript : MonoBehaviour
 {
     [SerializeField] private float gravity;
     [SerializeField] private float horSpeed;
-    [SerializeField] private TextMeshProUGUI snowSize;
+    [SerializeField] private TMP_Text snowSizeText;
     [SerializeField] private bool isMove;
     [SerializeField] private GameObject waterPrefab;
 
     [SerializeField] private GameObject waterExpolisonParticle;
     [SerializeField] private GameObject ballExplosionParticle;
+
+    private int _ss;
+    public int snowSize
+    {
+        get { return _ss; }
+        set { _ss = value; 
+            snowSizeText.text = snowSize.ToString();
+        }
+    }
+    
 
     private void Start()
     {
@@ -76,17 +86,17 @@ public class SnowBallScript : MonoBehaviour
 
     private void BallCrash(Collider2D other){
         int ballLevel = other.GetComponent<BallScript>().level;
-        snowSize.SetText((int.Parse(snowSize.text) - ballLevel).ToString());
+        snowSize -= ballLevel;
         Destroy(other.gameObject);
         GameObject explosion = Instantiate(ballExplosionParticle,transform);
         Destroy(explosion,0.75f); 
                 
-        if (int.Parse(snowSize.text) <= 0)
+        if (snowSize <= 0)
         {   
             Instantiate(waterPrefab,transform.position,transform.rotation,GameObject.Find("SnowCanvas").transform);
             GameObject waterExplosion = Instantiate(waterExpolisonParticle,transform.position,transform.rotation);
             explosion.transform.parent = waterExplosion.transform;   
-                    
+
             Destroy(gameObject);
             Destroy(waterExplosion,0.75f);                    
                     
