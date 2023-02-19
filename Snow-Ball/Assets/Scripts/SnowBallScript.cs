@@ -15,6 +15,7 @@ public class SnowBallScript : MonoBehaviour
     [SerializeField] private GameObject waterExpolisonParticle;
     [SerializeField] private GameObject ballExplosionParticle;
 
+    private int snowStartSize;
     private int _ss;
     public int snowSize
     {
@@ -27,6 +28,7 @@ public class SnowBallScript : MonoBehaviour
 
     private void Start()
     {
+        snowStartSize = snowSize;
         isMove = true;
         DirectionSelector();
     }
@@ -97,6 +99,7 @@ public class SnowBallScript : MonoBehaviour
             GameObject waterExplosion = Instantiate(waterExpolisonParticle,transform.position,transform.rotation);
             explosion.transform.parent = waterExplosion.transform;   
 
+            GetComponentInParent<SnowSpawnController>().destroyedSnowCount += snowStartSize;
             Destroy(gameObject);
             Destroy(waterExplosion,0.75f);                    
                     

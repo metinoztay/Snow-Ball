@@ -49,7 +49,7 @@ public class SnowSpawnController : MonoBehaviour
             int randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount,lastSnowAmount,true);
             if (spawnAmount == totalSnowAmount)
             {
-                startSnow =false;
+                startSnow = false;
                 return;
             }
             
