@@ -27,7 +27,7 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] private float spread;
 
    
-    private int c;
+    private int c=100;
     public int Coins
     {
         get { return c; }
@@ -39,7 +39,7 @@ public class CoinsManager : MonoBehaviour
 
     private void Awake() {
         targetPosition = coinsTarget.position;
-
+        coinUIText.text = Coins.ToString();
         PrepareCoins();
     }
 

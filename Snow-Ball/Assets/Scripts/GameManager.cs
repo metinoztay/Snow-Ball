@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance; 
 
     [SerializeField] GameObject shopCanvas;
+    [SerializeField] GameObject inputCanvas;
     [SerializeField] GameObject winCanvas;
 
     [SerializeField] GameObject loseCanvas;
@@ -52,27 +53,34 @@ public class GameManager : MonoBehaviour
 
     private void HandleShopMenu()
     {
+      inputCanvas.SetActive(false);
       shopCanvas.SetActive(true);
       fireScript.GetComponent<FireScript>().startFire = false;
       snowSpawner.GetComponent<SnowSpawnController>().startSnow = false;
     }
 
     private void HandleStart(){
+      Time.timeScale = 1;
+      inputCanvas.SetActive(true);
       shopCanvas.SetActive(false);
       snowSpawner.GetComponent<SnowSpawnController>().startSnow = true;
       fireScript.GetComponent<FireScript>().startFire = true;
       
     }
     private void HandleWin(){
+      inputCanvas.SetActive(false);
       fireScript.GetComponent<FireScript>().startFire = false;
       winCanvas.SetActive(true);
+      Time.timeScale = 0;
     }
 
     private void HandleLose(){
+      inputCanvas.SetActive(false);
       fireScript.GetComponent<FireScript>().startFire = false;
       snowSpawner.GetComponent<SnowSpawnController>().startSnow = false;
       snowSpawner.SetActive(false);
       loseCanvas.SetActive(true);
+      Time.timeScale = 0;
     }
        
     
