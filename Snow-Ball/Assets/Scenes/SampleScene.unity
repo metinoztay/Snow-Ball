@@ -326,9 +326,9 @@ MonoBehaviour:
   - {fileID: 7143086998475225103, guid: f72c41343e1e3154e8f84f38c01e2f1b, type: 3}
   - {fileID: 5104985854005683354, guid: 552518604337e1f4d9f155ad94ad0271, type: 3}
   - {fileID: 6774699733427226730, guid: 023076eb4b8285049b3e368ef8c9a991, type: 3}
-  totalSnowAmount: 10
-  maxSnowAmount: 4
-  minSnowAmount: 3
+  totalSnowAmount: 26
+  maxSnowAmount: 2
+  minSnowAmount: 1
   spawnTime: 1
   spawnDelay: 1
   startSnow: 0
@@ -1150,6 +1150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CannonBallObject: {fileID: 0}
   ballLevelUpButton: {fileID: 0}
+  speedUpButton: {fileID: 0}
   CoinsObject: {fileID: 0}
 --- !u!114 &293895971
 MonoBehaviour:
@@ -1834,6 +1835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopCanvas: {fileID: 1745329793}
+  inputCanvas: {fileID: 1846205428}
   winCanvas: {fileID: 2127925310}
   loseCanvas: {fileID: 293895968}
   snowSpawner: {fileID: 97620698}
@@ -2527,7 +2529,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -4221,7 +4223,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1097952027}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1745329798}
+        m_TargetAssemblyTypeName: ShopMenuScript, Assembly-CSharp
+        m_MethodName: BallLevelUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1097952027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5520,7 +5534,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1457441133}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1745329798}
+        m_TargetAssemblyTypeName: ShopMenuScript, Assembly-CSharp
+        m_MethodName: FireSpeedUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1457441133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6726,7 +6752,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CannonBallObject: {fileID: 1990064316}
-  ballLevelUpButton: {fileID: 0}
+  ballLevelUpButton: {fileID: 1097952026}
+  speedUpButton: {fileID: 1457441132}
   CoinsObject: {fileID: 779626828}
 --- !u!4 &1753972051 stripped
 Transform:
@@ -8221,7 +8248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8473,8 +8500,9 @@ MonoBehaviour:
   firePoint: {fileID: 1830399620}
   ballObject: {fileID: 2430688861007828566, guid: c72178713cb38184eb1699e391c35d67, type: 3}
   spawnTime: 0.6
-  spawnDelay: 0.5
-  maxLevel: 0
+  spawnDelay: 1.5
+  minDelay: 0
+  maxLevel: 10
   levelText: {fileID: 741955444}
   startFire: 0
 --- !u!95 &1990064321
@@ -8882,6 +8910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CannonBallObject: {fileID: 0}
   ballLevelUpButton: {fileID: 0}
+  speedUpButton: {fileID: 0}
   CoinsObject: {fileID: 0}
 --- !u!114 &2127925313
 MonoBehaviour:

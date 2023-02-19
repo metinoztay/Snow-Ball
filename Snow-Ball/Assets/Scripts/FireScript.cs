@@ -8,7 +8,9 @@ public class FireScript : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject ballObject;
     [SerializeField] private float spawnTime;
-    [SerializeField] private float spawnDelay;
+    [SerializeField] public float spawnDelay;
+
+    [SerializeField] public float minDelay;
 
     [SerializeField] public int maxLevel;
     [SerializeField] private TMP_Text levelText;
@@ -44,15 +46,17 @@ public class FireScript : MonoBehaviour
         }        
     }
 
-    public bool BallLevelUp(){
+    public void BallLevelUp(){
         if (level < maxLevel)
         {
             level++;
-            return true;
         }
-
-        return false;
     }
 
-
+    public void FireSpeedUp(){
+        if (spawnDelay > minDelay)
+        {
+            spawnDelay -= 0.1f;
+        }
+    }
 }

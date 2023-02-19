@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
       inputCanvas.SetActive(false);
       fireScript.GetComponent<FireScript>().startFire = false;
       snowSpawner.GetComponent<SnowSpawnController>().startSnow = false;
-      snowSpawner.SetActive(false);
+      //snowSpawner.SetActive(false);
       loseCanvas.SetActive(true);
       Time.timeScale = 0;
     }
