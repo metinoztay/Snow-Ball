@@ -8,11 +8,14 @@ public class ShopMenuScript : MonoBehaviour
     [SerializeField] private GameObject CannonBallObject;
     private int ballLevelUpCoin;
 
+    [SerializeField] private Button incomeLevelUpButton;
     [SerializeField] private Button ballLevelUpButton;
     [SerializeField] private Button speedUpButton;
     [SerializeField] private GameObject CoinsObject;
 
     int ballLevel, ballMaxLevel, ballNeedCoin;
+
+    int coinsValue, coinsValueNeedCoin , maxCoinValue;
 
     float fireSpeed , minDelay; 
     int speedNeedCoin;
@@ -23,6 +26,7 @@ public class ShopMenuScript : MonoBehaviour
     public void Start(){
         BallLevelUpControl();
         FireSpeedUpControl();
+        IncomeLevelUpControl();
     }
 
     public void StartGame(){
@@ -59,15 +63,38 @@ public class ShopMenuScript : MonoBehaviour
     private void FireSpeedUpControl(){
         fireSpeed = CannonBallObject.GetComponent<FireScript>().spawnDelay;
         minDelay = CannonBallObject.GetComponent<FireScript>().minDelay;
-        speedNeedCoin = (int)(Mathf.Pow(2,(1.6f-fireSpeed)*10)*10);                
+        speedNeedCoin = (int)(Mathf.Pow(2,(1.1f-fireSpeed)*10)*10);                
         coins = CoinsObject.GetComponent<CoinsManager>().Coins;
-        Debug.Log(speedNeedCoin);
         if (fireSpeed==minDelay || speedNeedCoin > coins)
         {
             speedUpButton.interactable = false;   
         }else
         {
-            speedUpButton.interactable=true;
+            speedUpButton.interactable = true;
         }
+    }
+
+    public void IncomeLevelUp(){
+        CoinsObject.GetComponent<CoinsManager>().Coins -= coinsValueNeedCoin;
+        CoinsObject.GetComponent<CoinsManager>().CoinsValueUp(); 
+        IncomeLevelUpControl();
+    }
+    
+    private void IncomeLevelUpControl(){
+        coinsValue = CoinsObject.GetComponent<CoinsManager>().coinsValue;
+        maxCoinValue = CoinsObject.GetComponent<CoinsManager>().maxCoinValue;
+        coinsValueNeedCoin = coinsValue * 10;
+        coins = CoinsObject.GetComponent<CoinsManager>().Coins;
+        
+        
+        if (coinsValue == maxCoinValue || coinsValueNeedCoin > coins)
+        {
+            incomeLevelUpButton.interactable = false;
+        }else
+        {
+            incomeLevelUpButton.interactable = true;
+        }
+        
+
     }
 }
