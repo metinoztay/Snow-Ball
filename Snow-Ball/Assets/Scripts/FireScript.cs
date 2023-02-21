@@ -8,7 +8,7 @@ public class FireScript : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject ballObject;
     [SerializeField] private float spawnTime;
-    [SerializeField] public float spawnDelay;
+    [SerializeField] public float fireSpeed;
 
     [SerializeField] public float minDelay;
 
@@ -19,7 +19,7 @@ public class FireScript : MonoBehaviour
 
 
     private int _level = 2;
-    public int level
+    public int ballLevel
     {
         get { return _level; }
         set { _level = value;
@@ -31,8 +31,10 @@ public class FireScript : MonoBehaviour
     
     private void Start()
     {
+        ballLevel = PlayerPrefs.GetInt(nameof(ballLevel));
+        fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed));
         fireAnimator = GetComponent<Animator>();
-        InvokeRepeating("Fire",spawnTime,spawnDelay);
+        InvokeRepeating("Fire",spawnTime,fireSpeed);
        
         
     }
@@ -42,21 +44,23 @@ public class FireScript : MonoBehaviour
         {
             fireAnimator.SetTrigger("Fire");
             Instantiate(ballObject, firePoint.position,firePoint.rotation);
-            ballObject.GetComponent<BallScript>().level = this.level;
+            ballObject.GetComponent<BallScript>().level = this.ballLevel;
         }        
     }
 
     public void BallLevelUp(){
-        if (level < maxLevel)
+        if (ballLevel < maxLevel)
         {
-            level++;
+            ballLevel++;
+            PlayerPrefs.SetInt(nameof(ballLevel),ballLevel);
         }
     }
 
     public void FireSpeedUp(){
-        if (spawnDelay > minDelay)
+        if (fireSpeed > minDelay)
         {
-            spawnDelay -= 0.1f;
+            fireSpeed -= 0.1f;
+            PlayerPrefs.SetFloat(nameof(fireSpeed),fireSpeed);
         }
     }
 }

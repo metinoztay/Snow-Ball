@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
     }
 
     private void HandleStart(){
-      Time.timeScale = 1;
       inputCanvas.SetActive(true);
       shopCanvas.SetActive(false);
       snowSpawner.GetComponent<SnowSpawnController>().startSnow = true;
@@ -71,19 +70,16 @@ public class GameManager : MonoBehaviour
       inputCanvas.SetActive(false);
       fireScript.GetComponent<FireScript>().startFire = false;
       winCanvas.SetActive(true);
-      Time.timeScale = 0;
     }
 
     private void HandleLose(){
       inputCanvas.SetActive(false);
       fireScript.GetComponent<FireScript>().startFire = false;
       snowSpawner.GetComponent<SnowSpawnController>().startSnow = false;
-      //snowSpawner.SetActive(false);
       loseCanvas.SetActive(true);
-      Time.timeScale = 0;
     }
-       
-    
+
+
     public enum GameState{
         ShopMenu,
         Start,

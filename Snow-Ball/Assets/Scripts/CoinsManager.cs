@@ -14,13 +14,11 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] public int maxCoinValue;
     Vector3 targetPosition;
     
-    private int _cv;
+    private int _cv=1;
     public int coinsValue
     {
         get { return _cv; }
-        set { _cv = value; 
-            Debug.Log(coinsValue);
-        }
+        set { _cv = value;}
     }
     
 
@@ -38,20 +36,23 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] private float spread;
 
    
-    private int c=100;
-    public int Coins
+    private int c;
+    public int coins
     {
         get { return c; }
         set { c = value; 
-              coinUIText.text = Coins.ToString();
-                }
+              coinUIText.text = coins.ToString();
+            }
     }
     
-
+    private void Start() {
+        coinsValue = PlayerPrefs.GetInt(nameof(coinsValue));
+        coins = PlayerPrefs.GetInt(nameof(coins));
+        coinUIText.text = coins.ToString();
+    }
     private void Awake() {
         targetPosition = coinsTarget.position;
-        coinUIText.text = Coins.ToString();
-        coinsValue=1;
+        coinsValue = 1;        
         PrepareCoins();
     }
 
@@ -84,11 +85,14 @@ public class CoinsManager : MonoBehaviour
                         coin.SetActive(false);
                         coinsQueue.Enqueue(coin);
                         Instantiate(coinExplosion,coinsTarget.position,coinsTarget.rotation,transform);
-                        Coins+=coinsValue;
+                        coins+=coinsValue;
+                        Debug.Log(coinsValue);
                     }
                 );
             }        
        }
+
+       PlayerPrefs.SetInt(nameof(coins),coins);
     }
 
     public void AddCoins(Vector3 collectedCoinPosition){
@@ -97,5 +101,6 @@ public class CoinsManager : MonoBehaviour
 
     public void CoinsValueUp(){
         coinsValue *= 2;
+        PlayerPrefs.SetInt(nameof(coinsValue),coinsValue);
     }
 }

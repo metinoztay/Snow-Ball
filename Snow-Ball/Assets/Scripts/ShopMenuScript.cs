@@ -22,11 +22,8 @@ public class ShopMenuScript : MonoBehaviour
     int coins;
 
 
-
     public void Start(){
-        BallLevelUpControl();
-        FireSpeedUpControl();
-        IncomeLevelUpControl();
+       ButtonsControl();
     }
 
     public void StartGame(){
@@ -34,16 +31,18 @@ public class ShopMenuScript : MonoBehaviour
     }
 
     public void BallLevelUp(){
-        CoinsObject.GetComponent<CoinsManager>().Coins -= ballNeedCoin;
+        CoinsObject.GetComponent<CoinsManager>().coins -= ballNeedCoin;
         CannonBallObject.GetComponent<FireScript>().BallLevelUp();
-        BallLevelUpControl();
+        ButtonsControl();        
+        Save();
     }
 
     private void BallLevelUpControl(){
-        ballLevel = CannonBallObject.GetComponent<FireScript>().level;
+        ballLevel = CannonBallObject.GetComponent<FireScript>().ballLevel;
         ballMaxLevel = CannonBallObject.GetComponent<FireScript>().maxLevel;
         ballNeedCoin = (int)(Mathf.Pow(2,(ballLevel-1))*10);
-        coins = CoinsObject.GetComponent<CoinsManager>().Coins;
+        coins = CoinsObject.GetComponent<CoinsManager>().coins;
+        
 
         if (ballLevel==ballMaxLevel || ballNeedCoin > coins)
         {
@@ -55,16 +54,17 @@ public class ShopMenuScript : MonoBehaviour
     }
 
     public void FireSpeedUp(){
-        CoinsObject.GetComponent<CoinsManager>().Coins -= speedNeedCoin;
+        CoinsObject.GetComponent<CoinsManager>().coins -= speedNeedCoin;
         CannonBallObject.GetComponent<FireScript>().FireSpeedUp();
-        FireSpeedUpControl();
+        ButtonsControl();
+        Save();
     }
 
     private void FireSpeedUpControl(){
-        fireSpeed = CannonBallObject.GetComponent<FireScript>().spawnDelay;
+        fireSpeed = CannonBallObject.GetComponent<FireScript>().fireSpeed;
         minDelay = CannonBallObject.GetComponent<FireScript>().minDelay;
         speedNeedCoin = (int)(Mathf.Pow(2,(1.1f-fireSpeed)*10)*10);                
-        coins = CoinsObject.GetComponent<CoinsManager>().Coins;
+        coins = CoinsObject.GetComponent<CoinsManager>().coins;
         if (fireSpeed==minDelay || speedNeedCoin > coins)
         {
             speedUpButton.interactable = false;   
@@ -75,16 +75,17 @@ public class ShopMenuScript : MonoBehaviour
     }
 
     public void IncomeLevelUp(){
-        CoinsObject.GetComponent<CoinsManager>().Coins -= coinsValueNeedCoin;
+        CoinsObject.GetComponent<CoinsManager>().coins -= coinsValueNeedCoin;
         CoinsObject.GetComponent<CoinsManager>().CoinsValueUp(); 
-        IncomeLevelUpControl();
+        ButtonsControl();
+        Save();
     }
     
     private void IncomeLevelUpControl(){
         coinsValue = CoinsObject.GetComponent<CoinsManager>().coinsValue;
         maxCoinValue = CoinsObject.GetComponent<CoinsManager>().maxCoinValue;
         coinsValueNeedCoin = coinsValue * 10;
-        coins = CoinsObject.GetComponent<CoinsManager>().Coins;
+        coins = CoinsObject.GetComponent<CoinsManager>().coins;
         
         
         if (coinsValue == maxCoinValue || coinsValueNeedCoin > coins)
@@ -94,7 +95,18 @@ public class ShopMenuScript : MonoBehaviour
         {
             incomeLevelUpButton.interactable = true;
         }
-        
+    }
+    
+    private void Save(){
+        PlayerPrefs.SetInt(nameof(coins),100);
+        PlayerPrefs.SetInt(nameof(ballLevel),ballLevel);
+        PlayerPrefs.SetFloat(nameof(fireSpeed),fireSpeed);
+        PlayerPrefs.SetInt(nameof(coinsValue),coinsValue);
+    }
 
+    private void ButtonsControl(){
+        BallLevelUpControl();
+        FireSpeedUpControl();
+        IncomeLevelUpControl();
     }
 }
