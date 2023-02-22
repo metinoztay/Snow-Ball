@@ -35,8 +35,6 @@ public class FireScript : MonoBehaviour
         fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed));
         fireAnimator = GetComponent<Animator>();
         InvokeRepeating("Fire",spawnTime,fireSpeed);
-       
-        
     }
     private void Fire()
     {

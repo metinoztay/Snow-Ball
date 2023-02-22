@@ -86,7 +86,6 @@ public class CoinsManager : MonoBehaviour
                         coinsQueue.Enqueue(coin);
                         Instantiate(coinExplosion,coinsTarget.position,coinsTarget.rotation,transform);
                         coins+=coinsValue;
-                        Debug.Log(coinsValue);
                     }
                 );
             }        
@@ -103,4 +102,5 @@ public class CoinsManager : MonoBehaviour
         coinsValue *= 2;
         PlayerPrefs.SetInt(nameof(coinsValue),coinsValue);
     }
+
 }
