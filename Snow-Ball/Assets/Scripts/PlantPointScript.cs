@@ -7,7 +7,7 @@ public class PlantPointScript : MonoBehaviour
 {
     [SerializeField] private Transform grossPoint;
     [SerializeField] private float grossAmount;
-    [SerializeField] public List<GameObject> isSnowedFields;
+    [SerializeField] public GameObject isSnowedField;
     
     private int maxPlantCount;
     [SerializeField] public int plantCount;
@@ -64,15 +64,7 @@ public class PlantPointScript : MonoBehaviour
     }
 
     private bool IsSnowed(){
-        foreach (GameObject field in isSnowedFields)
-        {
-            if (!field.GetComponent<GroundSnowScript>().isSnowed)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return isSnowedField.GetComponentInChildren<Image>().enabled;
     }
 
     public void CollectFall(){        

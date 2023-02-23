@@ -35,8 +35,6 @@ public class FireScript : MonoBehaviour
         
     }
 
-   
-    
     private void Fire()
     {
         if (startFire)
@@ -46,7 +44,7 @@ public class FireScript : MonoBehaviour
             ballObject.GetComponent<BallScript>().level = this.ballLevel;
         }        
     }
-    
+
     public void StartFire(){
         startFire = true;
         InvokeRepeating("Fire",spawnStartTime,fireSpeed);

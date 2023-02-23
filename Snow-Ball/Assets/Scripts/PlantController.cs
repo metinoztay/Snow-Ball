@@ -31,7 +31,7 @@ public class PlantController : MonoBehaviour
      {    
           for (int j = 0; j < field; j++)
           {   
-               plantPoints[i].GetComponent<PlantPointScript>().isSnowedFields.Add(groundSnowPoints[i*field + j]);
+               plantPoints[i].GetComponent<PlantPointScript>().isSnowedField=(groundSnowPoints[i]);
                
           }
      }
