@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class PlantPointScript : MonoBehaviour
 {
+    [SerializeField] private GameObject[] groundSnowPrefabs;
     [SerializeField] private Transform grossPoint;
     [SerializeField] private float grossAmount;
-    [SerializeField] public GameObject isSnowedField;
+    private GameObject groundSnowField;
     
     private int maxPlantCount;
     [SerializeField] public int plantCount;
@@ -17,6 +18,10 @@ public class PlantPointScript : MonoBehaviour
     
     private void Awake() {
         animator = GetComponent<Animator>();
+        int random = Random.Range(0,groundSnowPrefabs.Length);
+        groundSnowField = Instantiate(groundSnowPrefabs[random],transform.position,transform.rotation,transform);
+        groundSnowField.transform.SetParent(transform.parent);
+        groundSnowField.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void Update() {
@@ -30,7 +35,6 @@ public class PlantPointScript : MonoBehaviour
             Destroy(other.gameObject); 
             if (!IsSnowed())
             {
-                
             
                 if (isGross)
                 {
@@ -43,6 +47,11 @@ public class PlantPointScript : MonoBehaviour
                 }           
             }
            
+        }else if (other.tag == "SnowBall")
+        {    
+            Destroy(other.gameObject); 
+            groundSnowField.GetComponent<SpriteRenderer>().enabled = true;
+            GetComponentInParent<PlantController>().GroundControl();
         }
     }
     private void GetPlantCount(){
@@ -64,7 +73,7 @@ public class PlantPointScript : MonoBehaviour
     }
 
     private bool IsSnowed(){
-        return isSnowedField.GetComponentInChildren<Image>().enabled;
+        return groundSnowField.GetComponent<SpriteRenderer>().enabled;
     }
 
     public void CollectFall(){        

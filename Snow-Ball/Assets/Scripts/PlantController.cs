@@ -7,33 +7,35 @@ public class PlantController : MonoBehaviour
     [SerializeField] public int plantCount;
     [SerializeField] public int maxPlantCount;
 
-    [SerializeField] private List<GameObject> groundSnowPoints;
-    [SerializeField] private List<GameObject> plantPoints;
+    [Space]
+    [SerializeField] private List<GameObject> groundSnowFields;
 
-   private void Awake() {
-        plantCount = 0;
+    // ! Lose Control Yazılacak
 
-        foreach (var groundSnowPoint in GameObject.FindGameObjectsWithTag("GroundSnowPoint"))
-         {
-              
-               groundSnowPoints.Add(groundSnowPoint);
-         }
+    private void Start() {
+      GetGroundSnowFields();
+    }
 
-       foreach (var plantPoint in GameObject.FindGameObjectsWithTag("PlantPoint"))
-         {
-              plantPoints.Add(plantPoint);
-         }
-   }
-
-   private void Start() {
-     int field = groundSnowPoints.Count / plantPoints.Count;
-     for (int i = 0; i < plantPoints.Count; i++)
-     {    
-          for (int j = 0; j < field; j++)
-          {   
-               plantPoints[i].GetComponent<PlantPointScript>().isSnowedField=(groundSnowPoints[i]);
-               
+    private void GetGroundSnowFields(){
+          foreach (GameObject field in GameObject.FindGameObjectsWithTag("GroundSnow"))
+          {
+               groundSnowFields.Add(field);
           }
-     }
-   }
+    }
+
+    public void GroundControl(){
+        bool isSnowed;
+        foreach (GameObject field in groundSnowFields)
+        {
+            isSnowed = field.GetComponent<SpriteRenderer>().enabled;
+            Debug.Log(isSnowed);
+            if (!isSnowed)
+            {
+                return;
+            }
+        }
+
+        GameManager.Instance.UpdateGameState(GameManager.GameState.Lose);
+    }
+
 }

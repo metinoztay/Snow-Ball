@@ -24,7 +24,6 @@ public class ShopMenuScript : MonoBehaviour
 
 
     public void Start(){
-        Save();
         ButtonsControl();
     }
 
@@ -111,10 +110,10 @@ public class ShopMenuScript : MonoBehaviour
     }
     
     private void Save(){
-        PlayerPrefs.SetInt(nameof(coins),1000);
-        PlayerPrefs.SetInt(nameof(ballLevel),0);
-        PlayerPrefs.SetFloat(nameof(fireSpeed),0);
-        PlayerPrefs.SetInt(nameof(coinsValue),0);
+        PlayerPrefs.SetInt(nameof(coins),coins);
+        PlayerPrefs.SetInt(nameof(ballLevel),ballLevel);
+        PlayerPrefs.SetFloat(nameof(fireSpeed),fireSpeed);
+        PlayerPrefs.SetInt(nameof(coinsValue),coinsValue);
     }
 
     private void ButtonsControl(){
