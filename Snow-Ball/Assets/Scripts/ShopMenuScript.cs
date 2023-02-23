@@ -24,6 +24,7 @@ public class ShopMenuScript : MonoBehaviour
 
 
     public void Start(){
+        Save();
         ButtonsControl();
     }
 
@@ -67,7 +68,7 @@ public class ShopMenuScript : MonoBehaviour
     private void FireSpeedUpControl(){
         fireSpeed = CannonBallObject.GetComponent<FireScript>().fireSpeed;
         minDelay = CannonBallObject.GetComponent<FireScript>().minDelay;
-        fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.0f-fireSpeed)*10)*10);           
+        fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.0f-fireSpeed)*5)*10);           
         coins = CoinsObject.GetComponent<CoinsManager>().coins;
         fireSpeedUpButton.GetComponentInChildren<TMP_Text>().text = fireSpeedNeedCoin.ToString();
 
@@ -110,10 +111,10 @@ public class ShopMenuScript : MonoBehaviour
     }
     
     private void Save(){
-        PlayerPrefs.SetInt(nameof(coins),500);
-        PlayerPrefs.SetInt(nameof(ballLevel),1);
-        PlayerPrefs.SetFloat(nameof(fireSpeed),1f);
-        PlayerPrefs.SetInt(nameof(coinsValue),1);
+        PlayerPrefs.SetInt(nameof(coins),1000);
+        PlayerPrefs.SetInt(nameof(ballLevel),0);
+        PlayerPrefs.SetFloat(nameof(fireSpeed),0);
+        PlayerPrefs.SetInt(nameof(coinsValue),0);
     }
 
     private void ButtonsControl(){

@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
       inputCanvas.SetActive(true);
       shopCanvas.SetActive(false);
       snowSpawner.GetComponent<SnowSpawnController>().startSnow = true;
-      fireScript.GetComponent<FireScript>().startFire = true;
+      fireScript.GetComponent<FireScript>().StartFire();
       
     }
     private void HandleWin(){

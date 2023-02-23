@@ -7,7 +7,7 @@ public class FireScript : MonoBehaviour
 {   private Animator fireAnimator;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject ballObject;
-    [SerializeField] private float spawnTime;
+    [SerializeField] private float spawnStartTime;
     [SerializeField] public float fireSpeed;
 
     [SerializeField] public float minDelay;
@@ -28,12 +28,15 @@ public class FireScript : MonoBehaviour
     }
     
     
-    private void Start()
+    private void Awake()
     {
         LoadPlayerSaves();
         fireAnimator = GetComponent<Animator>();
-        InvokeRepeating("Fire",spawnTime,fireSpeed);
+        
     }
+
+   
+    
     private void Fire()
     {
         if (startFire)
@@ -43,7 +46,11 @@ public class FireScript : MonoBehaviour
             ballObject.GetComponent<BallScript>().level = this.ballLevel;
         }        
     }
-
+    
+    public void StartFire(){
+        startFire = true;
+        InvokeRepeating("Fire",spawnStartTime,fireSpeed);
+    }
     public void BallLevelUp(){
         if (ballLevel < maxLevel)
         {

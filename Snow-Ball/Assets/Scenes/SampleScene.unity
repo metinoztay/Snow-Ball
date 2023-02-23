@@ -8805,9 +8805,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1830399620}
   ballObject: {fileID: 2430688861007828566, guid: c72178713cb38184eb1699e391c35d67, type: 3}
-  spawnTime: 0.6
+  spawnStartTime: 1
   fireSpeed: 1
-  minDelay: 0.5
+  minDelay: 0.4
   maxLevel: 5
   levelText: {fileID: 741955444}
   startFire: 0
