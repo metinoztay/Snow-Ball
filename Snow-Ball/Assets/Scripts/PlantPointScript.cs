@@ -30,6 +30,8 @@ public class PlantPointScript : MonoBehaviour
             Destroy(other.gameObject); 
             if (!IsSnowed())
             {
+                
+            
                 if (isGross)
                 {
                     Gross();
@@ -74,7 +76,7 @@ public class PlantPointScript : MonoBehaviour
     }
 
     public void CollectFall(){        
-        bool left = Random.Range(0, 2) == 1;
+        bool left = Random.Range(0, 2) == 1 ? true : false;
         if (left)
         {
             animator.SetTrigger("FallLeft");

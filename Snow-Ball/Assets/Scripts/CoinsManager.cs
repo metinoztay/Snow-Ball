@@ -46,8 +46,7 @@ public class CoinsManager : MonoBehaviour
     }
     
     private void Start() {
-        coinsValue = PlayerPrefs.GetInt(nameof(coinsValue));
-        coins = PlayerPrefs.GetInt(nameof(coins));
+        LoadPlayerSaves();
         coinUIText.text = coins.ToString();
     }
     private void Awake() {
@@ -101,6 +100,13 @@ public class CoinsManager : MonoBehaviour
     public void CoinsValueUp(){
         coinsValue *= 2;
         PlayerPrefs.SetInt(nameof(coinsValue),coinsValue);
+    }
+
+    private void LoadPlayerSaves(){
+        coinsValue = PlayerPrefs.GetInt(nameof(coinsValue));
+        coins = PlayerPrefs.GetInt(nameof(coins));
+        if(coinsValue == 0)
+            coinsValue = 1;
     }
 
 }

@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8ed5a8ee4025446bfcfcd7845e7328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 1
+  gravity: 0.5
   horSpeed: 1
   snowSizeText: {fileID: 588768773141539558}
   isMove: 0

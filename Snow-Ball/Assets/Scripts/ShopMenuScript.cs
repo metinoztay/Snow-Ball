@@ -24,8 +24,7 @@ public class ShopMenuScript : MonoBehaviour
 
 
     public void Start(){
-        Save();
-       ButtonsControl();
+        ButtonsControl();
     }
 
     public void StartGame(){
@@ -43,17 +42,18 @@ public class ShopMenuScript : MonoBehaviour
         ballLevel = CannonBallObject.GetComponent<FireScript>().ballLevel;
         ballMaxLevel = CannonBallObject.GetComponent<FireScript>().maxLevel;
         ballNeedCoin = (int)(Mathf.Pow(2,(ballLevel-1))*10);
-        Debug.Log(ballNeedCoin);
         coins = CoinsObject.GetComponent<CoinsManager>().coins;
         ballLevelUpButton.GetComponentInChildren<TMP_Text>().text = ballNeedCoin.ToString();
         
 
-        if (ballLevel==ballMaxLevel || ballNeedCoin > coins)
+        if (ballLevel >= ballMaxLevel || ballNeedCoin > coins)
         {
             ballLevelUpButton.interactable = false;
+            ballLevelUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(170,183,116,255);
         }else
         {
             ballLevelUpButton.interactable = true;
+            ballLevelUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(242,231,34,255);   
         }
     }
 
@@ -67,16 +67,18 @@ public class ShopMenuScript : MonoBehaviour
     private void FireSpeedUpControl(){
         fireSpeed = CannonBallObject.GetComponent<FireScript>().fireSpeed;
         minDelay = CannonBallObject.GetComponent<FireScript>().minDelay;
-        fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.1f-fireSpeed)*10)*10);                
+        fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.0f-fireSpeed)*10)*10);           
         coins = CoinsObject.GetComponent<CoinsManager>().coins;
         fireSpeedUpButton.GetComponentInChildren<TMP_Text>().text = fireSpeedNeedCoin.ToString();
 
-        if (fireSpeed==minDelay || fireSpeedNeedCoin > coins)
+        if (fireSpeed <= minDelay || fireSpeedNeedCoin > coins)
         {
-            fireSpeedUpButton.interactable = false;   
+            fireSpeedUpButton.interactable = false;
+            fireSpeedUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(170,183,116,255);   
         }else
         {
             fireSpeedUpButton.interactable = true;
+            fireSpeedUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(242,231,34,255);   
         }
     }
 
@@ -95,17 +97,20 @@ public class ShopMenuScript : MonoBehaviour
         incomeLevelUpButton.GetComponentInChildren<TMP_Text>().text = incomeLevelNeedCoin.ToString();
         
         
-        if (coinsValue == maxCoinValue || incomeLevelNeedCoin > coins)
+        if (coinsValue >= maxCoinValue || incomeLevelNeedCoin > coins)
         {
-            incomeLevelUpButton.interactable = false;
+            incomeLevelUpButton.interactable = false; 
+            incomeLevelUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(170,183,116,255);
+
         }else
         {
             incomeLevelUpButton.interactable = true;
+            incomeLevelUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(242,231,34,255);   
         }
     }
     
     private void Save(){
-        PlayerPrefs.SetInt(nameof(coins),300);
+        PlayerPrefs.SetInt(nameof(coins),500);
         PlayerPrefs.SetInt(nameof(ballLevel),1);
         PlayerPrefs.SetFloat(nameof(fireSpeed),1f);
         PlayerPrefs.SetInt(nameof(coinsValue),1);

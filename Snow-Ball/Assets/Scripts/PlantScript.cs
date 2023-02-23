@@ -38,7 +38,6 @@ public class PlantScript : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if (other.transform == plantPoint)
         {   
-            Debug.Log("Exit");
             collectable = true;
             gameObject.tag="Collectable";
             cuttingLine.GetComponent<Animator>().SetBool("Collect",true);

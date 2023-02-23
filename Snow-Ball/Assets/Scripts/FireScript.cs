@@ -18,7 +18,7 @@ public class FireScript : MonoBehaviour
     [SerializeField] public bool startFire;
 
 
-    private int _level = 2;
+    private int _level;
     public int ballLevel
     {
         get { return _level; }
@@ -28,11 +28,9 @@ public class FireScript : MonoBehaviour
     }
     
     
-    
     private void Start()
     {
-        ballLevel = PlayerPrefs.GetInt(nameof(ballLevel));
-        fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed));
+        LoadPlayerSaves();
         fireAnimator = GetComponent<Animator>();
         InvokeRepeating("Fire",spawnTime,fireSpeed);
     }
@@ -60,5 +58,14 @@ public class FireScript : MonoBehaviour
             fireSpeed -= 0.1f;
             PlayerPrefs.SetFloat(nameof(fireSpeed),fireSpeed);
         }
+    }
+
+    private void LoadPlayerSaves(){
+        ballLevel = PlayerPrefs.GetInt(nameof(ballLevel));
+        fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed));
+        if(ballLevel==0)    
+            ballLevel = 1;
+        if(fireSpeed==0)
+            fireSpeed = 1;
     }
 }
