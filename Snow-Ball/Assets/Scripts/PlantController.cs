@@ -10,10 +10,8 @@ public class PlantController : MonoBehaviour
     [Space]
     [SerializeField] private List<GameObject> groundSnowFields;
 
-    // ! Lose Control Yazılacak
-
     private void Start() {
-      GetGroundSnowFields();
+        GetGroundSnowFields();
     }
 
     private void GetGroundSnowFields(){
@@ -28,14 +26,39 @@ public class PlantController : MonoBehaviour
         foreach (GameObject field in groundSnowFields)
         {
             isSnowed = field.GetComponent<SpriteRenderer>().enabled;
-            Debug.Log(isSnowed);
             if (!isSnowed)
             {
                 return;
             }
         }
-
         GameManager.Instance.UpdateGameState(GameManager.GameState.Lose);
+    }
+
+    public void ChangeGroundSnowPoint(int index){
+        if (index==0)
+            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+        else if (index==4)
+            transform.GetChild(3).GetComponent<SpriteRenderer>().enabled = true;
+        else
+        {
+            int random = Random.Range(0,2);
+
+            if(random == 0 && transform.GetChild(index-1).GetComponent<SpriteRenderer>().enabled)
+                random = 1;
+            
+            if (random == 1 && transform.GetChild(index+1).GetComponent<SpriteRenderer>().enabled)
+                random = 0;
+
+            if (random == 0)
+            {
+                transform.GetChild(index-1).GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else
+            {
+                transform.GetChild(index+1).GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }      
+
     }
 
 }

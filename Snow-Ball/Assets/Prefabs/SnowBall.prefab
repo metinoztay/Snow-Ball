@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 0.5
-  horSpeed: 1
+  horSpeed: 0
   snowSizeText: {fileID: 513926521951923258}
   isMove: 0
   waterPrefab: {fileID: 4383320946062098430, guid: 514617c345bae614a8f10c7bf7246a2e, type: 3}

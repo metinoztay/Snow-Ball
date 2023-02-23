@@ -99,10 +99,15 @@ public class SnowBallScript : MonoBehaviour
             GameObject waterExplosion = Instantiate(waterExpolisonParticle,transform.position,transform.rotation);
             explosion.transform.parent = waterExplosion.transform;   
 
-            GetComponentInParent<SnowSpawnController>().destroyedSnowCount += snowStartSize;
             Destroy(gameObject);
             Destroy(waterExplosion,0.75f);                    
                     
         }      
+    }
+
+    private void OnDestroy() {
+        GetComponentInParent<SnowSpawnController>().destroyedSnowCount += snowStartSize;
+
+        // ! En son kartopu için düzeltme gerekebilir. Win & Loose Aynı anda olabilir.
     }
 }

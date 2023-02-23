@@ -8,7 +8,7 @@ public class PlantPointScript : MonoBehaviour
     [SerializeField] private GameObject[] groundSnowPrefabs;
     [SerializeField] private Transform grossPoint;
     [SerializeField] private float grossAmount;
-    private GameObject groundSnowField;
+    public GameObject groundSnowField;
     
     private int maxPlantCount;
     [SerializeField] public int plantCount;
@@ -35,7 +35,6 @@ public class PlantPointScript : MonoBehaviour
             Destroy(other.gameObject); 
             if (!IsSnowed())
             {
-            
                 if (isGross)
                 {
                     Gross();
@@ -47,10 +46,20 @@ public class PlantPointScript : MonoBehaviour
                 }           
             }
            
-        }else if (other.tag == "SnowBall")
-        {    
-            Destroy(other.gameObject); 
-            groundSnowField.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else if (other.tag == "SnowBall")
+        {   
+            Destroy(other.gameObject);
+            if (groundSnowField.GetComponent<SpriteRenderer>().enabled)
+            {
+                int index = transform.GetSiblingIndex();
+                Debug.Log(index);
+                GetComponentInParent<PlantController>().ChangeGroundSnowPoint(index);
+            }
+            else
+            {
+                groundSnowField.GetComponent<SpriteRenderer>().enabled = true;
+            }
             GetComponentInParent<PlantController>().GroundControl();
         }
     }

@@ -103,7 +103,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: aae82b96134d436449e76f85e4e33147, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc05a485fbd8b864e9f9f8f015808129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSpeed: 5
+  ballSpeed: 17
   destroyTimer: 2.5
-  destroyParticle: {fileID: 7992929658942475705, guid: f7da075d44ee5496f9b097413640e28d, type: 3}
+  level: 1
 --- !u!58 &3023702891553073306
 CircleCollider2D:
   m_ObjectHideFlags: 0

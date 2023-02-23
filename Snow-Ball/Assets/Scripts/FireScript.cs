@@ -71,6 +71,6 @@ public class FireScript : MonoBehaviour
         if(ballLevel==0)    
             ballLevel = 1;
         if(fireSpeed==0)
-            fireSpeed = 1;
+            fireSpeed = 0.5f;
     }
 }
