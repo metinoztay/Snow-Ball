@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class SnowBallScript : MonoBehaviour
 {
-    [SerializeField] private float gravity;
-    [SerializeField] private float horSpeed;
+    [SerializeField] private float speed;
+    private float distanceTravelled;
+   
+    [SerializeField] public bool isMove;
     [SerializeField] private TMP_Text snowSizeText;
-    [SerializeField] private bool isMove;
     [SerializeField] private GameObject waterPrefab;
 
     [SerializeField] private GameObject waterExpolisonParticle;
@@ -30,24 +31,58 @@ public class SnowBallScript : MonoBehaviour
     {
         snowStartSize = snowSize;
         isMove = true;
-        DirectionSelector();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        switch (other.tag)
-        {
-            case "MainCamera":
-                ChangeDirection();
-                break;
-            case "Ball":
-                BallCrash(other);
-                break;
-            case "Grass":
-                break;
-
-            default:
-                break;
+        if(other.tag == "Ball"){
+            BallCrash(other);
         }
+    }
+
+    void Update()
+    {
+        Move();
+        
+    }
+
+    private void Move(){
+        
+    }
+   
+
+    private void BallCrash(Collider2D other){
+        int ballLevel = other.GetComponent<BallScript>().level;
+        snowSize -= ballLevel;
+        Destroy(other.gameObject);
+        GameObject explosion = Instantiate(ballExplosionParticle,transform);
+        Destroy(explosion,0.75f); 
+                
+        if (snowSize <= 0)
+        {   
+            Instantiate(waterPrefab,transform.position,transform.rotation,GameObject.Find("SnowCanvas").transform);
+            GameObject waterExplosion = Instantiate(waterExpolisonParticle,transform.position,transform.rotation);
+            explosion.transform.parent = waterExplosion.transform;   
+
+            Destroy(gameObject);
+            Destroy(waterExplosion,0.75f);                    
+                    
+        }      
+    }
+
+    private void OnDestroy() {
+        GetComponentInParent<SnowSpawnController>().destroyedSnowCount += snowStartSize;
+
+        // ! En son kartopu için düzeltme gerekebilir. Win & Loose Aynı anda olabilir.
+    }
+
+    //** Eski Hareket Scripti
+    /*
+    [SerializeField] private float gravity;
+    [SerializeField] private float horSpeed;
+
+    private void Start()
+    {
+        DirectionSelector();
     }
 
     void Update()
@@ -58,6 +93,7 @@ public class SnowBallScript : MonoBehaviour
         }
         
     }
+
 
     private void Move()
     {
@@ -86,28 +122,7 @@ public class SnowBallScript : MonoBehaviour
         }
     }
 
-    private void BallCrash(Collider2D other){
-        int ballLevel = other.GetComponent<BallScript>().level;
-        snowSize -= ballLevel;
-        Destroy(other.gameObject);
-        GameObject explosion = Instantiate(ballExplosionParticle,transform);
-        Destroy(explosion,0.75f); 
-                
-        if (snowSize <= 0)
-        {   
-            Instantiate(waterPrefab,transform.position,transform.rotation,GameObject.Find("SnowCanvas").transform);
-            GameObject waterExplosion = Instantiate(waterExpolisonParticle,transform.position,transform.rotation);
-            explosion.transform.parent = waterExplosion.transform;   
 
-            Destroy(gameObject);
-            Destroy(waterExplosion,0.75f);                    
-                    
-        }      
-    }
 
-    private void OnDestroy() {
-        GetComponentInParent<SnowSpawnController>().destroyedSnowCount += snowStartSize;
-
-        // ! En son kartopu için düzeltme gerekebilir. Win & Loose Aynı anda olabilir.
-    }
+    */
 }
