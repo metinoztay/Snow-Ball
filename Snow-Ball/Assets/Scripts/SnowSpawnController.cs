@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using PathCreation;
 
 public class SnowSpawnController : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private PathCreator[] paths;
     [SerializeField] private GameObject[] snowPrefabs;
     [SerializeField] private int totalSnowAmount;
     [SerializeField] private int maxSnowAmount;
@@ -34,6 +36,7 @@ public class SnowSpawnController : MonoBehaviour
     int lastSnowPrefab=-1;
     int lastSpawnPoint=-1;
     int lastSnowAmount=-1;
+    int lastPath;
 
     private void Start()
     {
@@ -46,6 +49,7 @@ public class SnowSpawnController : MonoBehaviour
         {
             int randomSnow = RandomUniqueNumber(0, snowPrefabs.Length, lastSnowPrefab,false);
             int randomSpawnPoint = RandomUniqueNumber(0,spawnPoints.Length, lastSpawnPoint,false);
+            int randomPath = RandomUniqueNumber(0,paths.Length,lastPath, false);
             int randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount,lastSnowAmount,true);
             if (spawnAmount == totalSnowAmount)
             {
@@ -54,13 +58,15 @@ public class SnowSpawnController : MonoBehaviour
             }
             
 
-            GameObject newSnow = Instantiate(snowPrefabs[randomSnow],spawnPoints[randomSpawnPoint].transform);
+            GameObject newSnow = Instantiate(snowPrefabs[randomSnow],transform);
             newSnow.GetComponent<SnowBallScript>().snowSize = randomAmount;
+            newSnow.GetComponent<SnowBallScript>().pathCreator = paths[randomPath];
 
             spawnAmount += randomAmount;
             lastSnowPrefab = randomSnow;
             lastSpawnPoint = randomSpawnPoint;
             lastSnowAmount = randomAmount;
+            lastPath = randomPath;
         }       
 
     }

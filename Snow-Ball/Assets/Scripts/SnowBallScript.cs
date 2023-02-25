@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using PathCreation;
 
 public class SnowBallScript : MonoBehaviour
-{
+{  
+    [SerializeField] public PathCreator pathCreator;
     [SerializeField] private float speed;
     private float distanceTravelled;
    
@@ -46,7 +48,8 @@ public class SnowBallScript : MonoBehaviour
     }
 
     private void Move(){
-        
+        distanceTravelled += speed*Time.deltaTime;
+        transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled);
     }
    
 
