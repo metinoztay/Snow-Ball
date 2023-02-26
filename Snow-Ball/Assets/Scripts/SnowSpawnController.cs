@@ -7,7 +7,6 @@ using PathCreation;
 
 public class SnowSpawnController : MonoBehaviour
 {
-    [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private PathCreator[] paths;
     [SerializeField] private GameObject[] snowPrefabs;
     [SerializeField] private int totalSnowAmount;
@@ -24,6 +23,7 @@ public class SnowSpawnController : MonoBehaviour
     {
         get { return _ds; }
         set { _ds = value; 
+                Debug.Log(destroyedSnowCount);
                 if (totalSnowAmount == destroyedSnowCount)
                 {
                     GameManager.Instance.UpdateGameState(GameManager.GameState.Win);
@@ -34,9 +34,8 @@ public class SnowSpawnController : MonoBehaviour
     
     int spawnAmount = 0;
     int lastSnowPrefab=-1;
-    int lastSpawnPoint=-1;
     int lastSnowAmount=-1;
-    int lastPath;
+    int lastPath=-1;
 
     private void Start()
     {
@@ -48,7 +47,6 @@ public class SnowSpawnController : MonoBehaviour
         if (startSnow)
         {
             int randomSnow = RandomUniqueNumber(0, snowPrefabs.Length, lastSnowPrefab,false);
-            int randomSpawnPoint = RandomUniqueNumber(0,spawnPoints.Length, lastSpawnPoint,false);
             int randomPath = RandomUniqueNumber(0,paths.Length,lastPath, false);
             int randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount,lastSnowAmount,true);
             if (spawnAmount == totalSnowAmount)
@@ -64,7 +62,6 @@ public class SnowSpawnController : MonoBehaviour
 
             spawnAmount += randomAmount;
             lastSnowPrefab = randomSnow;
-            lastSpawnPoint = randomSpawnPoint;
             lastSnowAmount = randomAmount;
             lastPath = randomPath;
         }       

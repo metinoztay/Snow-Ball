@@ -36,26 +36,26 @@ public class PlantController : MonoBehaviour
 
     public void ChangeGroundSnowPoint(int index){
         if (index==0)
-            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+            groundSnowFields[1].GetComponent<SpriteRenderer>().enabled = true;
         else if (index==4)
-            transform.GetChild(3).GetComponent<SpriteRenderer>().enabled = true;
+            groundSnowFields[3].GetComponent<SpriteRenderer>().enabled = true;
         else
         {
             int random = Random.Range(0,2);
 
-            if(random == 0 && transform.GetChild(index-1).GetComponent<SpriteRenderer>().enabled)
+            if(random == 0 && groundSnowFields[index-1].GetComponent<SpriteRenderer>().enabled)
                 random = 1;
             
-            if (random == 1 && transform.GetChild(index+1).GetComponent<SpriteRenderer>().enabled)
+            if (random == 1 && groundSnowFields[index+1].GetComponent<SpriteRenderer>().enabled)
                 random = 0;
 
             if (random == 0)
             {
-                transform.GetChild(index-1).GetComponent<SpriteRenderer>().enabled = true;
+                groundSnowFields[index-1].GetComponent<SpriteRenderer>().enabled = true;
             }
             else
             {
-                transform.GetChild(index+1).GetComponent<SpriteRenderer>().enabled = true;
+                groundSnowFields[index+1].GetComponent<SpriteRenderer>().enabled = true;
             }
         }      
 

@@ -53,7 +53,6 @@ public class PlantPointScript : MonoBehaviour
             if (groundSnowField.GetComponent<SpriteRenderer>().enabled)
             {
                 int index = transform.GetSiblingIndex();
-                Debug.Log(index);
                 GetComponentInParent<PlantController>().ChangeGroundSnowPoint(index);
             }
             else
