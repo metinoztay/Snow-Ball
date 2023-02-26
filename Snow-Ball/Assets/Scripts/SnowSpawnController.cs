@@ -54,9 +54,7 @@ public class SnowSpawnController : MonoBehaviour
                 return;
             }
             
-            Debug.Log(snowPrefabs.Length);
-            Debug.Log(randomSnow);
-            Debug.Log(snowPrefabs[randomSnow]);
+          
             GameObject newSnow = Instantiate(snowPrefabs[randomSnow],transform);
             newSnow.GetComponent<SnowBallScript>().pathCreator = paths[randomPath];
             newSnow.GetComponent<SnowBallScript>().snowSize = randomAmount;

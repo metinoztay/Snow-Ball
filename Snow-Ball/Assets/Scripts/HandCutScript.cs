@@ -10,7 +10,7 @@ public class HandCutScript : MonoBehaviour
 
    CoinsManager coinsManager;
 
-   [SerializeField] private Animator animator;
+   [SerializeField] public Animator animator;
 
    private void Start() {
       animator = GetComponentInParent<Animator>();

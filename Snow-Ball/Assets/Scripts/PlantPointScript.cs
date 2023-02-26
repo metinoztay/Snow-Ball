@@ -39,7 +39,7 @@ public class PlantPointScript : MonoBehaviour
         }
         else if (other.tag == "SnowBall")
         {   
-            Destroy(other.gameObject);
+            other.GetComponent<SnowBallScript>().DestroySnow();
             if (groundSnowField.GetComponent<SpriteRenderer>().enabled)
             {
                 int index = transform.GetSiblingIndex();

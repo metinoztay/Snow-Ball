@@ -7,6 +7,7 @@ using PathCreation;
 
 public class SnowBallScript : MonoBehaviour
 {  
+    
     [SerializeField] public PathCreator pathCreator;
     [SerializeField] private float speed;
     private float distanceTravelled;
@@ -66,13 +67,14 @@ public class SnowBallScript : MonoBehaviour
             GameObject waterExplosion = Instantiate(waterExpolisonParticle,transform.position,transform.rotation);
             explosion.transform.parent = waterExplosion.transform;   
 
-            Destroy(gameObject);
+            DestroySnow();
             Destroy(waterExplosion,0.75f);                    
                     
         }      
     }
 
-    private void OnDestroy() {
+    public void DestroySnow() {
         GetComponentInParent<SnowSpawnController>().destroyedSnowCount += snowStartSize;
+        Destroy(gameObject);
     }
 }

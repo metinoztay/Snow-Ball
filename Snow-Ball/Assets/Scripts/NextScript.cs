@@ -6,15 +6,22 @@ using UnityEngine.SceneManagement;
 public class NextScript : MonoBehaviour
 {   
     [SerializeField] private GameObject hand;
+    [SerializeField] private GameObject cuttingLine;
     private void NextLevel(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
     public void ControlPlants(){
 
-        hand.GetComponent<HandCutScript>().Move();
-
-        Invoke("NextLevel",3f);
+        bool isHandActive = hand.GetComponent<HandCutScript>().animator.GetBool("Collect");
+        if (isHandActive)
+        {
+            hand.GetComponent<HandCutScript>().Move();
+            Invoke("NextLevel",3f);
+        }else
+        {
+            NextLevel();
+        }   
     }
 
 }
