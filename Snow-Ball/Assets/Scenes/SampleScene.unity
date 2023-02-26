@@ -3467,7 +3467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &884930314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4996,7 +4996,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1245512355}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2127925316}
+        m_TargetAssemblyTypeName: NextScript, Assembly-CSharp
+        m_MethodName: ControlPlants
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1245512355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8886,6 +8898,7 @@ GameObject:
   - component: {fileID: 2127925315}
   - component: {fileID: 2127925314}
   - component: {fileID: 2127925313}
+  - component: {fileID: 2127925316}
   m_Layer: 0
   m_Name: WinCanvas
   m_TagString: Untagged
@@ -8976,6 +8989,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!114 &2127925316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127925310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52796d9032e87cc4b9a056ef54a92f0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 2082258430}
 --- !u!1001 &4383320946724045484
 PrefabInstance:
   m_ObjectHideFlags: 0

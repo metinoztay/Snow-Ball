@@ -9,7 +9,7 @@ public class PlantScript : MonoBehaviour
     [SerializeField] private float grossSpeed;
     [SerializeField] private GameObject plantController;
     [SerializeField] private GameObject cuttingLine;
-    [SerializeField] bool collectable;
+    [SerializeField] public bool collectable;
 
     private void Start() {
         collectable = false;
