@@ -10,9 +10,6 @@ public class HandCutScript : MonoBehaviour
 
    CoinsManager coinsManager;
 
-
-   
-
    [SerializeField] private Animator animator;
 
    private void Start() {
@@ -51,7 +48,6 @@ public class HandCutScript : MonoBehaviour
       }
    }
 
-   // ! Level Tamamlandığında uzayan bitki varsa bunları toplanmıyor, düzeltilecek.
    private void Collect(Collider2D other){
       if(other.tag == "Collectable" && move){
             coinsManager.AddCoins(other.transform.position);

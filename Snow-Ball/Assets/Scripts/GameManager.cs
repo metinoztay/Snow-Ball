@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
       UpdateGameState(GameState.ShopMenu);
     }
     public void UpdateGameState(GameState newState){
+         
+         if (newState == GameState.Win && State == GameState.Lose)
+               return;
+
         State = newState;
 
         switch (State)

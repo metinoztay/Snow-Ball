@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlantController : MonoBehaviour
 {
     [SerializeField] public int plantCount;
     [SerializeField] public int maxPlantCount;
 
-    [Space]
+     [Space]
     [SerializeField] private List<GameObject> groundSnowFields;
 
     private void Start() {
@@ -15,12 +16,13 @@ public class PlantController : MonoBehaviour
     }
 
     private void GetGroundSnowFields(){
-          foreach (GameObject field in GameObject.FindGameObjectsWithTag("GroundSnow"))
-          {
-               groundSnowFields.Add(field);
-          }
+        GameObject plantPoint;
+        for (int i = 0; i < 5; i++)
+        {
+            plantPoint = transform.GetChild(i).gameObject;
+            groundSnowFields.Add(plantPoint.transform.GetChild(1).gameObject);
+        }
     }
-
     public void GroundControl(){
         bool isSnowed;
         foreach (GameObject field in groundSnowFields)

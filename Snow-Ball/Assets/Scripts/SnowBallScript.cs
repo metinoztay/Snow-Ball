@@ -74,7 +74,5 @@ public class SnowBallScript : MonoBehaviour
 
     private void OnDestroy() {
         GetComponentInParent<SnowSpawnController>().destroyedSnowCount += snowStartSize;
-
-        // ! En son kartopu için düzeltme gerekebilir. Win & Loose Aynı anda olabilir.
     }
 }

@@ -24,6 +24,7 @@ public class ShopMenuScript : MonoBehaviour
 
 
     public void Start(){
+        Load();
         ButtonsControl();
     }
 
@@ -114,6 +115,13 @@ public class ShopMenuScript : MonoBehaviour
         PlayerPrefs.SetInt(nameof(ballLevel),ballLevel);
         PlayerPrefs.SetFloat(nameof(fireSpeed),fireSpeed);
         PlayerPrefs.SetInt(nameof(coinsValue),coinsValue);
+    }
+
+    private void Load(){
+        CoinsObject.GetComponent<CoinsManager>().coins = PlayerPrefs.GetInt(nameof(coins),0);
+        CannonBallObject.GetComponent<FireScript>().ballLevel = PlayerPrefs.GetInt(nameof(ballLevel),1);
+        CannonBallObject.GetComponent<FireScript>().fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed),1);
+        CoinsObject.GetComponent<CoinsManager>().coinsValue = PlayerPrefs.GetInt(nameof(coinsValue),1);
     }
 
     private void ButtonsControl(){

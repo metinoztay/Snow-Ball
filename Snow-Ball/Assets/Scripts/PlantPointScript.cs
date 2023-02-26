@@ -13,18 +13,11 @@ public class PlantPointScript : MonoBehaviour
     private int maxPlantCount;
     [SerializeField] public int plantCount;
     [SerializeField] public bool isGross;
-    
-    [SerializeField] Animator animator;
-    
-    private void Awake() {
-        animator = GetComponent<Animator>();
+
+    private void Start() {
         GroundSnowInstantiate();
     }
 
-    private void Update() {
-       ResetPlant();
-    }
-    
     private void OnTriggerEnter2D(Collider2D other) {
         GetPlantCount();
         if (other.tag=="Water")
@@ -81,34 +74,9 @@ public class PlantPointScript : MonoBehaviour
         return groundSnowField.GetComponent<SpriteRenderer>().enabled;
     }
 
-    public void CollectFall(){        
-        bool left = Random.Range(0, 2) == 1 ? true : false;
-        if (left)
-        {
-            animator.SetTrigger("FallLeft");
-        }
-        else
-        {
-            animator.SetTrigger("FallRight");
-        }
-    }
-
-    private void ResetPlant(){
-        var currentAngle = transform.rotation.eulerAngles.z;
-  
-       if (Mathf.Approximately(90,currentAngle) || Mathf.Approximately(270,currentAngle))
-       {
-            for (int i = 0; i < 2; i++)
-            {
-                transform.GetChild(i).transform.position = transform.position;
-            }
-       }
-    }
-
     private void GroundSnowInstantiate(){
         int random = Random.Range(0,groundSnowPrefabs.Length);
         groundSnowField = Instantiate(groundSnowPrefabs[random],transform.position,transform.rotation,transform);
-        groundSnowField.transform.SetParent(transform.parent);
         groundSnowField.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

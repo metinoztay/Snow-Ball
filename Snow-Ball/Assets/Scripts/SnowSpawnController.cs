@@ -23,7 +23,6 @@ public class SnowSpawnController : MonoBehaviour
     {
         get { return _ds; }
         set { _ds = value; 
-                Debug.Log(destroyedSnowCount);
                 if (totalSnowAmount == destroyedSnowCount)
                 {
                     GameManager.Instance.UpdateGameState(GameManager.GameState.Win);
@@ -48,14 +47,16 @@ public class SnowSpawnController : MonoBehaviour
         {
             int randomSnow = RandomUniqueNumber(0, snowPrefabs.Length, lastSnowPrefab,false);
             int randomPath = RandomUniqueNumber(0,paths.Length,lastPath, false);
-            int randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount,lastSnowAmount,true);
+            int randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount+1,lastSnowAmount,true);
             if (spawnAmount == totalSnowAmount)
             {
                 startSnow = false;
                 return;
             }
             
-
+            Debug.Log(snowPrefabs.Length);
+            Debug.Log(randomSnow);
+            Debug.Log(snowPrefabs[randomSnow]);
             GameObject newSnow = Instantiate(snowPrefabs[randomSnow],transform);
             newSnow.GetComponent<SnowBallScript>().pathCreator = paths[randomPath];
             newSnow.GetComponent<SnowBallScript>().snowSize = randomAmount;
@@ -84,7 +85,7 @@ public class SnowSpawnController : MonoBehaviour
         if(random == last)
         {
             random++;
-            if (random > max)
+            if (random >= max)
             {
                 random=min;
             }

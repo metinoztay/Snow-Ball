@@ -46,11 +46,11 @@ public class PlantScript : MonoBehaviour
     public void Collect(){
        
         grossPoint.transform.position = transform.position;
-        plantPoint.GetComponent<PlantPointScript>().CollectFall();
+        GetComponentInParent<FallingAnimationController>().CollectFall();
          
         collectable = false;
         gameObject.tag="Plant";
         plantController.GetComponent<PlantController>().plantCount--;
-        GetComponentInParent<PlantPointScript>().isGross = false;
+        plantPoint.GetComponent<PlantPointScript>().isGross = false;
     }
 }
