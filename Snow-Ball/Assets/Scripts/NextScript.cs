@@ -15,4 +15,6 @@ public class NextScript : MonoBehaviour
     {
         
     }
+
+    // ? Next butonu çıktığında kesilecek bitki varsa kesilmeden geçilmemeli
 }

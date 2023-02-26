@@ -18,10 +18,7 @@ public class PlantPointScript : MonoBehaviour
     
     private void Awake() {
         animator = GetComponent<Animator>();
-        int random = Random.Range(0,groundSnowPrefabs.Length);
-        groundSnowField = Instantiate(groundSnowPrefabs[random],transform.position,transform.rotation,transform);
-        groundSnowField.transform.SetParent(transform.parent);
-        groundSnowField.GetComponent<SpriteRenderer>().enabled = false;
+        GroundSnowInstantiate();
     }
 
     private void Update() {
@@ -106,6 +103,12 @@ public class PlantPointScript : MonoBehaviour
                 transform.GetChild(i).transform.position = transform.position;
             }
        }
+    }
 
+    private void GroundSnowInstantiate(){
+        int random = Random.Range(0,groundSnowPrefabs.Length);
+        groundSnowField = Instantiate(groundSnowPrefabs[random],transform.position,transform.rotation,transform);
+        groundSnowField.transform.SetParent(transform.parent);
+        groundSnowField.GetComponent<SpriteRenderer>().enabled = false;
     }
 }
