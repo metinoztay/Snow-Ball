@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; 
-
+   
     [SerializeField] GameObject shopCanvas;
     [SerializeField] GameObject inputCanvas;
     [SerializeField] GameObject winCanvas;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     
     private void Awake() {
         Instance = this;
+        LoadLevel();
     }
     
     private void Start() {
@@ -83,6 +85,14 @@ public class GameManager : MonoBehaviour
       loseCanvas.SetActive(true);
     }
 
+   private void LoadLevel(){
+      int activeLevel = SceneManager.GetActiveScene().buildIndex;
+      int savedLevel = PlayerPrefs.GetInt("level");
+      if (activeLevel != savedLevel)
+      {
+         SceneManager.LoadScene(savedLevel);
+      }
+   }
 
     public enum GameState{
         ShopMenu,

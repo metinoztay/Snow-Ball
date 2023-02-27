@@ -8,7 +8,7 @@ public class FireScript : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject ballObject;
     [SerializeField] private float spawnStartTime;
-    [SerializeField] public float fireSpeed;
+    [SerializeField] public float fireSpeed=1;
 
     [SerializeField] public float minDelay;
 
@@ -27,10 +27,12 @@ public class FireScript : MonoBehaviour
          }
     }
     
-    
-    private void Awake()
-    {
+    private void Awake() {
         LoadPlayerSaves();
+    }
+    private void Start()
+    {
+        
         fireAnimator = GetComponent<Animator>();
         
     }
@@ -68,9 +70,13 @@ public class FireScript : MonoBehaviour
     private void LoadPlayerSaves(){
         ballLevel = PlayerPrefs.GetInt(nameof(ballLevel));
         fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed));
+        
         if(ballLevel==0)    
             ballLevel = 1;
         if(fireSpeed==0)
             fireSpeed = 1f;
+
+        Debug.Log(ballLevel  + " " +  fireSpeed);
+        
     }
 }

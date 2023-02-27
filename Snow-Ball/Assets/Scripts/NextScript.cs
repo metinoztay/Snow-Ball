@@ -8,7 +8,9 @@ public class NextScript : MonoBehaviour
     [SerializeField] private GameObject hand;
     [SerializeField] private GameObject cuttingLine;
     private void NextLevel(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        int level = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("level",level+1); 
+        SceneManager.LoadScene(level+1);
     }
 
     public void ControlPlants(){

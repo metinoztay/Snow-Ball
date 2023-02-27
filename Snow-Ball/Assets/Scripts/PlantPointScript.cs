@@ -58,7 +58,8 @@ public class PlantPointScript : MonoBehaviour
     }
 
     private void AddNewPlant(){
-        if (!isGross)
+        bool midControl = GetComponentInChildren<Animator>().isActiveAndEnabled;
+        if (!isGross && midControl)
         {
             GetComponentInParent<PlantController>().plantCount++;
             isGross = true;

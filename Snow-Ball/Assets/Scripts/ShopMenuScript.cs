@@ -22,9 +22,7 @@ public class ShopMenuScript : MonoBehaviour
     int fireSpeedNeedCoin;
     int coins;
 
-
     public void Start(){
-        Load();
         ButtonsControl();
     }
 
@@ -32,6 +30,11 @@ public class ShopMenuScript : MonoBehaviour
         GameManager.Instance.UpdateGameState(GameManager.GameState.Start);
     }
 
+    private void ButtonsControl(){
+        BallLevelUpControl();
+        FireSpeedUpControl();
+        IncomeLevelUpControl();
+    }
     public void BallLevelUp(){
         CoinsObject.GetComponent<CoinsManager>().coins -= ballNeedCoin;
         CannonBallObject.GetComponent<FireScript>().BallLevelUp();
@@ -68,9 +71,11 @@ public class ShopMenuScript : MonoBehaviour
     private void FireSpeedUpControl(){
         fireSpeed = CannonBallObject.GetComponent<FireScript>().fireSpeed;
         minDelay = CannonBallObject.GetComponent<FireScript>().minDelay;
-        fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.0f-fireSpeed)*5)*10);           
+        fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.0f-fireSpeed)*10)*10);           
         coins = CoinsObject.GetComponent<CoinsManager>().coins;
         fireSpeedUpButton.GetComponentInChildren<TMP_Text>().text = fireSpeedNeedCoin.ToString();
+
+        Debug.Log(fireSpeed + " " + minDelay + " " + fireSpeedNeedCoin + " " + coins);
 
         if (fireSpeed <= minDelay || fireSpeedNeedCoin > coins)
         {
@@ -118,15 +123,11 @@ public class ShopMenuScript : MonoBehaviour
     }
 
     private void Load(){
-        CoinsObject.GetComponent<CoinsManager>().coins = PlayerPrefs.GetInt(nameof(coins),0);
-        CannonBallObject.GetComponent<FireScript>().ballLevel = PlayerPrefs.GetInt(nameof(ballLevel),1);
-        CannonBallObject.GetComponent<FireScript>().fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed),1);
-        CoinsObject.GetComponent<CoinsManager>().coinsValue = PlayerPrefs.GetInt(nameof(coinsValue),1);
+        CoinsObject.GetComponent<CoinsManager>().coins = PlayerPrefs.GetInt(nameof(coins));
+        CannonBallObject.GetComponent<FireScript>().ballLevel = PlayerPrefs.GetInt(nameof(ballLevel));
+        CannonBallObject.GetComponent<FireScript>().fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed));
+        CoinsObject.GetComponent<CoinsManager>().coinsValue = PlayerPrefs.GetInt(nameof(coinsValue));
     }
 
-    private void ButtonsControl(){
-        BallLevelUpControl();
-        FireSpeedUpControl();
-        IncomeLevelUpControl();
-    }
+
 }

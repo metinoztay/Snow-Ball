@@ -14,13 +14,6 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] public int maxCoinValue;
     Vector3 targetPosition;
     
-    private int _cv=1;
-    public int coinsValue
-    {
-        get { return _cv; }
-        set { _cv = value;}
-    }
-    
 
     [Space]
     [Header ("Available coins: (Coins to collect)")]
@@ -35,7 +28,14 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] Ease easeType;
     [SerializeField] private float spread;
 
-   
+    private int _cv=1;
+    public int coinsValue
+    {
+        get { return _cv; }
+        set { _cv = value;}
+    }
+    
+
     private int c;
     public int coins
     {
@@ -44,16 +44,18 @@ public class CoinsManager : MonoBehaviour
               coinUIText.text = coins.ToString();
             }
     }
-    
-    private void Start() {
-        LoadPlayerSaves();
-        coinUIText.text = coins.ToString();
-    }
+
     private void Awake() {
         targetPosition = coinsTarget.position;
-        coinsValue = 1;        
+        LoadPlayerSaves();
         PrepareCoins();
+    }    
+
+    private void Start() {
+        
+        coinUIText.text = coins.ToString();
     }
+
 
     private void PrepareCoins(){
 
@@ -85,12 +87,13 @@ public class CoinsManager : MonoBehaviour
                         coinsQueue.Enqueue(coin);
                         Instantiate(coinExplosion,coinsTarget.position,coinsTarget.rotation,transform);
                         coins+=coinsValue;
+                        PlayerPrefs.SetInt(nameof(coins),coins);
                     }
                 );
             }        
        }
 
-       PlayerPrefs.SetInt(nameof(coins),coins);
+       
     }
 
     public void AddCoins(Vector3 collectedCoinPosition){
@@ -105,8 +108,10 @@ public class CoinsManager : MonoBehaviour
     private void LoadPlayerSaves(){
         coinsValue = PlayerPrefs.GetInt(nameof(coinsValue));
         coins = PlayerPrefs.GetInt(nameof(coins));
+        
         if(coinsValue == 0)
             coinsValue = 1;
+        
     }
 
 }

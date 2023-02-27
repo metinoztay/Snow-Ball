@@ -8,11 +8,12 @@ public class PlantController : MonoBehaviour
     [SerializeField] public int plantCount;
     [SerializeField] public int maxPlantCount;
 
-     [Space]
+    [Space]
     [SerializeField] private List<GameObject> groundSnowFields;
 
     private void Start() {
-        GetGroundSnowFields();
+        Invoke("GetGroundSnowFields",1f);
+        //GetGroundSnowFields();
     }
 
     private void GetGroundSnowFields(){
