@@ -28,6 +28,7 @@ public class HandCutScript : MonoBehaviour
    public void Move(){
       move = true;
       direction = 1;
+      SelectorAnimation(false);
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
@@ -53,6 +54,10 @@ public class HandCutScript : MonoBehaviour
             coinsManager.AddCoins(other.transform.position);
             other.GetComponent<PlantScript>().Collect();            
         }
+   }
+
+   public void SelectorAnimation(bool isActive){
+      animator.SetBool("Selector",isActive);  
    }
    
 }

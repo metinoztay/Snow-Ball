@@ -11,12 +11,11 @@ public class BallScript : MonoBehaviour
 
     [SerializeField] public int level;
 
-    int bounce = 0;
-
     
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.up*ballSpeed;
+        //rb.velocity = transform.up*ballSpeed;
+        rb.AddForce(transform.up*ballSpeed*50);
         Destroy(gameObject,destroyTimer);
     }
 
@@ -25,16 +24,6 @@ public class BallScript : MonoBehaviour
         {
             //GameObject explosion = Instantiate(ballExplosionParticle,transform.position,transform.rotation,other.transform);  
             //Destroy(explosion,0.75f);
-        }
-        else if(other.tag == "MainCamera")
-        {
-            if (bounce == 0)
-            {
-                bounce++;                
-            }else
-            {
-                Destroy(gameObject);
-            }
         }
     }
 }
