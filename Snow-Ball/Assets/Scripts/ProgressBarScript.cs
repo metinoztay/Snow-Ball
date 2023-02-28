@@ -22,11 +22,11 @@ public class ProgressBarScript : MonoBehaviour
     }
 
     private void Fill(){
-        targetValue = (float)currentValue / (float)maxValue;
-        
+        targetValue = Mathf.InverseLerp(0,maxValue,currentValue);
+      
         if (fillImage.fillAmount < targetValue)
         {
-           fillImage.fillAmount += fillSpeed * Time.deltaTime;
+           fillImage.fillAmount += fillSpeed;
         }
     }
 

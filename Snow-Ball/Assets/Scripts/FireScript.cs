@@ -74,9 +74,6 @@ public class FireScript : MonoBehaviour
         if(ballLevel==0)    
             ballLevel = 1;
         if(fireSpeed==0)
-            fireSpeed = 1f;
-
-        Debug.Log(ballLevel  + " " +  fireSpeed);
-        
+            fireSpeed = 1f;        
     }
 }

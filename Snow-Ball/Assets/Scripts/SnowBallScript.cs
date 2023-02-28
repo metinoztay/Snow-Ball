@@ -40,6 +40,10 @@ public class SnowBallScript : MonoBehaviour
         if(other.tag == "Ball"){
             BallCrash(other);
         }
+        else if(other.tag == "PlantPoint")
+        {
+           GetComponentInParent<ComboCounter>().comboCount = 0;
+        }
     }
 
     void Update()
@@ -67,6 +71,7 @@ public class SnowBallScript : MonoBehaviour
             GameObject waterExplosion = Instantiate(waterExpolisonParticle,transform.position,transform.rotation);
             explosion.transform.parent = waterExplosion.transform;   
 
+            GetComponentInParent<ComboCounter>().ShowCombo(transform);
             DestroySnow();
             Destroy(waterExplosion,0.75f);                    
                     

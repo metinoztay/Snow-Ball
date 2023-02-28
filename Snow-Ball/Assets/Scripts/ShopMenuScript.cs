@@ -75,8 +75,6 @@ public class ShopMenuScript : MonoBehaviour
         coins = CoinsObject.GetComponent<CoinsManager>().coins;
         fireSpeedUpButton.GetComponentInChildren<TMP_Text>().text = fireSpeedNeedCoin.ToString();
 
-        Debug.Log(fireSpeed + " " + minDelay + " " + fireSpeedNeedCoin + " " + coins);
-
         if (fireSpeed <= minDelay || fireSpeedNeedCoin > coins)
         {
             fireSpeedUpButton.interactable = false;
