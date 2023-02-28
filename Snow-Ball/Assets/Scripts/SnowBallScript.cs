@@ -7,17 +7,17 @@ using PathCreation;
 
 public class SnowBallScript : MonoBehaviour
 {  
-    
+    [SerializeField] private TMP_Text snowSizeText;
     [SerializeField] public PathCreator pathCreator;
     [SerializeField] private float speed;
     private float distanceTravelled;
-   
     [SerializeField] public bool isMove;
-    [SerializeField] private TMP_Text snowSizeText;
+    
     [SerializeField] private GameObject waterPrefab;
-
     [SerializeField] private GameObject waterExpolisonParticle;
     [SerializeField] private GameObject ballExplosionParticle;
+
+
 
     private int snowStartSize;
     private int _ss;
@@ -74,7 +74,7 @@ public class SnowBallScript : MonoBehaviour
     }
 
     public void DestroySnow() {
-        GetComponentInParent<SnowSpawnController>().destroyedSnowCount += snowStartSize;
+        GetComponentInParent<SnowController>().DestroyedSnow(snowStartSize);
         Destroy(gameObject);
     }
 }

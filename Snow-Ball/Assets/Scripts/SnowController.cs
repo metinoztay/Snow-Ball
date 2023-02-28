@@ -5,10 +5,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using PathCreation;
 
-public class SnowSpawnController : MonoBehaviour
+public class SnowController : MonoBehaviour
 {
     [SerializeField] private PathCreator[] paths;
     [SerializeField] private GameObject[] snowPrefabs;
+    [SerializeField] private GameObject progressBar;
     [SerializeField] private int totalSnowAmount;
     [SerializeField] private int maxSnowAmount;
     [SerializeField] private int minSnowAmount;
@@ -39,6 +40,7 @@ public class SnowSpawnController : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("Spawn", spawnTime, spawnDelay);
+        progressBar.GetComponent<ProgressBarScript>().maxValue = totalSnowAmount;
     }
 
     private void Spawn()
@@ -57,8 +59,7 @@ public class SnowSpawnController : MonoBehaviour
           
             GameObject newSnow = Instantiate(snowPrefabs[randomSnow],transform);
             newSnow.GetComponent<SnowBallScript>().pathCreator = paths[randomPath];
-            newSnow.GetComponent<SnowBallScript>().snowSize = randomAmount;
-            
+            newSnow.GetComponent<SnowBallScript>().snowSize = randomAmount;            
 
             spawnAmount += randomAmount;
             lastSnowPrefab = randomSnow;
@@ -100,5 +101,10 @@ public class SnowSpawnController : MonoBehaviour
         }
 
         return random;
+    }
+
+    public void DestroyedSnow(int size){
+        destroyedSnowCount += size;
+        progressBar.GetComponent<ProgressBarScript>().IncrementProgress(size);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject loseCanvas;
     [SerializeField] GameObject snowSpawner;
     [SerializeField] GameObject fireScript;
-
     
+    [SerializeField] private TMP_Text levelText;
     public GameState State; 
     
     private void Awake() {
@@ -62,13 +63,13 @@ public class GameManager : MonoBehaviour
       inputCanvas.SetActive(false);
       shopCanvas.SetActive(true);
       fireScript.GetComponent<FireScript>().startFire = false;
-      snowSpawner.GetComponent<SnowSpawnController>().startSnow = false;
+      snowSpawner.GetComponent<SnowController>().startSnow = false;
     }
 
     private void HandleStart(){
       inputCanvas.SetActive(true);
       shopCanvas.SetActive(false);
-      snowSpawner.GetComponent<SnowSpawnController>().startSnow = true;
+      snowSpawner.GetComponent<SnowController>().startSnow = true;
       fireScript.GetComponent<FireScript>().StartFire();
       
     }
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
     private void HandleLose(){
       inputCanvas.SetActive(false);
       fireScript.GetComponent<FireScript>().startFire = false;
-      snowSpawner.GetComponent<SnowSpawnController>().startSnow = false;
+      snowSpawner.GetComponent<SnowController>().startSnow = false;
       loseCanvas.SetActive(true);
     }
 
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
       {
          SceneManager.LoadScene(savedLevel);
       }
+      levelText.text = savedLevel.ToString();
    }
 
     public enum GameState{
