@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour, IDragHandler
 {
-   [SerializeField] Transform cannonBall;
+    [SerializeField] Transform cannonBall;
     [SerializeField] float speed;
     [SerializeField] float maxTurnAngle;
     public void OnDrag(PointerEventData eventData)

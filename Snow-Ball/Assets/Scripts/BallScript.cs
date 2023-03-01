@@ -2,28 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class BallScript : MonoBehaviour
 {
-    Rigidbody2D rb;    
-    [SerializeField] private float ballSpeed;
-    [SerializeField] private float destroyTimer;
-
     [SerializeField] public int level;
 
-    
-    private void Start() {
-        rb = GetComponent<Rigidbody2D>();
-        //rb.velocity = transform.up*ballSpeed;
-        rb.AddForce(transform.up*ballSpeed*50);
-        Destroy(gameObject,destroyTimer);
-    }
+    public Queue<GameObject> ballsQueue;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "SnowBall")
+        if (other.tag == "SnowBall" || other.tag == "MainCamera")
         {
-            //GameObject explosion = Instantiate(ballExplosionParticle,transform.position,transform.rotation,other.transform);  
-            //Destroy(explosion,0.75f);
+            ballsQueue.Enqueue(gameObject);
+            gameObject.SetActive(false);
         }
+        
     }
+
+
 }

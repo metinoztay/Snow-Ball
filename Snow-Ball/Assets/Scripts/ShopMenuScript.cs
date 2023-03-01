@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 public class ShopMenuScript : MonoBehaviour
 {
-    [SerializeField] private GameObject CannonBallObject;
+    [SerializeField] private FireScript fireScript;
     private int ballLevelUpCoin;
 
     [SerializeField] private Button incomeLevelUpButton;
+    [SerializeField] private TMP_Text incomeButtonText;
     [SerializeField] private Button ballLevelUpButton;
+    [SerializeField] private TMP_Text ballLevelButtonText;
     [SerializeField] private Button fireSpeedUpButton;
-    [SerializeField] private GameObject CoinsObject;
+    [SerializeField] private TMP_Text fireSpeedUpButtonText;
+    [SerializeField] private CoinsManager coinsManager;
 
     int ballLevel, ballMaxLevel, ballNeedCoin;
 
@@ -36,80 +39,80 @@ public class ShopMenuScript : MonoBehaviour
         IncomeLevelUpControl();
     }
     public void BallLevelUp(){
-        CoinsObject.GetComponent<CoinsManager>().coins -= ballNeedCoin;
-        CannonBallObject.GetComponent<FireScript>().BallLevelUp();
+        coinsManager.coins -= ballNeedCoin;
+        fireScript.BallLevelUp();
         ButtonsControl();
         Save();       
     }
 
     private void BallLevelUpControl(){
-        ballLevel = CannonBallObject.GetComponent<FireScript>().ballLevel;
-        ballMaxLevel = CannonBallObject.GetComponent<FireScript>().maxLevel;
+        ballLevel = fireScript.ballLevel;
+        ballMaxLevel = fireScript.maxLevel;
         ballNeedCoin = (int)(Mathf.Pow(2,(ballLevel-1))*10);
-        coins = CoinsObject.GetComponent<CoinsManager>().coins;
-        ballLevelUpButton.GetComponentInChildren<TMP_Text>().text = ballNeedCoin.ToString();
+        coins = coinsManager.coins;
+        ballLevelButtonText.text = ballNeedCoin.ToString();
         
 
         if (ballLevel >= ballMaxLevel || ballNeedCoin > coins)
         {
             ballLevelUpButton.interactable = false;
-            ballLevelUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(170,183,116,255);
+            ballLevelButtonText.color = new Color32(170,183,116,255);
         }else
         {
             ballLevelUpButton.interactable = true;
-            ballLevelUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(242,231,34,255);   
+            ballLevelButtonText.color = new Color32(242,231,34,255);   
         }
     }
 
     public void FireSpeedUp(){
-        CoinsObject.GetComponent<CoinsManager>().coins -= fireSpeedNeedCoin;
-        CannonBallObject.GetComponent<FireScript>().FireSpeedUp();
+        coinsManager.coins -= fireSpeedNeedCoin;
+        fireScript.FireSpeedUp();
         ButtonsControl();
         Save();
     }
 
     private void FireSpeedUpControl(){
-        fireSpeed = CannonBallObject.GetComponent<FireScript>().fireSpeed;
-        minDelay = CannonBallObject.GetComponent<FireScript>().minDelay;
+        fireSpeed = fireScript.fireSpeed;
+        minDelay = fireScript.minDelay;
         fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.0f-fireSpeed)*10)*10);           
-        coins = CoinsObject.GetComponent<CoinsManager>().coins;
-        fireSpeedUpButton.GetComponentInChildren<TMP_Text>().text = fireSpeedNeedCoin.ToString();
+        coins = coinsManager.coins;
+        fireSpeedUpButtonText.text = fireSpeedNeedCoin.ToString();
 
         if (fireSpeed <= minDelay || fireSpeedNeedCoin > coins)
         {
             fireSpeedUpButton.interactable = false;
-            fireSpeedUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(170,183,116,255);   
+            fireSpeedUpButtonText.color = new Color32(170,183,116,255);   
         }else
         {
             fireSpeedUpButton.interactable = true;
-            fireSpeedUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(242,231,34,255);   
+            fireSpeedUpButtonText.color = new Color32(242,231,34,255);   
         }
     }
 
     public void IncomeLevelUp(){
-        CoinsObject.GetComponent<CoinsManager>().coins -= incomeLevelNeedCoin;
-        CoinsObject.GetComponent<CoinsManager>().CoinsValueUp(); 
+        coinsManager.coins -= incomeLevelNeedCoin;
+        coinsManager.CoinsValueUp(); 
         ButtonsControl();
         Save();
     }
     
     private void IncomeLevelUpControl(){
-        coinsValue = CoinsObject.GetComponent<CoinsManager>().coinsValue;
-        maxCoinValue = CoinsObject.GetComponent<CoinsManager>().maxCoinValue;
+        coinsValue = coinsManager.coinsValue;
+        maxCoinValue = coinsManager.maxCoinValue;
         incomeLevelNeedCoin = coinsValue * 10;
-        coins = CoinsObject.GetComponent<CoinsManager>().coins;
-        incomeLevelUpButton.GetComponentInChildren<TMP_Text>().text = incomeLevelNeedCoin.ToString();
+        coins = coinsManager.coins;
+        incomeButtonText.text = incomeLevelNeedCoin.ToString();
         
         
         if (coinsValue >= maxCoinValue || incomeLevelNeedCoin > coins)
         {
             incomeLevelUpButton.interactable = false; 
-            incomeLevelUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(170,183,116,255);
+            incomeButtonText.color = new Color32(170,183,116,255);
 
         }else
         {
             incomeLevelUpButton.interactable = true;
-            incomeLevelUpButton.GetComponentInChildren<TMP_Text>().color = new Color32(242,231,34,255);   
+            incomeButtonText.color = new Color32(242,231,34,255);   
         }
     }
     
@@ -121,10 +124,10 @@ public class ShopMenuScript : MonoBehaviour
     }
 
     private void Load(){
-        CoinsObject.GetComponent<CoinsManager>().coins = PlayerPrefs.GetInt(nameof(coins));
-        CannonBallObject.GetComponent<FireScript>().ballLevel = PlayerPrefs.GetInt(nameof(ballLevel));
-        CannonBallObject.GetComponent<FireScript>().fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed));
-        CoinsObject.GetComponent<CoinsManager>().coinsValue = PlayerPrefs.GetInt(nameof(coinsValue));
+        coinsManager.coins = PlayerPrefs.GetInt(nameof(coins));
+        fireScript.ballLevel = PlayerPrefs.GetInt(nameof(ballLevel));
+        fireScript.fireSpeed = PlayerPrefs.GetFloat(nameof(fireSpeed));
+        coinsManager.coinsValue = PlayerPrefs.GetInt(nameof(coinsValue));
     }
 
 

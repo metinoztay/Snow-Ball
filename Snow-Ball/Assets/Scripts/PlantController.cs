@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlantController : MonoBehaviour
 {
+    
     [SerializeField] public int plantCount;
     [SerializeField] public int maxPlantCount;
 
@@ -13,7 +14,6 @@ public class PlantController : MonoBehaviour
 
     private void Start() {
         Invoke("GetGroundSnowFields",1f);
-        //GetGroundSnowFields();
     }
 
     private void GetGroundSnowFields(){

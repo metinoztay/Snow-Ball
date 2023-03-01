@@ -6,8 +6,14 @@ using TMPro;
 public class FireScript : MonoBehaviour
 {   private Animator fireAnimator;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject ballObject;
+    [SerializeField] private GameObject ballPrefab;
+
+    [Space]
+    [Header ("Balls to prepare")]
+    [SerializeField] private int maxBalls;
+    public Queue<GameObject> ballsQueue = new Queue<GameObject>();
     [SerializeField] private float spawnStartTime;
+    [SerializeField] private int ballSpeed;
     [SerializeField] public float fireSpeed=1;
 
     [SerializeField] public float minDelay;
@@ -29,22 +35,26 @@ public class FireScript : MonoBehaviour
     
     private void Awake() {
         LoadPlayerSaves();
+        PrepareBalls();
     }
     private void Start()
     {
-        
         fireAnimator = GetComponent<Animator>();
-        
     }
 
     private void Fire()
     {
-        if (startFire)
+        if (ballsQueue.Count>0 && startFire)
         {
             fireAnimator.SetTrigger("Fire");
-            Instantiate(ballObject, firePoint.position,firePoint.rotation);
-            ballObject.GetComponent<BallScript>().level = this.ballLevel;
-        }        
+            GameObject ball = ballsQueue.Dequeue(); 
+            ball.transform.position = firePoint.transform.position;
+            ball.SetActive(true);
+            
+            
+            ball.GetComponent<Rigidbody2D>().AddForce(transform.up*ballSpeed);
+            ball.GetComponent<BallScript>().ballsQueue = ballsQueue; 
+        } 
     }
 
     public void StartFire(){
@@ -76,4 +86,16 @@ public class FireScript : MonoBehaviour
         if(fireSpeed==0)
             fireSpeed = 1f;        
     }
+
+    private void PrepareBalls(){
+        for (int i = 0; i < maxBalls; i++)
+        {
+            GameObject ball;
+            ball = Instantiate(ballPrefab);
+            ball.GetComponent<BallScript>().level = ballLevel;
+            ball.SetActive(false);
+            ballsQueue.Enqueue(ball);
+        }
+    }
+
 }

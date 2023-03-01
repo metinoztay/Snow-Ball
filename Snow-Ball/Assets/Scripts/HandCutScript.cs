@@ -8,14 +8,9 @@ public class HandCutScript : MonoBehaviour
    [SerializeField] private bool move;   
    [SerializeField] private float speed;
 
-   CoinsManager coinsManager;
+   [SerializeField] CoinsManager coinsManager;
 
-   [SerializeField] public Animator animator;
-
-   private void Start() {
-      animator = GetComponentInParent<Animator>();
-      coinsManager = FindAnyObjectByType<CoinsManager>();
-   }
+   [SerializeField] private Animator animator;
    private void Update() {
       if (move)
       {
@@ -51,7 +46,7 @@ public class HandCutScript : MonoBehaviour
 
    private void Collect(Collider2D other){
       if(other.tag == "Collectable" && move){
-            coinsManager.AddCoins(other.transform.position);
+            coinsManager.AddCoins(other.transform.position,10);
             other.GetComponent<PlantScript>().Collect();            
         }
    }

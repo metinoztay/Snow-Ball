@@ -12,10 +12,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject shopCanvas;
     [SerializeField] GameObject inputCanvas;
     [SerializeField] GameObject winCanvas;
-
     [SerializeField] GameObject loseCanvas;
-    [SerializeField] GameObject snowSpawner;
-    [SerializeField] GameObject fireScript;
+    [SerializeField] SnowController snowController;
+    [SerializeField] ComboCounter comboCounter;
+    [SerializeField] FireScript fireScript;
     
     [SerializeField] private TMP_Text levelText;
     public GameState State; 
@@ -62,27 +62,29 @@ public class GameManager : MonoBehaviour
     {
       inputCanvas.SetActive(false);
       shopCanvas.SetActive(true);
-      fireScript.GetComponent<FireScript>().startFire = false;
-      snowSpawner.GetComponent<SnowController>().startSnow = false;
+      fireScript.startFire = false;
+      snowController.startSnow = false;
     }
 
     private void HandleStart(){
       inputCanvas.SetActive(true);
       shopCanvas.SetActive(false);
-      snowSpawner.GetComponent<SnowController>().startSnow = true;
-      fireScript.GetComponent<FireScript>().StartFire();
+      snowController.startSnow = true;
+      fireScript.StartFire();
       
     }
     private void HandleWin(){
       inputCanvas.SetActive(false);
-      fireScript.GetComponent<FireScript>().startFire = false;
+      fireScript.startFire = false;
+      comboCounter.CollectCoin();
       winCanvas.SetActive(true);
     }
 
     private void HandleLose(){
       inputCanvas.SetActive(false);
-      fireScript.GetComponent<FireScript>().startFire = false;
-      snowSpawner.GetComponent<SnowController>().startSnow = false;
+      fireScript.startFire = false;
+      snowController.startSnow = false;
+      comboCounter.CollectCoin();
       loseCanvas.SetActive(true);
     }
 
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
       {
          SceneManager.LoadScene(savedLevel);
       }
-      levelText.text = savedLevel.ToString();
+      levelText.text = (activeLevel+1).ToString();
    }
 
     public enum GameState{

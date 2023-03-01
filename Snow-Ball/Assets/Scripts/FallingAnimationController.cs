@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FallingAnimationController : MonoBehaviour
 {
-     [SerializeField] Animator animator;
+    Animator animator;
     
     private void Awake() {
         animator = GetComponent<Animator>();

@@ -9,7 +9,6 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] private GameObject collectedCoinPrefab;
     [SerializeField] private Transform coinsTarget;
     [SerializeField] private TMP_Text coinUIText;
-    [SerializeField] private int addCoinAmount;
 
     [SerializeField] public int maxCoinValue;
     Vector3 targetPosition;
@@ -49,12 +48,8 @@ public class CoinsManager : MonoBehaviour
         targetPosition = coinsTarget.position;
         LoadPlayerSaves();
         PrepareCoins();
-    }    
-
-    private void Start() {
-        
         coinUIText.text = coins.ToString();
-    }
+    }    
 
 
     private void PrepareCoins(){
@@ -69,7 +64,7 @@ public class CoinsManager : MonoBehaviour
         }
     }
 
-    private void Animate(Vector3 collectedCoinPosition){
+    private void Animate(Vector3 collectedCoinPosition, int addCoinAmount){
        for (int i = 0; i < addCoinAmount; i++)
        {
             if (coinsQueue.Count>0)
@@ -96,8 +91,8 @@ public class CoinsManager : MonoBehaviour
        
     }
 
-    public void AddCoins(Vector3 collectedCoinPosition){
-         Animate(collectedCoinPosition);
+    public void AddCoins(Vector3 collectedCoinPosition, int addCoinAmount){
+         Animate(collectedCoinPosition,addCoinAmount);
     }
 
     public void CoinsValueUp(){

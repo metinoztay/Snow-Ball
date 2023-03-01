@@ -7,8 +7,9 @@ public class PlantScript : MonoBehaviour
     [SerializeField] private Transform grossPoint;
     [SerializeField] private Transform plantPoint;
     [SerializeField] private float grossSpeed;
-    [SerializeField] private GameObject plantController;
-    [SerializeField] private GameObject cuttingLine;
+    [SerializeField] private PlantController plantController;
+    [SerializeField] private Animator cuttingLineAnimator;
+    [SerializeField] private FallingAnimationController fallingAnimationController;
     [SerializeField] public bool collectable;
 
     private void Start() {
@@ -40,17 +41,18 @@ public class PlantScript : MonoBehaviour
         {   
             collectable = true;
             gameObject.tag="Collectable";
-            cuttingLine.GetComponent<Animator>().SetBool("Collect",true);
+            cuttingLineAnimator.SetBool("Collect",true);
+            // ! Çizgi o an aktifse bug olabiliyor, düzeltilecek 
         }
     }
     public void Collect(){
        
         grossPoint.transform.position = transform.position;
-        GetComponentInParent<FallingAnimationController>().CollectFall();
+        fallingAnimationController.CollectFall();
          
         collectable = false;
         gameObject.tag="Plant";
-        plantController.GetComponent<PlantController>().plantCount--;
+        plantController.plantCount--;
         plantPoint.GetComponent<PlantPointScript>().isGross = false;
     }
 }

@@ -48,7 +48,7 @@ public class SnowBallScript : MonoBehaviour
 
     void Update()
     {
-        Move();
+       Move();
         
     }
 
@@ -61,7 +61,6 @@ public class SnowBallScript : MonoBehaviour
     private void BallCrash(Collider2D other){
         int ballLevel = other.GetComponent<BallScript>().level;
         snowSize -= ballLevel;
-        Destroy(other.gameObject);
         GameObject explosion = Instantiate(ballExplosionParticle,transform);
         Destroy(explosion,0.75f); 
                 

@@ -41,6 +41,7 @@ public class SnowController : MonoBehaviour
     {
         InvokeRepeating("Spawn", spawnTime, spawnDelay);
         progressBar.GetComponent<ProgressBarScript>().maxValue = totalSnowAmount;
+
     }
 
     private void Spawn()

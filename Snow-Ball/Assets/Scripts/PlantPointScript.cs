@@ -9,6 +9,8 @@ public class PlantPointScript : MonoBehaviour
     [SerializeField] private Transform grossPoint;
     [SerializeField] private float grossAmount;
     public GameObject groundSnowField;
+
+    [SerializeField] PlantController plantController;
     
     private int maxPlantCount;
     [SerializeField] public int plantCount;
@@ -43,25 +45,25 @@ public class PlantPointScript : MonoBehaviour
             if (groundSnowField.GetComponent<SpriteRenderer>().enabled)
             {
                 int index = transform.GetSiblingIndex();
-                GetComponentInParent<PlantController>().ChangeGroundSnowPoint(index);
+                plantController.ChangeGroundSnowPoint(index);
             }
             else
             {
                 groundSnowField.GetComponent<SpriteRenderer>().enabled = true;
             }
-            GetComponentInParent<PlantController>().GroundControl();
+            plantController.GroundControl();
         }
     }
     private void GetPlantCount(){
-        plantCount = GetComponentInParent<PlantController>().plantCount;
-        maxPlantCount = GetComponentInParent<PlantController>().maxPlantCount;
+        plantCount = plantController.plantCount;
+        maxPlantCount = plantController.maxPlantCount;
     }
 
     private void AddNewPlant(){
         bool midControl = GetComponentInChildren<Animator>().isActiveAndEnabled;
         if (!isGross && midControl)
         {
-            GetComponentInParent<PlantController>().plantCount++;
+            plantController.plantCount++;
             isGross = true;
         }        
     }

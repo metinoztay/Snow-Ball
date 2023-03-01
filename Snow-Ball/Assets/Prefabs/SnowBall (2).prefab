@@ -137,10 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8ed5a8ee4025446bfcfcd7845e7328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathCreator: {fileID: 4829568867362290442, guid: 52468c0f037527d4dbd134964a894ed1, type: 3}
-  speed: 200
-  isMove: 1
   snowSizeText: {fileID: 3548339623441344228}
+  pathCreator: {fileID: 4829568867362290442, guid: 52468c0f037527d4dbd134964a894ed1, type: 3}
+  speed: 1.5
+  isMove: 1
   waterPrefab: {fileID: 4383320946062098430, guid: 514617c345bae614a8f10c7bf7246a2e, type: 3}
   waterExpolisonParticle: {fileID: 7889455369710313607, guid: a0add106573dbc840a7acb4fe874b11d, type: 3}
   ballExplosionParticle: {fileID: 7992929658942475705, guid: f7da075d44ee5496f9b097413640e28d, type: 3}

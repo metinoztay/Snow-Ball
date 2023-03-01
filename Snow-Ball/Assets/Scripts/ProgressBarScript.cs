@@ -12,13 +12,18 @@ public class ProgressBarScript : MonoBehaviour
     [SerializeField] private float fillSpeed;
     [SerializeField] private float targetValue;
 
+
+
     private void Start() {
         fillImage.fillAmount = 0;
     }
 
 
     private void Update() {
-        Fill();
+        if (GameManager.Instance.State != GameManager.GameState.Lose)
+        {   
+            Fill();
+        }        
     }
 
     private void Fill(){

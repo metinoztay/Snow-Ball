@@ -5,11 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class NextScript : MonoBehaviour
 {   
-    [SerializeField] private GameObject hand;
-    [SerializeField] private GameObject cuttingLine;
+    [SerializeField] private HandCutScript handCutScript;
 
     private void Start() {
-        hand.GetComponent<HandCutScript>().SelectorAnimation(true);
+        handCutScript.SelectorAnimation(true);
     }
     private void NextLevel(){
         int level = SceneManager.GetActiveScene().buildIndex;
@@ -17,19 +16,4 @@ public class NextScript : MonoBehaviour
         SceneManager.LoadScene(level+1);
     }
 
-    // ? eski kontrol kodu
-    /*
-    public void ControlPlants(){
-
-        bool isHandActive = hand.GetComponent<HandCutScript>().animator.GetBool("Collect");
-        if (isHandActive)
-        {
-            hand.GetComponent<HandCutScript>().Move();
-            Invoke("NextLevel",3f);
-        }else
-        {
-            NextLevel();
-        }   
-    }
-    */
 }
