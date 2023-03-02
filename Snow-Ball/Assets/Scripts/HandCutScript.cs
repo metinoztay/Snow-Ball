@@ -7,10 +7,9 @@ public class HandCutScript : MonoBehaviour
    [SerializeField] private float direction;
    [SerializeField] private bool move;   
    [SerializeField] private float speed;
-
    [SerializeField] CoinsManager coinsManager;
-
    [SerializeField] private Animator animator;
+   private List<GameObject> collectables;
    private void Update() {
       if (move)
       {
@@ -54,5 +53,4 @@ public class HandCutScript : MonoBehaviour
    public void SelectorAnimation(bool isActive){
       animator.SetBool("Selector",isActive);  
    }
-   
 }

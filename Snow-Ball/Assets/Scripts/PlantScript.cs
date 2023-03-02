@@ -41,8 +41,7 @@ public class PlantScript : MonoBehaviour
         {   
             collectable = true;
             gameObject.tag="Collectable";
-            cuttingLineAnimator.SetBool("Collect",true);
-            // ! Çizgi o an aktifse bug olabiliyor, düzeltilecek 
+            SetCuttingAnimatorActive();
         }
     }
     public void Collect(){
@@ -54,5 +53,17 @@ public class PlantScript : MonoBehaviour
         gameObject.tag="Plant";
         plantController.plantCount--;
         plantPoint.GetComponent<PlantPointScript>().isGross = false;
+    }
+
+    private void SetCuttingAnimatorActive(){
+        bool isActive = cuttingLineAnimator.GetBool("Collect");
+        if(isActive){
+            Invoke("SetCuttingAnimatorActive",1);
+        }
+        else if(gameObject.tag == "Collectable")
+        {
+            cuttingLineAnimator.SetBool("Collect",true);
+        }
+
     }
 }

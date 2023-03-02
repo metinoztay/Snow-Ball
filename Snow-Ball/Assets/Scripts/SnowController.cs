@@ -16,9 +16,6 @@ public class SnowController : MonoBehaviour
     [SerializeField] private float spawnTime;
     [SerializeField] private float spawnDelay;
     [SerializeField] public bool startSnow;
-
-
-    
     private int _ds=0;
     public int destroyedSnowCount
     {
@@ -31,7 +28,9 @@ public class SnowController : MonoBehaviour
             }
     }
     
-    
+    int randomSnow;
+    int randomPath;
+    int randomAmount;    
     int spawnAmount = 0;
     int lastSnowPrefab=-1;
     int lastSnowAmount=-1;
@@ -39,7 +38,7 @@ public class SnowController : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("Spawn", spawnTime, spawnDelay);
+        InvokeRepeating("Spawn",spawnTime,spawnDelay);
         progressBar.GetComponent<ProgressBarScript>().maxValue = totalSnowAmount;
 
     }
@@ -48,9 +47,9 @@ public class SnowController : MonoBehaviour
     {
         if (startSnow)
         {
-            int randomSnow = RandomUniqueNumber(0, snowPrefabs.Length, lastSnowPrefab,false);
-            int randomPath = RandomUniqueNumber(0,paths.Length,lastPath, false);
-            int randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount+1,lastSnowAmount,true);
+            randomSnow = RandomUniqueNumber(0, snowPrefabs.Length, lastSnowPrefab,false);
+            randomPath = RandomUniqueNumber(0,paths.Length,lastPath, false);
+            randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount+1,lastSnowAmount,true);
             if (spawnAmount == totalSnowAmount)
             {
                 startSnow = false;
