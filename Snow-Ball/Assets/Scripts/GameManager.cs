@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     private void HandleWin(){
       inputCanvas.SetActive(false);
       fireScript.startFire = false;
-      comboCounter.CollectCoin();
+      comboCounter.ResetCombo();
       winCanvas.SetActive(true);
     }
 
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
       inputCanvas.SetActive(false);
       fireScript.startFire = false;
       snowController.startSnow = false;
-      comboCounter.CollectCoin();
+      comboCounter.ResetCombo();
       loseCanvas.SetActive(true);
     }
 

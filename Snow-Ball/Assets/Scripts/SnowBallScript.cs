@@ -42,7 +42,7 @@ public class SnowBallScript : MonoBehaviour
         }
         else if(other.tag == "PlantPoint")
         {
-           GetComponentInParent<ComboCounter>().comboCount = 0;
+            GetComponentInParent<ComboCounter>().ResetCombo();
         }
     }
 

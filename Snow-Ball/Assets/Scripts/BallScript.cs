@@ -16,6 +16,10 @@ public class BallScript : MonoBehaviour
             ballsQueue.Enqueue(gameObject);
             gameObject.SetActive(false);
         }
+        else if(other.tag == "PlantPoint")
+        {
+           GetComponentInParent<ComboCounter>().comboCount = 0;
+        }
         
     }
 
