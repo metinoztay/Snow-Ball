@@ -35,12 +35,12 @@ public class CoinsManager : MonoBehaviour
     }
     
 
-    private int c;
+    private int _coins;
     public int coins
     {
-        get { return c; }
-        set { c = value; 
-              coinUIText.text = coins.ToString();
+        get { return _coins; }
+        set { _coins = value; 
+              CoinsTextUpdate();
             }
     }
 
@@ -48,7 +48,7 @@ public class CoinsManager : MonoBehaviour
         targetPosition = coinsTarget.position;
         LoadPlayerSaves();
         PrepareCoins();
-        coinUIText.text = coins.ToString();
+        CoinsTextUpdate();
     }    
 
 
@@ -96,7 +96,7 @@ public class CoinsManager : MonoBehaviour
     }
 
     public void CoinsValueUp(){
-        coinsValue *= 2;
+        coinsValue += 1;
         PlayerPrefs.SetInt(nameof(coinsValue),coinsValue);
     }
 
@@ -106,7 +106,21 @@ public class CoinsManager : MonoBehaviour
         
         if(coinsValue == 0)
             coinsValue = 1;
-        
+    }
+
+    private void CoinsTextUpdate(){
+        if (coins > 1000 && coins < 1000000)
+        {
+            coinUIText.text = (coins / 1000).ToString() + "K";
+        }
+        else if (coins > 1000000)
+        {
+            coinUIText.text = (coins / 1000000).ToString() + "M";
+        }
+        else
+        {
+            coinUIText.text = coins.ToString();
+        }
     }
 
 }

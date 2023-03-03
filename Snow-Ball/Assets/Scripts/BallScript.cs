@@ -11,7 +11,7 @@ public class BallScript : MonoBehaviour
     public Queue<GameObject> ballsQueue;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "SnowBall" || other.tag == "MainCamera")
+        if (other.tag == "SnowBall")
         {
             ballsQueue.Enqueue(gameObject);
             gameObject.SetActive(false);
@@ -21,6 +21,14 @@ public class BallScript : MonoBehaviour
            GetComponentInParent<ComboCounter>().comboCount = 0;
         }
         
+    } 
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if( other.tag == "MainCamera")
+        {
+            ballsQueue.Enqueue(gameObject);
+            gameObject.SetActive(false);
+        }
     }
 
 

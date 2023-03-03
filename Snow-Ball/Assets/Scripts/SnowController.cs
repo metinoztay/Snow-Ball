@@ -13,9 +13,7 @@ public class SnowController : MonoBehaviour
     [SerializeField] private int totalSnowAmount;
     [SerializeField] private int maxSnowAmount;
     [SerializeField] private int minSnowAmount;
-    [SerializeField] private float spawnTime;
     [SerializeField] private float spawnDelay;
-    [SerializeField] public bool startSnow;
     private int _ds=0;
     public int destroyedSnowCount
     {
@@ -28,6 +26,7 @@ public class SnowController : MonoBehaviour
             }
     }
     
+    Coroutine spawnCoroutine;
     int randomSnow;
     int randomPath;
     int randomAmount;    
@@ -38,25 +37,30 @@ public class SnowController : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("Spawn",spawnTime,spawnDelay);
         progressBar.GetComponent<ProgressBarScript>().maxValue = totalSnowAmount;
-
     }
 
-    private void Spawn()
+    public void StartSpawn(){
+        spawnCoroutine = StartCoroutine(Spawn());
+    }
+
+    public void StopSpawn(){
+        StopCoroutine(spawnCoroutine);
+    }
+
+    IEnumerator Spawn()
     {
-        if (startSnow)
+        while (true)
         {
             randomSnow = RandomUniqueNumber(0, snowPrefabs.Length, lastSnowPrefab,false);
             randomPath = RandomUniqueNumber(0,paths.Length,lastPath, false);
             randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount+1,lastSnowAmount,true);
             if (spawnAmount == totalSnowAmount)
             {
-                startSnow = false;
-                return;
+                StopSpawn();
+                break;
             }
             
-          
             GameObject newSnow = Instantiate(snowPrefabs[randomSnow],transform);
             newSnow.GetComponent<SnowBallScript>().pathCreator = paths[randomPath];
             newSnow.GetComponent<SnowBallScript>().snowSize = randomAmount;            
@@ -65,10 +69,11 @@ public class SnowController : MonoBehaviour
             lastSnowPrefab = randomSnow;
             lastSnowAmount = randomAmount;
             lastPath = randomPath;
+
+            yield return new WaitForSecondsRealtime(spawnDelay);
         }       
 
     }
-
     private int RandomUniqueNumber(int min , int max, int last, bool control)
     {
         if (max == min)

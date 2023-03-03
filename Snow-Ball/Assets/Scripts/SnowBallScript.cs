@@ -11,8 +11,6 @@ public class SnowBallScript : MonoBehaviour
     [SerializeField] public PathCreator pathCreator;
     [SerializeField] private float speed;
     private float distanceTravelled;
-    [SerializeField] public bool isMove;
-    
     [SerializeField] private GameObject waterPrefab;
     [SerializeField] private GameObject waterExpolisonParticle;
     [SerializeField] private GameObject ballExplosionParticle;
@@ -33,7 +31,6 @@ public class SnowBallScript : MonoBehaviour
     private void Start()
     {
         snowStartSize = snowSize;
-        isMove = true;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

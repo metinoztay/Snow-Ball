@@ -48,7 +48,7 @@ public class ShopMenuScript : MonoBehaviour
     private void BallLevelUpControl(){
         ballLevel = fireScript.ballLevel;
         ballMaxLevel = fireScript.maxLevel;
-        ballNeedCoin = (int)(Mathf.Pow(2,(ballLevel-1))*10);
+        ballNeedCoin = (int)(Mathf.Pow(3,(ballLevel-1))*10);
         coins = coinsManager.coins;
         ballLevelButtonText.text = ballNeedCoin.ToString();
         
@@ -74,7 +74,7 @@ public class ShopMenuScript : MonoBehaviour
     private void FireSpeedUpControl(){
         fireSpeed = fireScript.fireSpeed;
         minDelay = fireScript.minDelay;
-        fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.0f-fireSpeed)*10)*10);           
+        fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.0f-fireSpeed)*20)*10);           
         coins = coinsManager.coins;
         fireSpeedUpButtonText.text = fireSpeedNeedCoin.ToString();
 
@@ -99,7 +99,7 @@ public class ShopMenuScript : MonoBehaviour
     private void IncomeLevelUpControl(){
         coinsValue = coinsManager.coinsValue;
         maxCoinValue = coinsManager.maxCoinValue;
-        incomeLevelNeedCoin = coinsValue * 10;
+        incomeLevelNeedCoin = (int)Mathf.Pow(2,coinsValue)*10;
         coins = coinsManager.coins;
         incomeButtonText.text = incomeLevelNeedCoin.ToString();
         

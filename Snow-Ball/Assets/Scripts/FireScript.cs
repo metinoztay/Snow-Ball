@@ -12,7 +12,6 @@ public class FireScript : MonoBehaviour
     [Header ("Balls to prepare")]
     [SerializeField] private int maxBalls;
     public Queue<GameObject> ballsQueue = new Queue<GameObject>();
-    [SerializeField] private float spawnStartTime;
     [SerializeField] private int ballSpeed;
     [SerializeField] public float fireSpeed=1;
 
@@ -20,10 +19,7 @@ public class FireScript : MonoBehaviour
 
     [SerializeField] public int maxLevel;
     [SerializeField] private TMP_Text levelText;
-
-    [SerializeField] public bool startFire;
-
-
+    Coroutine fireCoroutine;
     private int _level;
     public int ballLevel
     {
@@ -35,17 +31,24 @@ public class FireScript : MonoBehaviour
     
     private void Awake() {
         LoadPlayerSaves();
-        PrepareBalls();
-    }
-    private void Start()
-    {
+        
         fireAnimator = GetComponent<Animator>();
     }
 
-    private void Fire()
+    public void StartFire(){
+        PrepareBalls();
+        fireCoroutine = StartCoroutine(Fire());
+    }
+
+    public void StopFire(){
+        StopCoroutine(fireCoroutine);
+    }
+    IEnumerator Fire()
     {
-        if (ballsQueue.Count>0 && startFire)
+        while(true)
         {
+            yield return new WaitForSecondsRealtime(fireSpeed);
+
             fireAnimator.SetTrigger("Fire");
             GameObject ball = ballsQueue.Dequeue(); 
             ball.transform.position = firePoint.transform.position;
@@ -57,10 +60,6 @@ public class FireScript : MonoBehaviour
         } 
     }
 
-    public void StartFire(){
-        startFire = true;
-        InvokeRepeating("Fire",spawnStartTime,fireSpeed);
-    }
     public void BallLevelUp(){
         if (ballLevel < maxLevel)
         {
@@ -72,7 +71,7 @@ public class FireScript : MonoBehaviour
     public void FireSpeedUp(){
         if (fireSpeed > minDelay)
         {
-            fireSpeed -= 0.1f;
+            fireSpeed -= 0.05f;
             PlayerPrefs.SetFloat(nameof(fireSpeed),fireSpeed);
         }
     }

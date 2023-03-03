@@ -62,28 +62,25 @@ public class GameManager : MonoBehaviour
     {
       inputCanvas.SetActive(false);
       shopCanvas.SetActive(true);
-      fireScript.startFire = false;
-      snowController.startSnow = false;
     }
 
     private void HandleStart(){
       inputCanvas.SetActive(true);
       shopCanvas.SetActive(false);
-      snowController.startSnow = true;
+      snowController.StartSpawn();
       fireScript.StartFire();
-      
     }
     private void HandleWin(){
       inputCanvas.SetActive(false);
-      fireScript.startFire = false;
+      fireScript.StopFire();
       comboCounter.ResetCombo();
       winCanvas.SetActive(true);
     }
 
     private void HandleLose(){
       inputCanvas.SetActive(false);
-      fireScript.startFire = false;
-      snowController.startSnow = false;
+      fireScript.StopFire();
+      snowController.StopSpawn();
       comboCounter.ResetCombo();
       loseCanvas.SetActive(true);
     }
