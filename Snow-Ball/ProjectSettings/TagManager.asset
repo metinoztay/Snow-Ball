@@ -16,6 +16,7 @@ TagManager:
   - CuttingLine
   - Hand
   - Collectable
+  - TimeSnowBall
   layers:
   - Default
   - TransparentFX

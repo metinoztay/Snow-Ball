@@ -11,7 +11,7 @@ public class BallScript : MonoBehaviour
     public Queue<GameObject> ballsQueue;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "SnowBall")
+        if (other.tag == "SnowBall" || other.tag == "TimeSnowBall")
         {
             ballsQueue.Enqueue(gameObject);
             gameObject.SetActive(false);
