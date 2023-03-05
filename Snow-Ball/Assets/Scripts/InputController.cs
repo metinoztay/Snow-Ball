@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 public class InputController : MonoBehaviour, IDragHandler
 {
     [SerializeField] Transform cannonBall;
-    [SerializeField] float speed;
+    [SerializeField] float sensivity;
     [SerializeField] float maxTurnAngle;
     public void OnDrag(PointerEventData eventData)
     {
         var rotation = cannonBall.rotation;
         float current = rotation.eulerAngles.z;
-        current -= eventData.delta.x * speed;  
+        current -= eventData.delta.x * sensivity;  
         if(current>300){
             current = current-360;
         }

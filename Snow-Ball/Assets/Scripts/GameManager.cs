@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] SnowController snowController;
     [SerializeField] ComboCounter comboCounter;
     [SerializeField] FireScript fireScript;
+    [SerializeField] AudioController audioController;
     
     [SerializeField] private TMP_Text levelText;
     public GameState State; 
@@ -60,17 +61,20 @@ public class GameManager : MonoBehaviour
 
     private void HandleShopMenu()
     {
+      audioController.playMenuMusic();
       inputCanvas.SetActive(false);
       shopCanvas.SetActive(true);
     }
 
     private void HandleStart(){
+      audioController.playGameMusic();
       inputCanvas.SetActive(true);
       shopCanvas.SetActive(false);
       snowController.StartSpawn();
       fireScript.StartFire();
     }
     private void HandleWin(){
+      audioController.playWinMusic();
       inputCanvas.SetActive(false);
       fireScript.StopFire();
       comboCounter.ResetCombo();
@@ -78,6 +82,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void HandleLose(){
+      audioController.playLoseMusic();
       inputCanvas.SetActive(false);
       fireScript.StopFire();
       snowController.StopSpawn();

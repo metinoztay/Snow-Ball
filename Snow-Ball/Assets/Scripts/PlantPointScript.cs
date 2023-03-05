@@ -22,7 +22,7 @@ public class PlantPointScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         GetPlantCount();
-        if (other.tag=="Water")
+        if (other.CompareTag("Water"))
         {  
             Destroy(other.gameObject); 
             if (!IsSnowed())
@@ -39,7 +39,7 @@ public class PlantPointScript : MonoBehaviour
             }
            
         }
-        else if (other.tag == "SnowBall")
+        else if (other.CompareTag("SnowBall"))
         {   
             other.GetComponent<SnowBallScript>().DestroySnow();
             if (groundSnowField.GetComponent<SpriteRenderer>().enabled)

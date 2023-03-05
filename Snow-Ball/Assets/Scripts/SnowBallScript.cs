@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using PathCreation;
 
@@ -14,9 +13,6 @@ public class SnowBallScript : MonoBehaviour
     [SerializeField] private GameObject waterPrefab;
     [SerializeField] private GameObject waterExpolisonParticle;
     [SerializeField] private GameObject ballExplosionParticle;
-
-
-
     private int snowStartSize;
     private int _ss;
     public int snowSize
@@ -34,10 +30,10 @@ public class SnowBallScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Ball"){
+        if(other.CompareTag("Ball")){
             BallCrash(other);
         }
-        else if(other.tag == "PlantPoint")
+        else if(other.CompareTag("PlantPoint"))
         {
             GetComponentInParent<ComboCounter>().ResetCombo();
         }
@@ -69,8 +65,7 @@ public class SnowBallScript : MonoBehaviour
 
             GetComponentInParent<ComboCounter>().ShowCombo(transform);
             DestroySnow();
-            Destroy(waterExplosion,0.75f);                    
-                    
+            Destroy(waterExplosion,0.75f); 
         }      
     }
 

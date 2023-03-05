@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using DG.Tweening;
 
 public class BallScript : MonoBehaviour
 {
@@ -11,24 +10,26 @@ public class BallScript : MonoBehaviour
     public Queue<GameObject> ballsQueue;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "SnowBall" || other.tag == "TimeSnowBall")
+        if (other.CompareTag("SnowBall") || other.CompareTag("TimeSnowBall"))
         {
-            ballsQueue.Enqueue(gameObject);
-            gameObject.SetActive(false);
+            ResetBall();
         }
-        else if(other.tag == "PlantPoint")
+        else if(other.CompareTag("PlantPoint"))
         {
            GetComponentInParent<ComboCounter>().comboCount = 0;
         }
-        
     } 
 
     private void OnTriggerExit2D(Collider2D other) {
-        if( other.tag == "MainCamera")
+        if(other.CompareTag("MainCamera"))
         {
-            ballsQueue.Enqueue(gameObject);
-            gameObject.SetActive(false);
+            ResetBall();
         }
+    }
+
+    public void ResetBall(){
+        ballsQueue.Enqueue(gameObject);
+        gameObject.SetActive(false);
     }
 
 

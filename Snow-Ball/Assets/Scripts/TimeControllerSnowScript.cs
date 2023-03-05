@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class TimeSnowScript : MonoBehaviour
+using PathCreation;
+public class TimeControllerSnowScript : MonoBehaviour
 {
-
+    [SerializeField] public PathCreator pathCreator;
+    [SerializeField] private float speed;
+    private float distanceTravelled;
     [SerializeField] private GameObject waterExpolisonParticle;
     [SerializeField] private GameObject frostExplosionParticle;
 
     [SerializeField] private float freezeTime;
+    
 
     private SpriteRenderer spriteRenderer;
     
@@ -16,9 +19,21 @@ public class TimeSnowScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    void Update()
+    {
+       Move();
+        
+    }
+
+    private void Move(){
+        distanceTravelled += speed*Time.deltaTime;
+        transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled);
+    }
+   
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag=="Ball" && gameObject.tag == "TimeSnowBall")
+        if (other.CompareTag("Ball") && gameObject.CompareTag("TimeSnowBall"))
         {
+            other.GetComponent<BallScript>().ResetBall();
             StartCoroutine(SlowTheTime());
         }
         else if(other.tag=="PlantPoint")
@@ -35,7 +50,7 @@ public class TimeSnowScript : MonoBehaviour
         spriteRenderer.enabled=false;   
         Destroy(explosion,0.75f);        
         Destroy(waterExplosion,0.75f); 
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0.4f;
         yield return new WaitForSecondsRealtime(freezeTime);
         Time.timeScale = 1f;
         Destroy(gameObject);

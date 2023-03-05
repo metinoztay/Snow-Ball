@@ -26,11 +26,11 @@ public class HandCutScript : MonoBehaviour
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
-      if (other.tag=="MainCamera" && direction==1)
+      if (other.CompareTag("MainCamera") && direction==1)
       {         
          direction *= -1;
       }
-      else if(other.tag=="MainCamera")
+      else if(other.CompareTag("MainCamera"))
       {
          move=false;
          direction = 1;
@@ -44,7 +44,7 @@ public class HandCutScript : MonoBehaviour
    }
 
    private void Collect(Collider2D other){
-      if(other.tag == "Collectable" && move){
+      if(other.CompareTag("Collectable") && move){
             coinsManager.AddCoins(other.transform.position,10);
             other.GetComponent<PlantScript>().Collect();            
         }

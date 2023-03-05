@@ -9,6 +9,8 @@ public class SnowController : MonoBehaviour
 {
     [SerializeField] private PathCreator[] paths;
     [SerializeField] private GameObject[] snowPrefabs;
+    [SerializeField] private GameObject timeControllerSnowPrefab;
+    bool isTimeControllerSnowSpawned;
     [SerializeField] private GameObject progressBar;
     [SerializeField] private int totalSnowAmount;
     [SerializeField] private int maxSnowAmount;
@@ -30,7 +32,7 @@ public class SnowController : MonoBehaviour
     int randomSnow;
     int randomPath;
     int randomAmount;    
-    int spawnAmount = 0;
+    int spawnedAmount = 0;
     int lastSnowPrefab=-1;
     int lastSnowAmount=-1;
     int lastPath=-1;
@@ -55,24 +57,30 @@ public class SnowController : MonoBehaviour
             randomSnow = RandomUniqueNumber(0, snowPrefabs.Length, lastSnowPrefab,false);
             randomPath = RandomUniqueNumber(0,paths.Length,lastPath, false);
             randomAmount = RandomUniqueNumber(minSnowAmount,maxSnowAmount+1,lastSnowAmount,true);
-            if (spawnAmount == totalSnowAmount)
+            if (spawnedAmount == totalSnowAmount)
             {
                 StopSpawn();
                 break;
             }
             
+            if (!isTimeControllerSnowSpawned && spawnedAmount > totalSnowAmount/2)
+            {
+                TimeControllerSnowSpawn();
+                yield return new WaitForSecondsRealtime(spawnDelay);
+                continue;
+            }
+
             GameObject newSnow = Instantiate(snowPrefabs[randomSnow],transform);
             newSnow.GetComponent<SnowBallScript>().pathCreator = paths[randomPath];
             newSnow.GetComponent<SnowBallScript>().snowSize = randomAmount;            
 
-            spawnAmount += randomAmount;
+            spawnedAmount += randomAmount;
             lastSnowPrefab = randomSnow;
             lastSnowAmount = randomAmount;
             lastPath = randomPath;
 
             yield return new WaitForSecondsRealtime(spawnDelay);
-        }       
-
+        }
     }
     private int RandomUniqueNumber(int min , int max, int last, bool control)
     {
@@ -97,7 +105,7 @@ public class SnowController : MonoBehaviour
 
         if (control)
         {   
-            int diff = totalSnowAmount - spawnAmount;
+            int diff = totalSnowAmount - spawnedAmount;
 
             if (diff <= random)
             {   
@@ -111,5 +119,11 @@ public class SnowController : MonoBehaviour
     public void DestroyedSnow(int size){
         destroyedSnowCount += size;
         progressBar.GetComponent<ProgressBarScript>().IncrementProgress(size);
+    }
+
+    private void TimeControllerSnowSpawn(){
+        GameObject newSnow = Instantiate(timeControllerSnowPrefab,transform);
+        newSnow.GetComponent<TimeControllerSnowScript>().pathCreator = paths[randomPath];
+        isTimeControllerSnowSpawned = true;
     }
 }
