@@ -2,14 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InputController : MonoBehaviour, IDragHandler
 {
+    [SerializeField] Slider sensivitySlider;
     [SerializeField] Transform cannonBall;
     [SerializeField] float sensivity;
     [SerializeField] float maxTurnAngle;
+
+    private void Awake() {
+       sensivity = PlayerPrefs.GetFloat("Sensivity");
+        if (sensivity == 0)
+        {
+            sensivity = 0.2f;
+        }
+        sensivitySlider.value = sensivity*100;
+    }
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log(sensivity);
         var rotation = cannonBall.rotation;
         float current = rotation.eulerAngles.z;
         current -= eventData.delta.x * sensivity;  
@@ -22,5 +34,10 @@ public class InputController : MonoBehaviour, IDragHandler
         }
         cannonBall.rotation = rotation;
     }   
+
+    public void UpdateSensivity(){
+        sensivity = (float)sensivitySlider.value / 100;
+        PlayerPrefs.SetFloat("Sensivity",sensivity);
+    }
 
 }

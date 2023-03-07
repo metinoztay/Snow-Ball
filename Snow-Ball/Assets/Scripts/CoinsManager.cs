@@ -12,6 +12,8 @@ public class CoinsManager : MonoBehaviour
 
     [SerializeField] public int maxCoinValue;
     Vector3 targetPosition;
+
+    AudioSource audioSource;
     
 
     [Space]
@@ -49,6 +51,7 @@ public class CoinsManager : MonoBehaviour
         LoadPlayerSaves();
         PrepareCoins();
         CoinsTextUpdate();
+        audioSource = GetComponent<AudioSource>();
     }    
 
 
@@ -65,6 +68,7 @@ public class CoinsManager : MonoBehaviour
     }
 
     private void Animate(Vector3 collectedCoinPosition, int addCoinAmount){
+        
        for (int i = 0; i < addCoinAmount; i++)
        {
             if (coinsQueue.Count>0)
@@ -82,6 +86,7 @@ public class CoinsManager : MonoBehaviour
                         coinsQueue.Enqueue(coin);
                         Instantiate(coinExplosion,coinsTarget.position,coinsTarget.rotation,transform);
                         coins+=coinsValue;
+                        audioSource.Play();
                         PlayerPrefs.SetInt(nameof(coins),coins);
                     }
                 );

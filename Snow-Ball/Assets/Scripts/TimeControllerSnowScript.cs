@@ -9,14 +9,17 @@ public class TimeControllerSnowScript : MonoBehaviour
     private float distanceTravelled;
     [SerializeField] private GameObject waterExpolisonParticle;
     [SerializeField] private GameObject frostExplosionParticle;
-
+    AudioController audioController;
     [SerializeField] private float freezeTime;
+    AudioSource audioSource;
     
 
     private SpriteRenderer spriteRenderer;
     
     private void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioController = FindAnyObjectByType<AudioController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -44,6 +47,8 @@ public class TimeControllerSnowScript : MonoBehaviour
 
     IEnumerator SlowTheTime(){
         gameObject.tag = "Untagged";
+        audioController.playTimeFreezeMusic();
+        audioSource.Play();
         GameObject explosion = Instantiate(frostExplosionParticle,transform);
         GameObject waterExplosion = Instantiate(waterExpolisonParticle,transform.position,transform.rotation);
         explosion.transform.parent = waterExplosion.transform;
@@ -53,6 +58,7 @@ public class TimeControllerSnowScript : MonoBehaviour
         Time.timeScale = 0.4f;
         yield return new WaitForSecondsRealtime(freezeTime);
         Time.timeScale = 1f;
+        audioController.playGameMusic();
         Destroy(gameObject);
     }
 

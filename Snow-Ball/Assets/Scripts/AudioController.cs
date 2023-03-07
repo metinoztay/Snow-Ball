@@ -11,10 +11,11 @@ public class AudioController : MonoBehaviour
     [SerializeField] AudioClip timeFreeze; 
     [SerializeField] AudioClip win;
     [SerializeField] AudioClip lose;
-    [SerializeField] AudioClip upgrade;
-    
+
+
     private void Start() {
         audioSource = GetComponent<AudioSource>();
+        AudioListener.pause = PlayerPrefs.GetInt("Mute")==1;
     }
 
     public void playMenuMusic(){
@@ -25,6 +26,7 @@ public class AudioController : MonoBehaviour
     public void playGameMusic(){
         audioSource.clip = game;
         audioSource.Play();
+        audioSource.volume = 0.02f;
     }
 
     public void playTimeFreezeMusic(){
@@ -33,19 +35,25 @@ public class AudioController : MonoBehaviour
     }
 
     public void playWinMusic(){
-
+        audioSource.clip = win;
+        audioSource.Play();
+        audioSource.loop = false;
     }
 
     public void playLoseMusic(){
-
+        audioSource.clip = lose;
+        audioSource.Play();
+        audioSource.loop = false;
     }
 
     public void SoundOn(){
-        audioSource.enabled = true;
+        AudioListener.pause = false;
+        PlayerPrefs.SetInt("Mute",0);
     }
 
     public void SoundOff(){
-        audioSource.enabled = false;
+        AudioListener.pause = true;
+        PlayerPrefs.SetInt("Mute",1);
     }
 
     

@@ -32,7 +32,10 @@ public class GameManager : MonoBehaviour
     public void UpdateGameState(GameState newState){
          
          if (newState == GameState.Win && State == GameState.Lose)
-               return;
+            return;
+         else if (State==GameState.Lose && newState == GameState.Lose)
+            return;
+      
 
         State = newState;
 
@@ -67,6 +70,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void HandleStart(){
+      Time.timeScale = 1;
       audioController.playGameMusic();
       inputCanvas.SetActive(true);
       shopCanvas.SetActive(false);

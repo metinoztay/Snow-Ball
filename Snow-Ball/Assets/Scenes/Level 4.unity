@@ -298,9 +298,9 @@ MonoBehaviour:
   - {fileID: 6774699733427226730, guid: 023076eb4b8285049b3e368ef8c9a991, type: 3}
   timeControllerSnowPrefab: {fileID: 87939748823268480, guid: 54d517e8c953bd448aca37944602cbc3, type: 3}
   progressBar: {fileID: 1932382858}
-  totalSnowAmount: 10
-  maxSnowAmount: 1
-  minSnowAmount: 1
+  totalSnowAmount: 45
+  maxSnowAmount: 3
+  minSnowAmount: 2
   spawnDelay: 1.2
 --- !u!114 &97620702
 MonoBehaviour:
