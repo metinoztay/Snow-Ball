@@ -7,8 +7,7 @@ public class FallingAnimationController : MonoBehaviour
     Animator animator;
     
     private void Awake() {
-        animator = GetComponent<Animator>();
-        
+        animator = GetComponent<Animator>(); 
     }
 
     private void Update() {

@@ -29,11 +29,11 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] Ease easeType;
     [SerializeField] private float spread;
 
-    private int _cv=1;
+    private int _coinsValue=1;
     public int coinsValue
     {
-        get { return _cv; }
-        set { _cv = value;}
+        get { return _coinsValue; }
+        set { _coinsValue = value;}
     }
     
 

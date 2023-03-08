@@ -14,19 +14,19 @@ public class AudioController : MonoBehaviour
 
 
     private void Start() {
-        audioSource = GetComponent<AudioSource>();
-        AudioListener.pause = PlayerPrefs.GetInt("Mute")==1;
+        audioSource = GetComponent<AudioSource>();        
     }
 
     public void playMenuMusic(){
         audioSource.clip = menu;
         audioSource.Play();
+        //audioSource.volume = 0.04f;
     }
 
     public void playGameMusic(){
         audioSource.clip = game;
         audioSource.Play();
-        audioSource.volume = 0.02f;
+        audioSource.volume = 0.04f;
     }
 
     public void playTimeFreezeMusic(){
@@ -37,12 +37,14 @@ public class AudioController : MonoBehaviour
     public void playWinMusic(){
         audioSource.clip = win;
         audioSource.Play();
+        audioSource.volume = 0.5f;
         audioSource.loop = false;
     }
 
     public void playLoseMusic(){
         audioSource.clip = lose;
         audioSource.Play();
+        audioSource.volume = 0.5f;
         audioSource.loop = false;
     }
 

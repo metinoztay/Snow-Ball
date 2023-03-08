@@ -140,7 +140,7 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   speed: 2
   waterExpolisonParticle: {fileID: 7889455369710313607, guid: a0add106573dbc840a7acb4fe874b11d, type: 3}
-  frostExplosionParticle: {fileID: 7155694334727089173, guid: bda30e200a4557548899f5d9c6d075de, type: 3}
+  frostExplosionParticle: {fileID: 5730464008750278816, guid: b4c2073ab4950914e9646d3e8fa9b0c5, type: 3}
   freezeTime: 5
 --- !u!82 &6056530832476914018
 AudioSource:

@@ -17,7 +17,7 @@ public class InputController : MonoBehaviour, IDragHandler
         {
             sensivity = 0.2f;
         }
-        sensivitySlider.value = sensivity*100;
+        //sensivitySlider.value = sensivity*100;*/
     }
     public void OnDrag(PointerEventData eventData)
     {

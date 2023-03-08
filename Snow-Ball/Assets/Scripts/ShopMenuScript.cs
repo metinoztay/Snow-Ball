@@ -51,7 +51,7 @@ public class ShopMenuScript : MonoBehaviour
         ballMaxLevel = fireScript.maxLevel;
         ballNeedCoin = (int)(Mathf.Pow(3,(ballLevel-1))*10);
         coins = coinsManager.coins;
-        ballLevelButtonText.text = ballNeedCoin.ToString();
+        ballLevelButtonText.text = MoneyToText(ballNeedCoin);
         
 
         if (ballLevel >= ballMaxLevel || ballNeedCoin > coins)
@@ -77,7 +77,7 @@ public class ShopMenuScript : MonoBehaviour
         minDelay = fireScript.minDelay;
         fireSpeedNeedCoin = (int)(Mathf.Pow(2,(1.0f-fireSpeed)*20)*10);           
         coins = coinsManager.coins;
-        fireSpeedUpButtonText.text = fireSpeedNeedCoin.ToString();
+        fireSpeedUpButtonText.text = MoneyToText(fireSpeedNeedCoin);
 
         if (fireSpeed <= minDelay || fireSpeedNeedCoin > coins)
         {
@@ -102,7 +102,7 @@ public class ShopMenuScript : MonoBehaviour
         maxCoinValue = coinsManager.maxCoinValue;
         incomeLevelNeedCoin = (int)Mathf.Pow(2,coinsValue)*10;
         coins = coinsManager.coins;
-        incomeButtonText.text = incomeLevelNeedCoin.ToString();
+        incomeButtonText.text = MoneyToText(incomeLevelNeedCoin);
         
         
         if (coinsValue >= maxCoinValue || incomeLevelNeedCoin > coins)
@@ -142,5 +142,18 @@ public class ShopMenuScript : MonoBehaviour
        }
     }
 
-
+    private string MoneyToText(int value){
+        if (value > 1000 && value < 1000000)
+        {
+            return (value / 1000).ToString() + "K";
+        }
+        else if (coins > 1000000)
+        {
+            return (value / 1000000).ToString() + "M";
+        }
+        else
+        {
+            return value.ToString();
+        }
+    }
 }
