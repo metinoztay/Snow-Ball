@@ -224,9 +224,9 @@ MonoBehaviour:
   - {fileID: 6774699733427226730, guid: 023076eb4b8285049b3e368ef8c9a991, type: 3}
   timeControllerSnowPrefab: {fileID: 87939748823268480, guid: 54d517e8c953bd448aca37944602cbc3, type: 3}
   progressBar: {fileID: 1932382858}
-  totalSnowAmount: 264
-  maxSnowAmount: 6
-  minSnowAmount: 5
+  totalSnowAmount: 500
+  maxSnowAmount: 9
+  minSnowAmount: 7
   spawnDelay: 1.2
 --- !u!114 &97620702
 MonoBehaviour:
@@ -3666,6 +3666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Path
       objectReference: {fileID: 0}
+    - target: {fileID: 861266374487769388, guid: 7859377d574736145b287222ab9c95af, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7859377d574736145b287222ab9c95af, type: 3}
 --- !u!1001 &1099406501745877351
@@ -3887,7 +3891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2250296452505856806, guid: 05f4075962549a2439b4add92f6e6fa5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2250296452505856807, guid: 05f4075962549a2439b4add92f6e6fa5, type: 3}
       propertyPath: m_Pivot.x

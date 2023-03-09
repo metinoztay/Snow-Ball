@@ -37,6 +37,8 @@ public class PlantController : MonoBehaviour
         GameManager.Instance.UpdateGameState(GameManager.GameState.Lose);
     }
 
+    //? Eski Script
+    /*
     public void ChangeGroundSnowPoint(int index){
         if (index==0)
             groundSnowFields[1].GetComponent<SpriteRenderer>().enabled = true;
@@ -60,8 +62,57 @@ public class PlantController : MonoBehaviour
             {
                 groundSnowFields[index+1].GetComponent<SpriteRenderer>().enabled = true;
             }
-        }      
+        }     
+    }
+    */
+    public void ChangeGroundSnowPoint(int index, int indexRange){
+        bool goLeft;
+        bool isEnabledLeft = true;
+        bool isEnabledRight = true;
+
+        if (index - indexRange < 0)
+        {
+            isEnabledLeft = true;
+            isEnabledRight = groundSnowFields[index+indexRange].GetComponent<SpriteRenderer>().enabled;
+            goLeft = false;
+        }
+        else if (index + indexRange > 4)
+        {
+            isEnabledRight = true;
+            isEnabledLeft = groundSnowFields[index-indexRange].GetComponent<SpriteRenderer>().enabled;
+            goLeft = true;
+        }
+        else
+        {
+            isEnabledLeft = groundSnowFields[index-indexRange].GetComponent<SpriteRenderer>().enabled;
+            isEnabledRight = groundSnowFields[index+indexRange].GetComponent<SpriteRenderer>().enabled; 
+            goLeft = Random.Range(0,2) == 0;
+        }
+           
+        
+        if (isEnabledLeft && isEnabledRight)
+        {
+            ChangeGroundSnowPoint(index, indexRange+1);
+        }
+        else if (isEnabledLeft && !isEnabledRight)
+        {
+            groundSnowFields[index+indexRange].GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else if (!isEnabledLeft && isEnabledRight)
+        {
+            groundSnowFields[index-indexRange].GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else
+        {
+            if (goLeft)
+            {
+                groundSnowFields[index-indexRange].GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else
+            {
+                groundSnowFields[index+indexRange].GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
 
     }
-
 }

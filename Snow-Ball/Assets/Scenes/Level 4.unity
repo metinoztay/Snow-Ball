@@ -468,7 +468,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &293895974
 MonoBehaviour:
@@ -2737,7 +2737,7 @@ MonoBehaviour:
   fireSpeedUpButton: {fileID: 1457441132}
   fireSpeedUpButtonText: {fileID: 1841946864}
   coinsManager: {fileID: 779626830}
-  settingsMenu: {fileID: 1752988506}
+  controlMenu: {fileID: 1752988506}
 --- !u!1 &1752988506 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3456030087308473565, guid: bb444743fbaa52048836e0d8d2990b87, type: 3}

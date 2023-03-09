@@ -15,7 +15,7 @@ public class ShopMenuScript : MonoBehaviour
     [SerializeField] private Button fireSpeedUpButton;
     [SerializeField] private TMP_Text fireSpeedUpButtonText;
     [SerializeField] private CoinsManager coinsManager;
-    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject controlMenu;
 
 
     int ballLevel, ballMaxLevel, ballNeedCoin;
@@ -38,6 +38,7 @@ public class ShopMenuScript : MonoBehaviour
         BallLevelUpControl();
         FireSpeedUpControl();
         IncomeLevelUpControl();
+        controlMenu.SetActive(false);
     }
     public void BallLevelUp(){
         coinsManager.coins -= ballNeedCoin;
@@ -132,13 +133,13 @@ public class ShopMenuScript : MonoBehaviour
     }
 
     public void SettingsOnOff(){
-        bool isActive = settingsMenu.activeInHierarchy;
+        bool isActive = controlMenu.activeInHierarchy;
        if (isActive)
        {
-        settingsMenu.SetActive(false);
+        controlMenu.SetActive(false);
        }else
        {
-        settingsMenu.SetActive(true);
+        controlMenu.SetActive(true);
        }
     }
 
