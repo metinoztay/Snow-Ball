@@ -21,19 +21,19 @@ public class HandCutScript : MonoBehaviour
 
    public void Move(){
       move = true;
-      direction = 1;
+      direction = -1;
       SelectorAnimation(false);
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
-      if (other.CompareTag("MainCamera") && direction==1)
+      if (other.CompareTag("MainCamera") && direction==-1)
       {         
          direction *= -1;
       }
       else if(other.CompareTag("MainCamera"))
       {
          move=false;
-         direction = 1;
+         direction = -1;
          animator.SetBool("Collect",false);
          
       }
