@@ -35,10 +35,10 @@ public class ShopMenuScript : MonoBehaviour
     }
 
     private void ButtonsControl(){
+        controlMenu.SetActive(false);
         BallLevelUpControl();
         FireSpeedUpControl();
-        IncomeLevelUpControl();
-        controlMenu.SetActive(false);
+        IncomeLevelUpControl();        
     }
     public void BallLevelUp(){
         coinsManager.coins -= ballNeedCoin;

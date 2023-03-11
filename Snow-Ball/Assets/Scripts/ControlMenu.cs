@@ -6,27 +6,29 @@ using UnityEngine.UI;
 public class ControlMenu : MonoBehaviour
 {
     [SerializeField] Slider sensivitySlider;
-    [SerializeField] Button sounOnButton;
-    [SerializeField] Button sounOffButton;
+    [SerializeField] Button soundOnButton;
+    [SerializeField] Button soundOffButton;
 
-    Color active = new Color(255,255,255,255);
-    Color inaktive = new Color(135,114,114,255);
-
+    //Color active = new Color(255,255,255,255);
+    //Color inaktive = new Color(135,114,114,255);
     private void OnEnable() {
         SaveControl();
+    }
+
+    private void Update() {
+       SaveControl();
     }
     public void SoundOff(){
         AudioListener.pause = true;
         PlayerPrefs.SetInt("Mute",1);
-        sounOffButton.Select();
+        soundOffButton.Select();
     }
 
     public void SoundOn(){
         AudioListener.pause = false;
         PlayerPrefs.SetInt("Mute",0);
-        sounOnButton.Select();
+        soundOnButton.Select();
     }
-
     public void SaveControl(){
         bool isSoundOff = PlayerPrefs.GetInt("Mute")==1;
 
@@ -44,6 +46,5 @@ public class ControlMenu : MonoBehaviour
             sensivity = 0.2f;
         }
         sensivitySlider.value = sensivity*100;
-
     }
 }

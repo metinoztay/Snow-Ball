@@ -211,11 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paths:
-  - {fileID: 898336252}
-  - {fileID: 1730359362}
   - {fileID: 572258424}
-  - {fileID: 1827398470}
-  - {fileID: 1201842974}
   snowPrefabs:
   - {fileID: 2142018826804794528, guid: 52fc43160164d5c40a61a7fcf1f5b0d4, type: 3}
   - {fileID: 1931030398913448158, guid: 04a472672ed6d374c9c14a3ebb07d259, type: 3}
@@ -224,9 +220,9 @@ MonoBehaviour:
   - {fileID: 6774699733427226730, guid: 023076eb4b8285049b3e368ef8c9a991, type: 3}
   timeControllerSnowPrefab: {fileID: 87939748823268480, guid: 54d517e8c953bd448aca37944602cbc3, type: 3}
   progressBar: {fileID: 1932382858}
-  totalSnowAmount: 500
-  maxSnowAmount: 9
-  minSnowAmount: 7
+  totalSnowAmount: 15
+  maxSnowAmount: 1
+  minSnowAmount: 1
   spawnDelay: 1.2
 --- !u!114 &97620702
 MonoBehaviour:
@@ -1206,7 +1202,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 035a91c7bde58bb469510340719b087d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1467,17 +1463,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &898336252 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 861266374487769387, guid: 7859377d574736145b287222ab9c95af, type: 3}
-  m_PrefabInstance: {fileID: 861266374714885335}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e5ac92bc18f545cc84cd886ece82b4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &997591880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3891,7 +3876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2250296452505856806, guid: 05f4075962549a2439b4add92f6e6fa5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2250296452505856807, guid: 05f4075962549a2439b4add92f6e6fa5, type: 3}
       propertyPath: m_Pivot.x

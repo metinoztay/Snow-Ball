@@ -406,8 +406,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensivitySlider: {fileID: 3456030086673590047}
-  sounOnButton: {fileID: 3456030087148862583}
-  sounOffButton: {fileID: 3456030087676558059}
+  soundOnButton: {fileID: 3456030087148862583}
+  soundOffButton: {fileID: 3456030087676558059}
 --- !u!1 &3456030087676558061
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,12 +33,11 @@ public class ComboCounter : MonoBehaviour
         resetSpeed = 1f / resetTime;
         comboCount = 0;
     }
-    void Update()
+    private void Update()
     {
         ComboCountDown();
     }
 
- 
     private void ComboCountDown(){
         
         if (circleImage.fillAmount > 0)
@@ -61,7 +60,7 @@ public class ComboCounter : MonoBehaviour
             }
     }
 
-        public void ShowCombo(Transform snowBall){
+    public void ShowCombo(Transform snowBall){
         comboCount++;
         circleImage.fillAmount = 1f;
         if (comboCount == 0 || comboCount == 1)

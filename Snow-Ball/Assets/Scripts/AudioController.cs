@@ -19,33 +19,35 @@ public class AudioController : MonoBehaviour
 
     public void playMenuMusic(){
         audioSource.clip = menu;
+        audioSource.volume = 0.5f;
         audioSource.Play();
-        //audioSource.volume = 0.04f;
     }
 
     public void playGameMusic(){
         audioSource.clip = game;
-        audioSource.Play();
         audioSource.volume = 0.04f;
+        audioSource.Play();       
     }
 
     public void playTimeFreezeMusic(){
         audioSource.clip = timeFreeze;
+        audioSource.volume = 0.04f;
         audioSource.Play();
+
     }
 
     public void playWinMusic(){
         audioSource.clip = win;
-        audioSource.Play();
         audioSource.volume = 0.5f;
         audioSource.loop = false;
+        audioSource.Play();
     }
 
     public void playLoseMusic(){
         audioSource.clip = lose;
-        audioSource.Play();
-        audioSource.volume = 0.5f;
+        audioSource.volume = 0.4f;
         audioSource.loop = false;
+        audioSource.Play();
     }
 
     public void SoundOn(){

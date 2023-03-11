@@ -4348,25 +4348,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControlMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 3456030088317419182, guid: bb444743fbaa52048836e0d8d2990b87, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 3456030087308473565, guid: bb444743fbaa52048836e0d8d2990b87, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3456030088317419182, guid: bb444743fbaa52048836e0d8d2990b87, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.1919192
+      objectReference: {fileID: 0}
+    - target: {fileID: 3456030088317419182, guid: bb444743fbaa52048836e0d8d2990b87, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3456030088486285369, guid: bb444743fbaa52048836e0d8d2990b87, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.1919192
       objectReference: {fileID: 0}
     - target: {fileID: 3456030088486285369, guid: bb444743fbaa52048836e0d8d2990b87, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3456030088486285369, guid: bb444743fbaa52048836e0d8d2990b87, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.1919192
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb444743fbaa52048836e0d8d2990b87, type: 3}

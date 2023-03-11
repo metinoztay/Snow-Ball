@@ -41,7 +41,15 @@ public class TimeControllerSnowScript : MonoBehaviour
         }
         else if(other.tag=="PlantPoint")
         {
-            StartCoroutine(DestroyTimer());
+            if (Time.timeScale!=1)
+            {
+                StartCoroutine(DestroyTimer());
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            
         }
     }
 

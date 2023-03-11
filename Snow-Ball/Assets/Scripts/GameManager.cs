@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
          
          if (newState == GameState.Win && State == GameState.Lose)
             return;
-         else if (State==GameState.Lose && newState == GameState.Lose)
+         else if (State == GameState.Lose && newState == GameState.Lose)
             return;
       
 
@@ -55,8 +55,7 @@ public class GameManager : MonoBehaviour
              case GameState.Lose:
                 HandleLose();
                 break;
-        
-            
+
              default:
                 break;
         }
@@ -92,6 +91,7 @@ public class GameManager : MonoBehaviour
       snowController.StopSpawn();
       comboCounter.ResetCombo();
       loseCanvas.SetActive(true);
+      winCanvas.SetActive(false);
     }
 
    private void LoadLevel(){
@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviour
         Start,
         Pause,
         Win,
-        Lose  
-        
+        Lose    
     }
 }
